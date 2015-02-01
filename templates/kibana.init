@@ -100,7 +100,7 @@ case "$1" in
     else
       start
     fi
-    exit $code
+    #exit $code
     ;;
   stop) stop ;;
   force-stop) force_stop ;;
