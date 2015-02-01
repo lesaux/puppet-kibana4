@@ -97,7 +97,7 @@ class kibana4 (
 
   service { 'kibana':
     ensure     => running,
-    enable     => enabled,
+    enable     => true,
     hasstatus  => true,
     hasrestart => true,
     require    => File['/etc/init.d/kibana']
