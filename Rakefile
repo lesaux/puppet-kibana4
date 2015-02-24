@@ -1,45 +1,28 @@
-require 'puppetlabs_spec_helper/rake_tasks'
-require 'puppet-lint/tasks/puppet-lint'
-require 'puppet-syntax/tasks/puppet-syntax'
+require 'rake'
+require 'rspec/core/rake_task'
 
-exclude_paths = [
-  "pkg/**/*",
-  "vendor/**/*",
-  "spec/**/*",
-]
-
-Rake::Task[:lint].clear
-PuppetLint::RakeTask.new :lint do |config|
-	# Pattern of files to ignore
-	config.ignore_paths = exclude_paths
-
-	# List of checks to disable
-	config.disable_checks = [ '80chars', 'autoloader_layout', 'class_inherits_from_params_class' ]
-
-	# Should the task fail if there were any warnings, defaults to false
-	config.fail_on_warnings = true
-
-	# Print out the context for the problem, defaults to false
-	config.with_context = true
-
-	# Format string for puppet-lint's output (see the puppet-lint help output
-	# for details
-	config.log_format = "%{path}:%{linenumber}:%{check}:%{KIND}:%{message}"
-
-	# Compare module layout relative to the module root
-	# config.relative = true
+desc "Run all RSpec code examples"
+RSpec::Core::RakeTask.new(:rspec) do |t|
+  t.rspec_opts = File.read("spec/spec.opts").chomp || ""
 end
 
-PuppetSyntax.exclude_paths = exclude_paths
-
-desc "Run acceptance tests"
-RSpec::Core::RakeTask.new(:acceptance) do |t|
-  t.pattern = 'spec/acceptance'
+SPEC_SUITES = (Dir.entries('spec') - ['.', '..','fixtures']).select {|e| File.directory? "spec/#{e}" }
+namespace :rspec do
+  SPEC_SUITES.each do |suite|
+    desc "Run #{suite} RSpec code examples"
+    RSpec::Core::RakeTask.new(suite) do |t|
+      t.pattern = "spec/#{suite}/**/*_spec.rb"
+      t.rspec_opts = File.read("spec/spec.opts").chomp || ""
+    end
+  end
 end
+task :default => :rspec
 
-desc "Run syntax, lint, and spec tests."
-task :test => [
-  :syntax,
-  :lint,
-  :spec,
-]
+begin
+  if Gem::Specification::find_by_name('puppet-lint')
+    require 'puppet-lint/tasks/puppet-lint'
+    PuppetLint.configuration.ignore_paths = ["spec/**/*.pp", "vendor/**/*.pp"]
+    task :default => [:rspec, :lint]
+  end
+rescue Gem::LoadError
+end
