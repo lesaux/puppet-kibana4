@@ -26,6 +26,9 @@
 # Installation directory used iff install_method is 'archive'
 # Defaults to '/opt'.
 #
+# [*install_method*]
+# Only the "archive" method is supported at the moment
+#
 # [*symlink*]
 # Determines if a symlink should be created in the installation directory for
 # the extracted archive. Only used if install_method is 'archive'.
@@ -35,15 +38,11 @@
 # Sets the name to be used for the symlink. The default is '${install_dir}/kibana'.
 # Only used if install_method is 'archive'.
 #
-# [*kibana_user*]
-# The user that will own the installation directory.
-# The default is 'root' and there is no logic in place to check that the value
-# specified is a valid user on the system.
+# [*kibana4_user*]
+# The user that will run the service. For now installation directory is still owned by root.
 #
-# [*kibana_group*]
-# The group that will own the installation directory.
-# The default is 'root' and there is no logic in place to check that the value
-# specified is a valid group on the system.
+# [*kibana4_group*]
+# The primary group of the kibana user
 #
 #
 # === Examples
