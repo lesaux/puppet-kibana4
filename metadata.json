@@ -3,7 +3,7 @@
   "version": "0.0.2",
   "author": "lesaux",
   "summary": "Kibana4 installation",
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
   "source": "https://github.com/lesaux/puppet-kibana4.git",
   "project_page": "https://github.com/lesaux/puppet-kibana4",
   "issues_url": "https://github.com/lesaux/puppet-kibana4/issues",
