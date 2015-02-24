@@ -43,7 +43,7 @@
 # === Examples
 #
 #  class { '::kibana4':
-#    version         => '4.0.0-beta3',
+#    version         => '4.0.0',
 #    install_method  => 'package',
 #  }
 #
@@ -65,9 +65,6 @@ class kibana4 (
       target   => $install_dir,
       url      => $download_url,
     }
-
-    $require_target = Archive["kibana-${version}"]
-    #$config_js = "${install_dir}/kibana-${version}/config.js"
 
     if $symlink {
       file { $symlink_name:

@@ -2,25 +2,13 @@
   "name": "lesaux-kibana4",
   "version": "0.0.1",
   "author": "lesaux",
-  "summary": "This module provides Kibana4",
-  "license": "Apache License, Version 2.0",
-  "source": "git://github.com/lesaux/puppet-kibana4.git",
+  "summary": "Kibana4 installation",
+  "license": "Apache 2.0",
+  "source": "https://github.com/lesaux/puppet-kibana4.git",
   "project_page": "https://github.com/lesaux/puppet-kibana4",
   "issues_url": "https://github.com/lesaux/puppet-kibana4/issues",
-  "operatingsystem_support": [
-    {
-      "operatingsystem":"RedHat",
-      "operatingsystmrelease":[ "6.0" ]
-    }
-  ],
   "dependencies": [
-    {
-      "name": "camptocamp/archive",
-      "version_requirement": ">= 0.3.2"
-    },
-    {
-      "name": "puppetlabs/stdlib",
-      "version_requirement": ">=3.2.0 <5.0.0"
-    }
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
   ]
 }
+
