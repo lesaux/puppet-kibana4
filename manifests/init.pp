@@ -88,8 +88,8 @@ class kibana4 (
   }
 
   file { '/etc/init.d/kibana':
-    mode    => '0755',
     ensure  => present,
+    mode    => '0755',
     content => template('kibana4/kibana.init'),
     group   => $kibana_group,
     owner   => $kibana_user,

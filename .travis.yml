@@ -25,4 +25,4 @@ matrix:
     - rvm: 2.0.0
       env: PUPPET_GEM_VERSION="~> 2.7.0"
 notifications:
-  email: false
+  email: true
