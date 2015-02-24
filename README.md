@@ -50,20 +50,22 @@ user name, group name, uid and gid.
 
 ```
   class { '::kibana4':
-    version         => '4.0.0-linux-x64',
-    install_method  => 'archive',
-    symlink         => false,
-    create_user     => true,
-    kibana4_user    => kibana4,
-    kibana4_group   => kibana4,
-    kibana4_gid     => 200,
-    kibana4_uid     => 200,
+    version           => '4.0.0-linux-x64',
+    install_method    => 'archive',
+    symlink           => false,
+    create_user       => true,
+    kibana4_user      => kibana4,
+    kibana4_group     => kibana4,
+    kibana4_gid       => 200,
+    kibana4_uid       => 200,
+    elasticsearch_url => 'http://localhost:9200',
   }
 ```
 
 ## Parameters
 
 Check all parameters in init.pp file
+
  [*ensure*]
 
 Should the service be started. Valid values are stopped (false) and running (true)
@@ -79,7 +81,7 @@ Defaults to the latest 4.0.0 version available at the time of module release.
 
  [*download_url*]
 
-URL to download kibana from iff install_method is 'archive'
+URL to download kibana from if install_method is 'archive'
 Defaults to "https://download.elasticsearch.org/kibana/kibana/kibana-${version}.tar.gz"
 
  [*install_dir*]
@@ -88,6 +90,7 @@ Installation directory used iff install_method is 'archive'
 Defaults to '/opt'.
 
  [*install_method*]
+
 Only the "archive" method is supported at the moment
 
  [*symlink*]
@@ -109,6 +112,9 @@ The user that will run the service. For now installation directory is still owne
 
 The primary group of the kibana user
 
+ [*elasticsearch_url*]
+
+The url of your elasticsearch
 
 ## Reference
 
