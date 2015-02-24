@@ -1,3 +1,7 @@
+# == Class: kibana4
+#
+# Configuration
+#
 class kibana4::config {
 
   file {"${kibana4::install_dir}/kibana-${kibana4::version}/config/kibana.yml":
