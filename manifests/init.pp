@@ -3,6 +3,12 @@
 # Installs and configures Kibana4.
 #
 # === Parameters
+# [*ensure*]
+# Should the service be started. Valid values are stopped (false) and running (true)
+#
+# [*enable*]
+# Should the service be enabled on boot. Valid values are true, false, and manual.
+#
 # [*version*]
 # Version of Kibana4 that gets installed.
 # Defaults to the latest 4.0.0 version available at the time of module release.
@@ -49,56 +55,22 @@
 #
 class kibana4 (
   $download_url       = "https://download.elasticsearch.org/kibana/kibana/kibana-${version}.tar.gz",
-  $kibana_group       = $kibana4::params::kibana_group,
-  $kibana_user        = $kibana4::params::kibana_user,
+  $create_user        = $kibana4::params::create_user,
+  $ensure             = $kibana4::params::ensure,
+  $enable             = $kibana4::params::enable,
+  $kibana4_group      = $kibana4::params::kibana_group,
+  $kibana4_gid        = $kibana4::params::kibana_gid,
+  $kibana4_user       = $kibana4::params::kibana_user,
+  $kibana4_uid        = $kibana4::params::kibana_uid,
   $install_dir        = $kibana4::params::install_dir,
   $install_method     = $kibana4::params::install_method,
   $symlink            = $kibana4::params::symlink,
-  $symlink_name       = "${install_dir}/kibana",
+  $symlink_name       = "${install_dir}/kibana4",
   $version            = $kibana4::params::version,
 ) inherits kibana4::params {
 
-  if $install_method == 'archive' {
-    archive { "kibana-${version}":
-      ensure   => present,
-      checksum => false,
-      target   => $install_dir,
-      url      => $download_url,
-    }
-
-    if $symlink {
-      file { $symlink_name:
-        ensure  => link,
-        require => Archive["kibana-${version}"],
-        target  => "${install_dir}/kibana-${version}",
-      }
-    }
-  }
-
-  if $install_method == 'package' {
-    package { 'kibana':
-      ensure => $version,
-    }
-
-    #$config_js = "${install_dir}/config.js"
-    $require_target = Package['kibana']
-  }
-
-  file { '/etc/init.d/kibana':
-    ensure  => present,
-    mode    => '0755',
-    content => template('kibana4/kibana.init'),
-    group   => $kibana_group,
-    owner   => $kibana_user,
-    require => $require_target,
-  }
-
-  service { 'kibana':
-    ensure     => running,
-    enable     => true,
-    hasstatus  => true,
-    hasrestart => true,
-    require    => File['/etc/init.d/kibana']
-  }
+  class {'kibana4::user': }->
+  class {'kibana4::install': }->
+  class {'kibana4::service': }
 
 }
