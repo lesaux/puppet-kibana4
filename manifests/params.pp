@@ -22,17 +22,16 @@ class kibana4::params {
   $default_app_id              = 'discover'
   $request_timeout             = '300000'
   $shard_timeout               = '0'
-  $verify_ssl                  = 'false'
+  $verify_ssl                  = false
   $ca                          = '/path/to/your/CA.pem'
   $ssl_key_file                = '/path/to/your/server.key'
   $ssl_cert_file               = '/path/to/your/server.crt'
   $pid_file                    = '/var/run/kibana.pid'
-  $bundled_plugin_ids          = [ 'plugins/dashboard/index','plugins/discover/index',
-                                   'plugins/doc/index','plugins/kibana/index',
-                                   'plugins/markdown_vis/index','plugins/metric_vis/index',
-                                   'plugins/settings/index','plugins/table_vis/index',
-                                   'plugins/vis_types/index','plugins/visualize/index' ]
-
-
+  $bundled_plugin_ids          = [
+    'plugins/dashboard/index','plugins/discover/index',
+    'plugins/doc/index','plugins/kibana/index',
+    'plugins/markdown_vis/index','plugins/metric_vis/index',
+    'plugins/settings/index','plugins/table_vis/index',
+    'plugins/vis_types/index','plugins/visualize/index' ]
 }
 

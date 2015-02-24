@@ -9,8 +9,8 @@ class kibana4::config {
     owner   => root,
     group   => root,
     mode    => '0755',
-    content => template("kibana4/kibana.yml.erb"),
+    content => template('kibana4/kibana.yml.erb'),
     notify  => Service['kibana4'],
-  }  
+  }
 
 }

@@ -52,12 +52,12 @@ user name, group name, uid and gid.
   class { '::kibana4':
     version         => '4.0.0-linux-x64',
     install_method  => 'archive',
-    symlink => false,
-    create_user => true,
-    kibana4_user => kibana4,
-    kibana4_group => kibana4,
-    kibana4_gid => 200,
-    kibana4_uid => 200,
+    symlink         => false,
+    create_user     => true,
+    kibana4_user    => kibana4,
+    kibana4_group   => kibana4,
+    kibana4_gid     => 200,
+    kibana4_uid     => 200,
   }
 ```
 
