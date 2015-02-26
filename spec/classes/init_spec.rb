@@ -11,6 +11,8 @@ describe 'kibana4' do
         :install_method => 'archive',
         :symlink        => false,
         :version        => '4.0.0-linux-x64',
+        :ensure         => false,
+        :enable         => false,
       }
     end
     it { should contain_archive('kibana-4.0.0-linux-x64')}
@@ -27,6 +29,7 @@ describe 'kibana4' do
         :symlink        => false,
         :version        => '4.0.0-linux-x64',
         :ensure         => true,
+        :enable         => false,
       }
     end
     it { should contain_archive('kibana-4.0.0-linux-x64')}
@@ -59,6 +62,8 @@ describe 'kibana4' do
         :install_method => 'archive',
         :symlink        => true,
         :version        => '4.0.0-linux-x64',
+        :ensure         => false,
+        :enable         => false,
       }
     end
     it { should contain_archive('kibana-4.0.0-linux-x64')}
@@ -75,6 +80,7 @@ describe 'kibana4' do
         :symlink        => true,
         :version        => '4.0.0-linux-x64',
         :ensure         => true,
+        :enable         => false,
       }
     end
     it { should contain_archive('kibana-4.0.0-linux-x64')}
@@ -115,6 +121,8 @@ describe 'kibana4' do
         :kibana4_uid    => '200',
         :kibana4_group  => 'kibana4',
         :kibana4_gid    => '200',
+        :enable         => false,
+        :ensure         => false,
       }
     end
     it { should contain_archive('kibana-4.0.0-linux-x64')}
@@ -136,6 +144,8 @@ describe 'kibana4' do
         :kibana4_uid    => '200',
         :kibana4_group  => 'kibana4',
         :kibana4_gid    => '200',
+        :ensure         => true,
+        :enable         => false,
       }
     end
     it { should contain_archive('kibana-4.0.0-linux-x64')}
@@ -178,6 +188,8 @@ describe 'kibana4' do
         :kibana4_uid    => '200',
         :kibana4_group  => 'kibana4',
         :kibana4_gid    => '200',
+        :ensure         => false,
+        :enable         => false,
       }
     end
     it { should contain_archive('kibana-4.0.0-linux-x64')}
@@ -199,6 +211,7 @@ describe 'kibana4' do
         :kibana4_uid    => '200',
         :kibana4_group  => 'kibana4',
         :kibana4_gid    => '200',
+        :enable         => false,
       }
     end
     it { should contain_archive('kibana-4.0.0-linux-x64')}
