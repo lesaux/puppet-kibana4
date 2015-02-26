@@ -63,6 +63,8 @@ user name, group name, uid and gid.
 
 Check all parameters in init.pp file
 
+### Installation Parameters
+
  [*ensure*]
 
 Should the service be started. Valid values are stopped (false) and running (true)
@@ -71,15 +73,28 @@ Should the service be started. Valid values are stopped (false) and running (tru
 
 Should the service be enabled on boot. Valid values are true, false, and manual.
 
- [*version*]
+ [*create_user*]
 
-Version of Kibana4 that gets installed.
-Defaults to the latest 4.0.0 version available at the time of module release.
+Should the module a create a user to run Kibana4. Default is false, in which case Kibana
+will run as root. If set to true, you will need to specify values for kibana4_group, kibana4_user,
+kibana4_uid and kibana4_gid.
 
- [*download_url*]
+ [*kibana4_user*]
 
-URL to download kibana from if install_method is 'archive'
-Defaults to "https://download.elasticsearch.org/kibana/kibana/kibana-${version}.tar.gz"
+The user that will run the service. For now installation directory is still owned by root.
+This will be a "system" account.
+
+ [*kibana4_group*]
+
+The primary group of the kibana user
+
+ [*kibana4_uid*]
+
+Choose the kibana4_user uid
+
+ [*kibana4_gid*]
+
+Choose the kibana4_group gid
 
  [*install_dir*]
  
@@ -94,24 +109,59 @@ Only the "archive" method is supported at the moment
 
 Determines if a symlink should be created in the installation directory for
 the extracted archive. Only used if install_method is 'archive'.
-Defaults to 'false'.
+Defaults to 'true'.
 
  [*symlink_name*]
 
 Sets the name to be used for the symlink. The default is '${install_dir}/kibana4'.
 Only used if install_method is 'archive'.
 
- [*kibana4_user*]
+ [*version*]
 
-The user that will run the service. For now installation directory is still owned by root.
+Version of Kibana4 that gets installed.
+Defaults to the latest 4.0.0-linux-x64 version available at the time of module release.
 
- [*kibana4_group*]
+ [*download_url*]
 
-The primary group of the kibana user
+URL to download kibana from if install_method is 'archive'
+Defaults to "https://download.elasticsearch.org/kibana/kibana/kibana-${version}.tar.gz"
 
+### Configuration Parameters
+
+ See Kibana4 documentation for more details. Defaults values are the same as defaults from kibana.yml
+ provided in the archive version 4.0.0-linux-x64.
+
+ [*port*]
+
+ [*host*]
+ 
  [*elasticsearch_url*]
 
-The url of your elasticsearch
+ [*elasticsearch_preserve_host*]
+ 
+ [*kibana_index*]
+
+ [*default_app_id*]
+ 
+ [*request_timeout*]
+ 
+ [*shard_timeout*]
+ 
+ [*verify_ssl*]
+ 
+Default has been changed to false.
+Providing better SSL support is my todo list.
+
+ [*ca*]
+ 
+ [*ssl_key_file*]
+ 
+ [*ssl_cert_file*]
+ 
+ [*pid_file*]
+ 
+ [*bundled_plugin_ids*]
+ 
 
 ## Reference
 
