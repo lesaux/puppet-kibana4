@@ -21,13 +21,10 @@ Install and configure Kibana4. Should work on any linux OS.
 
 ## Module Description
 
-If applicable, this section should have a brief description of the technology
-the module integrates with and what that integration enables. This section
-should answer the questions: "What does this module *do*?" and "Why would I use
-it?"
+This module assumes you have a working Elasticsearch installation and indices (usually an "ELK" stack)
+Kibana4 only works with recent versions of Elasticsearch ( 1.4 an up? ). I recommend using the "elasticsearch_http" output
+in logstash as the "elasticsearch" output uses ES version 1.1.1 and will prevent Kibana4 from connecting.
 
-If your module has a range of functionality (installation, configuration,
-management, etc.) this is the time to mention it.
 
 ## Setup
 
@@ -97,11 +94,11 @@ Only the "archive" method is supported at the moment
 
 Determines if a symlink should be created in the installation directory for
 the extracted archive. Only used if install_method is 'archive'.
-Defaults to 'true'.
+Defaults to 'false'.
 
  [*symlink_name*]
 
-Sets the name to be used for the symlink. The default is '${install_dir}/kibana'.
+Sets the name to be used for the symlink. The default is '${install_dir}/kibana4'.
 Only used if install_method is 'archive'.
 
  [*kibana4_user*]
@@ -122,5 +119,5 @@ This module uses camptocamp/archives to download and extract the Kibana4 archive
 
 ## Limitations
 
-Basic spec testing is done, but no tests on the generate config file is done at the moment.
+Basic spec testing is done, but no tests on the generated config file are done at the moment.
 

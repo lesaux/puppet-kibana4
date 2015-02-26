@@ -3,8 +3,8 @@
 # Default parameters
 #
 class kibana4::params {
-  $ensure                      = false
-  $enable                      = false
+  $ensure                      = true
+  $enable                      = true
   $create_user                 = false
   $kibana4_group               = 'root'
   $kibana4_gid                 = undef
