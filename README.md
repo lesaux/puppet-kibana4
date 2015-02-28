@@ -22,10 +22,8 @@ Install and configure Kibana4. Should work on any linux OS.
 
 ## Module Description
 
-This module assumes you have a working Elasticsearch installation and indices (usually an "ELK" stack)
-Kibana4 only works with recent versions of Elasticsearch ( 1.4 an up? ). I recommend using the "elasticsearch_http" output
-in logstash as the "elasticsearch" output uses ES version 1.1.1 and will prevent Kibana4 from connecting.
-
+This module assumes you have a working Elasticsearch installation and indices (usually an "ELK" stack).
+Kibana4 only works with recent versions of Elasticsearch (1.4.4 and later). I recommend using the "elasticsearch" output with `protocol => "http"` in Logstash (supported since 1.4.0) as the default `protocol => "node"` uses ES version 1.1.1 and will prevent Kibana4 from connecting.
 
 ## Setup
 
