@@ -12,9 +12,9 @@ class kibana4::params {
   $service_enable              = true
   $service_name                = 'kibana4'
   $manage_user                 = false
-  $kibana4_group               = 'root'
+  $kibana4_group               = 'kibana4'
   $kibana4_gid                 = undef
-  $kibana4_user                = 'root'
+  $kibana4_user                = 'kibana4'
   $kibana4_uid                 = undef
   $install_dir                 = '/opt'
   $symlink                     = true
