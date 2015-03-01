@@ -4,7 +4,7 @@
 #
 class kibana4::user {
 
-  if $kibana4::create_user {
+  if $kibana4::manage_user {
 
     group { $kibana4::kibana4_group:
       ensure => present,

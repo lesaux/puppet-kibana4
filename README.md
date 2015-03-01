@@ -48,10 +48,10 @@ user name, group name, uid and gid.
 
 ```
   class { '::kibana4':
-    version           => '4.0.0-linux-x64',
-    install_method    => 'archive',
+    package_ensure    => '4.0.0-linux-x64',
+    package_provider  => 'archive',
     symlink           => false,
-    create_user       => true,
+    manage_user       => true,
     kibana4_user      => kibana4,
     kibana4_group     => kibana4,
     kibana4_gid       => 200,
@@ -66,66 +66,78 @@ Check all parameters in init.pp file
 
 ### Installation Parameters
 
- [*ensure*]
+[*package_ensure*]
 
-Should the service be started. Valid values are stopped (false) and running (true)
+Version of Kibana4 that gets installed.  Defaults to the latest 4.0.0 version
+available at the time of module release.
 
- [*enable*]
+[*package_name*]
 
-Should the service be enabled on boot. Valid values are true, false, and manual.
+The name of the Kibana4 package that gets installed. Defaults to 'kibana'.
 
- [*create_user*]
+[*package_provider*]
 
-Should the module a create a user to run Kibana4. Default is false, in which case Kibana
-will run as root. If set to true, you will need to specify values for kibana4_group, kibana4_user,
-kibana4_uid and kibana4_gid.
+Set to 'archive' to download Kibana from the Elasticsearch download site (see
+also `package_download_url` below).  Set to 'package' to use the default package
+manager for installation.  Defaults to 'archive'.
 
- [*kibana4_user*]
+[*package_download_url*]
 
-The user that will run the service. For now installation directory is still owned by root.
-This will be a "system" account.
+Alternative URL from which to download Kibana iff `package_provider` is
+'archive'. Defaults to `undef`, because by default the URL is constructed
+from the usual Elasticsearch download site URL, the `package_name` and
+`package_ensure`.
 
- [*kibana4_group*]
+[*service_ensure*]
 
-The primary group of the kibana user
+Specifies the service state. Valid values are stopped (false) and running
+(true). Defaults to 'running'.
 
- [*kibana4_uid*]
+[*service_enable*]
 
-Choose the kibana4_user uid
+Should the service be enabled on boot. Valid values are true, false, and
+manual. Defaults to 'true'.
 
- [*kibana4_gid*]
+[*service_name*]
 
-Choose the kibana4_group gid
+Name of the Kibana4 service. Defaults to 'kibana4'.
 
- [*install_dir*]
- 
+[*install_dir*]
+
 Installation directory used iff install_method is 'archive'
 Defaults to '/opt'.
 
- [*install_method*]
-
-Only the "archive" method is supported at the moment
-
- [*symlink*]
+[*symlink*]
 
 Determines if a symlink should be created in the installation directory for
 the extracted archive. Only used if install_method is 'archive'.
 Defaults to 'true'.
 
- [*symlink_name*]
+[*symlink_name*]
 
-Sets the name to be used for the symlink. The default is '${install_dir}/kibana4'.
-Only used if install_method is 'archive'.
+Sets the name to be used for the symlink. The default is '$install_dir/kibana4'.
+Only used if `package_provider` is 'archive'.
 
- [*version*]
+[*manage_user*]
 
-Version of Kibana4 that gets installed.
-Defaults to the latest 4.0.0-linux-x64 version available at the time of module release.
+Should the user that will run the Kibana service be created and managed by
+Puppet? Defaults to 'false'.
 
- [*download_url*]
+[*kibana4_user*]
 
-URL to download kibana from if install_method is 'archive'
-Defaults to "https://download.elasticsearch.org/kibana/kibana/kibana-${version}.tar.gz"
+The user that will run the service. For now installation directory is still owned by root.
+
+[*kibana4_uid*]
+
+The user ID assigned to the user specified in `kibana4_user`. Defaults to `undef`.
+
+[*kibana4_group*]
+
+The primary group of the kibana user
+
+[*kibana4_gid*]
+
+The group ID assigned to the group specified in `kibana4_group`. Defaults to `undef`.
 
 ### Configuration Parameters
 
@@ -135,34 +147,34 @@ Defaults to "https://download.elasticsearch.org/kibana/kibana/kibana-${version}.
  [*port*]
 
  [*host*]
- 
+
  [*elasticsearch_url*]
 
  [*elasticsearch_preserve_host*]
- 
+
  [*kibana_index*]
 
  [*default_app_id*]
- 
+
  [*request_timeout*]
- 
+
  [*shard_timeout*]
- 
+
  [*verify_ssl*]
- 
+
 Default has been changed to false.
 Providing better SSL support is my todo list.
 
  [*ca*]
- 
+
  [*ssl_key_file*]
- 
+
  [*ssl_cert_file*]
- 
+
  [*pid_file*]
- 
+
  [*bundled_plugin_ids*]
- 
+
 
 ## Reference
 

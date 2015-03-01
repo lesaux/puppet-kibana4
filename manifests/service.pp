@@ -4,7 +4,7 @@
 #
 class kibana4::service {
 
-  file { '/etc/init.d/kibana4':
+  file { "/etc/init.d/${kibana4::service_name}":
     ensure  => present,
     mode    => '0755',
     content => template('kibana4/kibana.init'),
@@ -13,8 +13,9 @@ class kibana4::service {
   }
 
   service { 'kibana4':
-    ensure     => $kibana4::ensure,
-    enable     => $kibana4::enable,
+    ensure     => $kibana4::service_ensure,
+    enable     => $kibana4::service_enable,
+    name       => $kibana4::service_name,
     hasstatus  => true,
     hasrestart => true,
     require    => File['/etc/init.d/kibana4']
