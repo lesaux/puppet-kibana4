@@ -31,7 +31,7 @@ Kibana4 only works with recent versions of Elasticsearch (1.4.4 and later). I re
 
 * Downloads and extracts the kibana4 archive
 * Optionally create a user to use for the service
-* Creates an initrd file as one is not yet provided by the archive
+* Creates an init.d file as one is not yet provided by the archive
 * Modifies configuration file if needed.
 * Java installation is not managed by this module.
 
@@ -118,7 +118,7 @@ Only used if `package_provider` is 'archive'.
 
 [*manage_user*]
 
-Should the user that will run the Kibana service be created and managed by
+Should the user and group that will run the Kibana service be created and managed by
 Puppet? Defaults to 'false'.
 
 [*kibana4_user*]

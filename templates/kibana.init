@@ -34,11 +34,7 @@ start() {
 
 
   # Run the program!
-<% if scope.lookupvar('kibana4::manage_user')  %>
   chroot --userspec <%= scope.lookupvar('kibana4::kibana4_user') %>:<%= scope.lookupvar('kibana4::kibana4_group') %> / sh -c "
-<% else %>
-  chroot --userspec root:root / sh -c "
-<% end %>
     cd /
 
     exec \"$program\" $args
