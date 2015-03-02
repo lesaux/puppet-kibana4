@@ -18,7 +18,7 @@ class kibana4::service {
     name       => $kibana4::service_name,
     hasstatus  => true,
     hasrestart => true,
-    require    => File['/etc/init.d/kibana4']
+    require    => File["/etc/init.d/${kibana4::service_name}"]
   }
 
 }
