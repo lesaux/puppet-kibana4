@@ -1,3 +1,16 @@
+#0.0.6 (2015-03-01)
+
+**Enhancements**
+ - All around style refactoring. Thanks to Andreas Ntaflos.
+
+**Documentation**
+ - Documentation changes to reflect style refactoring.
+
+#0.0.5 (2015-02-28)
+
+**Documentation**
+ - Some readme changes to clarify ES requirements. Thanks to Andreas Ntaflos.
+
 # 0.0.4 (2015-02-25)
 
 **Documentation**
