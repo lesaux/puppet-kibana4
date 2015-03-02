@@ -4,7 +4,9 @@
 #
 class kibana4::config {
 
-  file {"${kibana4::install_dir}/kibana-${kibana4::version}/config/kibana.yml":
+  $version = $kibana4::package_ensure
+
+  file { "${kibana4::install_dir}/kibana-${version}/config/kibana.yml":
     ensure  => file,
     owner   => root,
     group   => root,

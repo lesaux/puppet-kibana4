@@ -3,17 +3,22 @@
 # Default parameters
 #
 class kibana4::params {
-  $ensure                      = true
-  $enable                      = true
-  $create_user                 = false
+  $package_ensure              = '4.0.0-linux-x64'
+  $package_name                = 'kibana'
+  $package_provider            = 'archive'
+  $package_download_url        = undef
+  $es_download_site_url        = 'https://download.elasticsearch.org'
+  $service_ensure              = true
+  $service_enable              = true
+  $service_name                = 'kibana4'
+  $manage_user                 = false
   $kibana4_group               = 'root'
   $kibana4_gid                 = undef
   $kibana4_user                = 'root'
   $kibana4_uid                 = undef
   $install_dir                 = '/opt'
-  $install_method              = 'archive'
   $symlink                     = true
-  $version                     = '4.0.0-linux-x64'
+  $symlink_name                = "${install_dir}/kibana4"
   $port                        = '5601'
   $host                        = '0.0.0.0'
   $elasticsearch_url           = 'http://localhost:9200'

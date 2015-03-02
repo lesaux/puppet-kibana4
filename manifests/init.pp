@@ -3,31 +3,39 @@
 # Installs and configures Kibana4.
 #
 # === Parameters
-# [*ensure*]
-# Should the service be started. Valid values are stopped (false) and running (true)
 #
-# [*enable*]
-# Should the service be enabled on boot. Valid values are true, false, and manual.
+# [*package_ensure*]
+# Version of Kibana4 that gets installed.  Defaults to the latest 4.0.0 version
+# available at the time of module release.
 #
-# [*version*]
-# Version of Kibana4 that gets installed.
-# Defaults to the latest 4.0.0 version available at the time of module release.
+# [*package_name*]
+# The name of the Kibana4 package that gets installed. Defaults to 'kibana'.
 #
-# [*install_method*]
-# Set to 'archive' to download kibana from the supplied download_url.
-# Set to 'package' to use the default package manager for installation.
-# Defaults to 'archive'.
+# [*package_provider*]
+# Set to 'archive' to download Kibana from the Elasticsearch download site (see
+# also `package_download_url` below).  Set to 'package' to use the default package
+# manager for installation.  Defaults to 'archive'.
 #
-# [*download_url*]
-# URL to download kibana from iff install_method is 'archive'
-# Defaults to "https://download.elasticsearch.org/kibana/kibana/kibana-${version}.tar.gz"
+# [*package_download_url*]
+# Alternative URL from which to download Kibana iff `package_provider` is
+# 'archive'. Defaults to `undef`, because by default the URL is constructed
+# from the usual Elasticsearch download site URL, the `package_name` and
+# `package_ensure`.
+#
+# [*service_ensure*]
+# Specifies the service state. Valid values are stopped (false) and running
+# (true). Defaults to 'running'.
+#
+# [*service_enable*]
+# Should the service be enabled on boot. Valid values are true, false, and
+# manual. Defaults to 'true'.
+#
+# [*service_name*]
+# Name of the Kibana4 service. Defaults to 'kibana4'.
 #
 # [*install_dir*]
 # Installation directory used iff install_method is 'archive'
 # Defaults to '/opt'.
-#
-# [*install_method*]
-# Only the "archive" method is supported at the moment
 #
 # [*symlink*]
 # Determines if a symlink should be created in the installation directory for
@@ -35,37 +43,48 @@
 # Defaults to 'true'.
 #
 # [*symlink_name*]
-# Sets the name to be used for the symlink. The default is '${install_dir}/kibana'.
-# Only used if install_method is 'archive'.
+# Sets the name to be used for the symlink. The default is '$install_dir/kibana4'.
+# Only used if `package_provider` is 'archive'.
+#
+# [*manage_user*]
+# Should the user that will run the Kibana service be created and managed by
+# Puppet? Defaults to 'false'.
 #
 # [*kibana4_user*]
 # The user that will run the service. For now installation directory is still owned by root.
 #
+# [*kibana4_uid*]
+# The user ID assigned to the user specified in `kibana4_user`. Defaults to `undef`.
+#
 # [*kibana4_group*]
 # The primary group of the kibana user
 #
+# [*kibana4_gid*]
+# The group ID assigned to the group specified in `kibana4_group`. Defaults to `undef`.
 #
 # === Examples
 #
 #  class { '::kibana4':
-#    version         => '4.0.0',
-#    install_method  => 'package',
+#    package_ensure => '4.0.0',
+#    install_method => 'package',
 #  }
 #
 class kibana4 (
-  $download_url                = "https://download.elasticsearch.org/kibana/kibana/kibana-${version}.tar.gz",
-  $create_user                 = $kibana4::params::create_user,
-  $ensure                      = $kibana4::params::ensure,
-  $enable                      = $kibana4::params::enable,
-  $kibana4_group               = $kibana4::params::kibana_group,
-  $kibana4_gid                 = $kibana4::params::kibana_gid,
-  $kibana4_user                = $kibana4::params::kibana_user,
-  $kibana4_uid                 = $kibana4::params::kibana_uid,
+  $package_ensure              = $kibana4::params::package_ensure,
+  $package_name                = $kibana4::params::package_name,
+  $package_provider            = $kibana4::params::package_provider,
+  $package_download_url        = $kibana4::params::package_download_url,
+  $service_ensure              = $kibana4::params::service_ensure,
+  $service_enable              = $kibana4::params::service_enable,
+  $service_name                = $kibana4::params::service_name,
+  $manage_user                 = $kibana4::params::manage_user,
+  $kibana4_group               = $kibana4::params::kibana4_group,
+  $kibana4_gid                 = $kibana4::params::kibana4_gid,
+  $kibana4_user                = $kibana4::params::kibana4_user,
+  $kibana4_uid                 = $kibana4::params::kibana4_uid,
   $install_dir                 = $kibana4::params::install_dir,
-  $install_method              = $kibana4::params::install_method,
   $symlink                     = $kibana4::params::symlink,
-  $symlink_name                = "${install_dir}/kibana4",
-  $version                     = $kibana4::params::version,
+  $symlink_name                = $kibana4::params::symlink_name,
   $port                        = $kibana4::params::port,
   $host                        = $kibana4::params::host,
   $elasticsearch_url           = $kibana4::params::elasticsearch_url,
