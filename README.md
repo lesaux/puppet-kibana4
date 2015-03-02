@@ -81,7 +81,7 @@ manager for installation.  Defaults to 'archive'.
 
 [*package_download_url*]
 
-Alternative URL from which to download Kibana iff `package_provider` is
+Alternative URL from which to download Kibana if `package_provider` is
 'archive'. Defaults to `undef`, because by default the URL is constructed
 from the usual Elasticsearch download site URL, the `package_name` and
 `package_ensure`.
@@ -119,7 +119,7 @@ Only used if `package_provider` is 'archive'.
 [*manage_user*]
 
 Should the user and group that will run the Kibana service be created and managed by
-Puppet? Defaults to 'false'.
+Puppet? Defaults to 'true'.
 
 [*kibana4_user*]
 

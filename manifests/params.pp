@@ -11,7 +11,7 @@ class kibana4::params {
   $service_ensure              = true
   $service_enable              = true
   $service_name                = 'kibana4'
-  $manage_user                 = false
+  $manage_user                 = true
   $kibana4_group               = 'kibana4'
   $kibana4_gid                 = undef
   $kibana4_user                = 'kibana4'
