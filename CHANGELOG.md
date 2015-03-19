@@ -1,3 +1,8 @@
+#0.0.8 (2015-03-19)
+
+**Documentation**
+ - Adding tags to ease up search in puppet forge.
+
 #0.0.7 (2015-03-01)
 
 **Enhancements**
