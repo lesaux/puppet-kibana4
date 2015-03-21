@@ -37,6 +37,9 @@
 # Installation directory used iff install_method is 'archive'
 # Defaults to '/opt'.
 #
+# [*config_file*]
+# The location, as a path, of the Kibana configuration file.
+#
 # [*symlink*]
 # Determines if a symlink should be created in the installation directory for
 # the extracted archive. Only used if install_method is 'archive'.
@@ -83,6 +86,7 @@ class kibana4 (
   $kibana4_user                = $kibana4::params::kibana4_user,
   $kibana4_uid                 = $kibana4::params::kibana4_uid,
   $install_dir                 = $kibana4::params::install_dir,
+  $config_file                 = undef,
   $symlink                     = $kibana4::params::symlink,
   $symlink_name                = $kibana4::params::symlink_name,
   $port                        = $kibana4::params::port,
