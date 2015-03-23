@@ -30,7 +30,7 @@ describe 'kibana4' do
         :package_ensure   => '4.0.0-linux-x64',
         :service_ensure   => false,
         :service_enable   => false,
-        :init_template    => false,
+        :manage_init_file => false,
       }
     end
     it { should contain_archive('kibana-4.0.0-linux-x64')}
