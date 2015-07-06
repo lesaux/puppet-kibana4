@@ -22,6 +22,10 @@
 # from the usual Elasticsearch download site URL, the `package_name` and
 # `package_ensure`.
 #
+# [*package_proxy_server*]
+# Specifies which proxy server use to download archive. Valid format is
+# http[s]//[user:passwd@]proxy_host:port
+#
 # [*service_ensure*]
 # Specifies the service state. Valid values are stopped (false) and running
 # (true). Defaults to 'running'.
@@ -74,6 +78,7 @@ class kibana4 (
   $package_name                = $kibana4::params::package_name,
   $package_provider            = $kibana4::params::package_provider,
   $package_download_url        = $kibana4::params::package_download_url,
+  $package_proxy_server        = $kibana4::params::package_proxy_server,
   $service_ensure              = $kibana4::params::service_ensure,
   $service_enable              = $kibana4::params::service_enable,
   $service_name                = $kibana4::params::service_name,
