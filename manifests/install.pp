@@ -14,10 +14,11 @@ class kibana4::install {
     }
 
     archive { "kibana-${version}":
-      ensure   => present,
-      checksum => false,
-      target   => $kibana4::install_dir,
-      url      => $download_url,
+      ensure            => present,
+      checksum          => false,
+      target            => $kibana4::install_dir,
+      url               => $download_url,
+      proxy_server      => $kibana::package_proxy_server,
     }
 
     if $kibana4::symlink {
