@@ -18,7 +18,7 @@ class kibana4::install {
       checksum          => false,
       target            => $kibana4::install_dir,
       url               => $download_url,
-      proxy_server      => $kibana::package_proxy_server,
+      proxy_server      => $kibana4::package_proxy_server,
     }
 
     if $kibana4::symlink {
