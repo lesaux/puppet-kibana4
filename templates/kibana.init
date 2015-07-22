@@ -25,7 +25,7 @@ program=<%= scope.lookupvar('kibana4::symlink_name') %>/bin/kibana
 program=<%= scope.lookupvar('kibana4::install_dir') %>/kibana-<%= scope.lookupvar('kibana4::package_ensure') %>/bin/kibana
 <% end %>
 args=''
-pidfile=<%= scope.lookupvar('kibana4::pid_file') %>/
+pidfile=<%= scope.lookupvar('kibana4::pid_file') %>
 
 [ -r /etc/default/$name ] && . /etc/default/$name
 [ -r /etc/sysconfig/$name ] && . /etc/sysconfig/$name
