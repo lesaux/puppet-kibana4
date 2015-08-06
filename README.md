@@ -46,7 +46,7 @@ user name, group name, uid and gid.
 
 ```
   class { '::kibana4':
-    package_ensure    => '4.0.0-linux-x64',
+    package_ensure    => '4.1.1-linux-x64',
     package_provider  => 'archive',
     symlink           => false,
     manage_user       => true,
@@ -66,7 +66,7 @@ Check all parameters in init.pp file
 
 [*package_ensure*]
 
-Version of Kibana4 that gets installed.  Defaults to the latest 4.0.0 version
+Version of Kibana4 that gets installed.  Defaults to the latest 4.1.1 version
 available at the time of module release.
 
 [*package_name*]
@@ -140,7 +140,7 @@ The group ID assigned to the group specified in `kibana4_group`. Defaults to `un
 ### Configuration Parameters
 
  See Kibana4 documentation for more details. Defaults values are the same as defaults from kibana.yml
- provided in the archive version 4.0.0-linux-x64.
+ provided in the archive version 4.1.1-linux-x64.
 
  [*port*]
 
