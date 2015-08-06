@@ -1,12 +1,12 @@
 #1.0.0 (2015-08-06)
 
 **Enhancements**
- -pid file improvements
- -proxy server support on archive downloading
- -Default version bump from 4.0.0 to 4.1.1
+ - pid file improvements
+ - proxy server support on archive downloading
+ - Default version bump from 4.0.0 to 4.1.1
 
 **Documentation**
- -Document package_proxy_server parameter
+ - Document package_proxy_server parameter
 
 #0.0.9 (2015-03-19)
 
