@@ -5,6 +5,9 @@
  -proxy server support on archive downloading
  -Default version bump from 4.0.0 to 4.1.1
 
+**Documentation**
+ -Document package_proxy_server parameter
+
 #0.0.9 (2015-03-19)
 
 **Documentation**
