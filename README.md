@@ -86,6 +86,10 @@ Alternative URL from which to download Kibana if `package_provider` is
 from the usual Elasticsearch download site URL, the `package_name` and
 `package_ensure`.
 
+[*package_proxy_server*]
+
+Specify a proxy server if you need to use one. Defaults to `undef`.
+
 [*service_ensure*]
 
 Specifies the service state. Valid values are stopped (false) and running
