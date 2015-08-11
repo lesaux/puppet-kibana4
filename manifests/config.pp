@@ -6,7 +6,13 @@ class kibana4::config {
 
   $version = $kibana4::package_ensure
 
-  file { "${kibana4::install_dir}/kibana-${version}/config/kibana.yml":
+  if $kibana4::use_official_repos {
+    $config_file = '/opt/kibana/config/kibana.yml'
+  } else {
+    $config_file = "${kibana4::install_dir}/kibana-${version}/config/kibana.yml"
+  }
+
+  file { $config_file:
     ensure  => file,
     owner   => root,
     group   => root,

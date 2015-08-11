@@ -31,10 +31,45 @@ class kibana4::install {
   }
 
   if $kibana4::package_provider == 'package' {
+
+    if $kibana4::use_official_repos {
+
+      case $::osfamily {
+        'RedHat': {
+          yumrepo { "kibana-${kibana4::repo_version}":
+            baseurl   => "http://packages.elastic.co/kibana/${kibana4::repo_version}/centos",
+            enabled   => '1',
+            gpgcheck  => '1',
+            gpgkey    => 'https://packages.elastic.co/GPG-KEY-elasticsearch',
+            descr     => "Kibana repository for ${kibana4::repo_version}.x packages",
+            before    => Package['kibana4'],
+          }
+        }
+        'Debian': {
+          if !defined(Class['apt']) {
+            class { 'apt': }
+          }
+          apt::source { "kibana-${kibana4::repo_version}":
+            location    => "http://packages.elastic.co/kibana/${kibana4::repo_version}/debian",
+            release     => 'stable',
+            repos       => 'main',
+            key         => 'D88E42B4',
+            key_source  => 'http://packages.elastic.co/GPG-KEY-elasticsearch',
+            include_src => false,
+          }
+        }
+        default: {
+          fail("${::operatingsystem} not supported")
+        }
+      }
+
+    }
+
     package { 'kibana4':
       ensure => $kibana4::package_ensure,
       name   => $kibana4::package_name,
     }
+
   }
 
 }

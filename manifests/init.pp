@@ -79,6 +79,8 @@ class kibana4 (
   $package_provider            = $kibana4::params::package_provider,
   $package_download_url        = $kibana4::params::package_download_url,
   $package_proxy_server        = $kibana4::params::package_proxy_server,
+  $use_official_repos          = $kibana4::params::use_official_repos,
+  $repo_version                = $kibana4::params::repo_version,
   $service_ensure              = $kibana4::params::service_ensure,
   $service_enable              = $kibana4::params::service_enable,
   $service_name                = $kibana4::params::service_name,
