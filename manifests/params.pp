@@ -8,6 +8,8 @@ class kibana4::params {
   $package_provider            = 'archive'
   $package_download_url        = undef
   $package_proxy_server        = undef
+  $use_official_repos          = false
+  $repo_version                = '4.1'
   $es_download_site_url        = 'https://download.elasticsearch.org'
   $service_ensure              = true
   $service_enable              = true
