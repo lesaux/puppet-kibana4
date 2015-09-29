@@ -104,6 +104,15 @@ manual. Defaults to 'true'.
 
 Name of the Kibana4 service. Defaults to 'kibana4'.
 
+[*manage_init_file*]
+
+Install init file. If the init script is provided by a package,
+set it to `false`. Defaults to 'true'
+
+[*init_template*]
+
+Service file as a template. Defaults to 'kibana4/kibana.init'.
+
 [*install_dir*]
 
 Installation directory used iff install_method is 'archive'
