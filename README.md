@@ -109,6 +109,9 @@ Name of the Kibana4 service. Defaults to 'kibana4'.
 Installation directory used iff install_method is 'archive'
 Defaults to '/opt'.
 
+[*config_file*]
+The location, as a path, of the Kibana configuration file.
+
 [*symlink*]
 
 Determines if a symlink should be created in the installation directory for
