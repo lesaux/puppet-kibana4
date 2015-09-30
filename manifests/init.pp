@@ -26,6 +26,13 @@
 # Specifies which proxy server use to download archive. Valid format is
 # http[s]//[user:passwd@]proxy_host:port
 #
+# [*use_official_repo*]
+# Use official apt or yum repository. Only used if package_provider is set to 'package'.
+#
+# [*repo_version*]
+# apt or yum repository version. Only used if 'use_official_repo' is set to 'true'.
+# defaults to '4.1'.
+#
 # [*service_ensure*]
 # Specifies the service state. Valid values are stopped (false) and running
 # (true). Defaults to 'running'.
@@ -82,6 +89,8 @@ class kibana4 (
   $package_provider            = $kibana4::params::package_provider,
   $package_download_url        = $kibana4::params::package_download_url,
   $package_proxy_server        = $kibana4::params::package_proxy_server,
+  $use_official_repo           = $kibana4::params::use_official_repo,
+  $repo_version                = $kibana4::params::repo_version,
   $service_ensure              = $kibana4::params::service_ensure,
   $service_enable              = $kibana4::params::service_enable,
   $service_name                = $kibana4::params::service_name,

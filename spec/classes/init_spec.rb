@@ -274,4 +274,63 @@ describe 'kibana4' do
     it { should contain_file('kibana-config-file').with_path('/etc/kibana4/kibana.yml') }
   end
 
+  context 'installs via package provider' do
+
+    context 'using custom package' do
+      let :facts do
+        {
+          :osfamily => 'RedHat'
+        }
+      end
+      let :params do
+        {
+          :package_provider   => 'package',
+        }
+      end
+      it { should contain_package('kibana4') }
+    end
+
+    context 'using the official repos on CentOS' do
+      let :facts do
+        {
+          :osfamily => 'RedHat'
+        }
+      end
+      let :params do
+        {
+          :package_provider   => 'package',
+          :package_name       => 'kibana',
+          :service_name       => 'kibana',
+          :use_official_repos => true,
+          :repo_version       => '4.1'
+        }
+      end
+      it { should contain_package('kibana4').with_name('kibana')}
+      it { should contain_service('kibana4').with_ensure('true').with_name('kibana') }
+      it { should contain_yumrepo('kibana-4.1') }
+    end
+
+    context 'using the official repos on Ubuntu' do
+      let :facts do
+        {
+          :osfamily  => 'Debian',
+          :lsbdistid => 'trusty'
+        }
+      end
+      let :params do
+        {
+          :package_provider   => 'package',
+          :package_name       => 'kibana',
+          :service_name       => 'kibana',
+          :use_official_repos => true,
+          :repo_version       => '4.1'
+        }
+      end
+      it { should contain_package('kibana4').with_name('kibana')}
+      it { should contain_service('kibana4').with_ensure('true').with_name('kibana') }
+      it { should contain_apt__source('kibana-4.1') }
+    end
+
+  end
+
 end
