@@ -32,7 +32,7 @@ class kibana4::install {
 
   if $kibana4::package_provider == 'package' {
 
-    if $kibana4::use_official_repos {
+    if $kibana4::use_official_repo {
 
       case $::osfamily {
         'RedHat': {

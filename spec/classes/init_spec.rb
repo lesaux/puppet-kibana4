@@ -301,7 +301,7 @@ describe 'kibana4' do
           :package_provider   => 'package',
           :package_name       => 'kibana',
           :service_name       => 'kibana',
-          :use_official_repos => true,
+          :use_official_repo  => true,
           :repo_version       => '4.1'
         }
       end
@@ -322,7 +322,7 @@ describe 'kibana4' do
           :package_provider   => 'package',
           :package_name       => 'kibana',
           :service_name       => 'kibana',
-          :use_official_repos => true,
+          :use_official_repo  => true,
           :repo_version       => '4.1'
         }
       end
