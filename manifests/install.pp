@@ -53,9 +53,9 @@ class kibana4::install {
             location    => "http://packages.elastic.co/kibana/${kibana4::repo_version}/debian",
             release     => 'stable',
             repos       => 'main',
-            key         => 'D88E42B4',
-            key_source  => 'http://packages.elastic.co/GPG-KEY-elasticsearch',
-            include_src => false,
+            key         => { 'source' => 'http://packages.elastic.co/GPG-KEY-elasticsearch',
+                             'id'     => '46095ACC8548582C1A2699A9D27D666CD88E42B4' },
+            include     => { 'src' => false },
           }
         }
         default: {
