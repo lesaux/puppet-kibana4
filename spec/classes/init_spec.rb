@@ -260,8 +260,8 @@ describe 'kibana4' do
     it { should_not contain_file('/opt/kibana') }
     it { should contain_file('kibana-config-file').with_path('/usr/share/kibana4/config/kibana.yml') }
     it { should contain_service('kibana4').with_ensure('true').with_enable('true') }
-    it { should contain_file('/etc/init.d/kibana4').with_content(/^program=\/opt\/kibana4\/bin\/kibana/) }
-    it { should contain_file('/etc/init.d/kibana4').with_content(/^  chroot --userspec kib4:kib4 \/ sh -c "/) }
+    #it { should contain_file('/etc/init.d/kibana4').with_content(/^program=\/opt\/kibana4\/bin\/kibana/) }
+    #it { should contain_file('/etc/init.d/kibana4').with_content(/^  chroot --userspec kib4:kib4 \/ sh -c "/) }
   end
 
   context 'installs via package and set config file' do
