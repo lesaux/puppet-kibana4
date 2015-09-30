@@ -29,9 +29,10 @@ Kibana4 only works with recent versions of Elasticsearch (1.4.4 and later). I re
 
 ### What kibana4 affects
 
-* Downloads and extracts the kibana4 archive
+* Downloads and extracts the kibana4 archive, or perform installation using OS pakcage manager.
+* Manage the elastic.co Kibana repositories
 * Optionally create a user to use for the service
-* Creates an init.d file as one is not yet provided by the archive
+* Creates an init.d file if installing from the archive.
 * Modifies configuration file if needed.
 * Java installation is not managed by this module.
 
@@ -44,6 +45,7 @@ include kibana4
 If you decided to have the module create a user, you will need to specify
 user name, group name, uid and gid.
 
+Example to install from archive.
 ```
   class { '::kibana4':
     package_ensure    => '4.1.1-linux-x64',
@@ -56,6 +58,18 @@ user name, group name, uid and gid.
     kibana4_uid       => 200,
     elasticsearch_url => 'http://localhost:9200',
   }
+```
+Example to install from apt or yum repo
+```
+class { '::kibana4':
+  package_provider   => 'package',
+  package_name       => 'kibana',
+  package_ensure     => '4.1.1',
+  manage_user        => 'false'
+  service_name       => 'kibana',
+  use_official_repo  => true,
+  repo_version       => '4.1'
+}
 ```
 
 ## Parameters
@@ -89,6 +103,13 @@ from the usual Elasticsearch download site URL, the `package_name` and
 [*package_proxy_server*]
 
 Specify a proxy server if you need to use one. Defaults to `undef`.
+
+[*use_official_repo*]
+Use official apt or yum repository. Only used if package_provider is set to 'package'.
+
+[*repo_version*]
+Apt or yum repository version. Only used if 'use_official_repo' is set to 'true'.
+defaults to '4.1'.
 
 [*service_ensure*]
 
