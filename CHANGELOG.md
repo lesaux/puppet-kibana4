@@ -1,3 +1,13 @@
+#1.0.2 (2015-01-10)
+
+**Enhancements**
+ - support for official elactic.co repositories. Thanks to Andrew Stangl.
+ - OS package installation improvements.
+ - Elasticsearch authentication support.
+
+**Documentation**
+ - Installation from offical repos example.
+
 #1.0.1 (2015-08-06)
 
 **Documentation**

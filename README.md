@@ -31,8 +31,8 @@ Kibana4 only works with recent versions of Elasticsearch (1.4.4 and later). I re
 
 * Downloads and extracts the kibana4 archive, or perform installation using OS package manager.
 * Manage the elastic.co Kibana repositories
-* Optionally create a user to use for the service
-* Creates an init.d file if installing from the archive.
+* Optionally create a user to use for the service. You should not create a user if installing Kibana with package management (apt or yum).
+* Creates an init.d file if installing from the archive. Note that the init file is not managed if you are installing Kibana with package management (apt or yum).
 * Modifies configuration file if needed.
 * Java installation is not managed by this module.
 
@@ -59,7 +59,8 @@ Example to install from archive.
     elasticsearch_url => 'http://localhost:9200',
   }
 ```
-Example to install from apt or yum repo
+Example to install from apt or yum repo. You will need to explicitly set the service_name to 'kibana' in most cases, because
+for legacy reasons the default service_name is set to kibana4 - this may change in the future.
 ```
 class { '::kibana4':
   package_provider   => 'package',

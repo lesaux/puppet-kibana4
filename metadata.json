@@ -1,6 +1,6 @@
 {
   "name": "lesaux-kibana4",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "lesaux",
   "summary": "Kibana 4 installation",
   "license": "Apache-2.0",
@@ -15,7 +15,7 @@
     },
     {
     "operatingsystem": "Ubuntu",
-    "operatingsystemrelease": [ "12.04", "10.04" ]
+    "operatingsystemrelease": [ "14.04", "12.04", "10.04" ]
     }
    ],
   "dependencies": [
