@@ -3,7 +3,7 @@
 # Default parameters
 #
 class kibana4::params {
-  $package_ensure              = '4.1.1-linux-x64'
+  $package_ensure              = '4.1.2-linux-x64'
   $package_name                = 'kibana'
   $package_provider            = 'archive'
   $package_download_url        = undef
