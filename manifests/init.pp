@@ -26,6 +26,13 @@
 # Specifies which proxy server use to download archive. Valid format is
 # http[s]//[user:passwd@]proxy_host:port
 #
+# [*use_official_repo*]
+# Use official apt or yum repository. Only used if package_provider is set to 'package'.
+#
+# [*repo_version*]
+# apt or yum repository version. Only used if 'use_official_repo' is set to 'true'.
+# defaults to '4.1'.
+#
 # [*service_ensure*]
 # Specifies the service state. Valid values are stopped (false) and running
 # (true). Defaults to 'running'.
@@ -36,6 +43,13 @@
 #
 # [*service_name*]
 # Name of the Kibana4 service. Defaults to 'kibana4'.
+#
+# [*init_template*]
+# Service file as a template
+#
+# [*manage_init_file*]
+# Install init file. If the init script is provided by a package,
+# set it to `false`. Defaults to 'true'
 #
 # [*install_dir*]
 # Installation directory used iff install_method is 'archive'
@@ -82,9 +96,13 @@ class kibana4 (
   $package_provider            = $kibana4::params::package_provider,
   $package_download_url        = $kibana4::params::package_download_url,
   $package_proxy_server        = $kibana4::params::package_proxy_server,
+  $use_official_repo           = $kibana4::params::use_official_repo,
+  $repo_version                = $kibana4::params::repo_version,
   $service_ensure              = $kibana4::params::service_ensure,
   $service_enable              = $kibana4::params::service_enable,
   $service_name                = $kibana4::params::service_name,
+  $init_template               = $kibana4::params::init_template,
+  $manage_init_file            = $kibana4::params::manage_init_file,
   $manage_user                 = $kibana4::params::manage_user,
   $kibana4_group               = $kibana4::params::kibana4_group,
   $kibana4_gid                 = $kibana4::params::kibana4_gid,
@@ -98,6 +116,8 @@ class kibana4 (
   $host                        = $kibana4::params::host,
   $elasticsearch_url           = $kibana4::params::elasticsearch_url,
   $elasticsearch_preserve_host = $kibana4::params::elasticsearch_preserve_host,
+  $elasticsearch_username      = $kibana4::params::elasticsearch_username,
+  $elasticsearch_password      = $kibana4::params::elasticsearch_password,
   $kibana_index                = $kibana4::params::kibana_index,
   $default_app_id              = $kibana4::params::default_app_id,
   $request_timeout             = $kibana4::params::request_timeout,

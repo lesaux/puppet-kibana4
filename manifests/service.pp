@@ -4,12 +4,18 @@
 #
 class kibana4::service {
 
-  file { "/etc/init.d/${kibana4::service_name}":
-    ensure  => present,
-    mode    => '0755',
-    content => template('kibana4/kibana.init'),
-    group   => root,
-    owner   => root,
+  # init file from template
+  if ($kibana4::manage_init_file == true) {
+    file { "/etc/init.d/${kibana4::service_name}":
+      ensure  => present,
+      mode    => '0755',
+      content => template($kibana4::init_template),
+      group   => root,
+      owner   => root,
+    }
+    $require = File["/etc/init.d/${kibana4::service_name}"]
+  } else {
+    $require = undef
   }
 
   service { 'kibana4':
@@ -18,7 +24,7 @@ class kibana4::service {
     name       => $kibana4::service_name,
     hasstatus  => true,
     hasrestart => true,
-    require    => File["/etc/init.d/${kibana4::service_name}"]
+    require    => $require
   }
 
 }

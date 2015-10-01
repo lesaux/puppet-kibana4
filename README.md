@@ -29,9 +29,10 @@ Kibana4 only works with recent versions of Elasticsearch (1.4.4 and later). I re
 
 ### What kibana4 affects
 
-* Downloads and extracts the kibana4 archive
-* Optionally create a user to use for the service
-* Creates an init.d file as one is not yet provided by the archive
+* Downloads and extracts the kibana4 archive, or perform installation using OS package manager.
+* Manage the elastic.co Kibana repositories
+* Optionally create a user to use for the service. You should not create a user if installing Kibana with package management (apt or yum).
+* Creates an init.d file if installing from the archive. Note that the init file is not managed if you are installing Kibana with package management (apt or yum).
 * Modifies configuration file if needed.
 * Java installation is not managed by this module.
 
@@ -44,6 +45,7 @@ include kibana4
 If you decided to have the module create a user, you will need to specify
 user name, group name, uid and gid.
 
+Example to install from archive.
 ```
   class { '::kibana4':
     package_ensure    => '4.1.1-linux-x64',
@@ -56,6 +58,22 @@ user name, group name, uid and gid.
     kibana4_uid       => 200,
     elasticsearch_url => 'http://localhost:9200',
   }
+```
+Example to install from apt or yum repo.
+You will need to explicitly set the service_name to 'kibana' in most cases, because
+for legacy reasons the default service_name is set to kibana4 - this may change in the future.
+We disable user and init.d management as these are provided in official packages.
+```
+class { '::kibana4':
+  package_provider   => 'package',
+  package_name       => 'kibana',
+  package_ensure     => '4.1.1',
+  manage_user        => false,
+  mamage_init_file   => false,
+  service_name       => 'kibana',
+  use_official_repo  => true,
+  repo_version       => '4.1'
+}
 ```
 
 ## Parameters
@@ -90,6 +108,13 @@ from the usual Elasticsearch download site URL, the `package_name` and
 
 Specify a proxy server if you need to use one. Defaults to `undef`.
 
+[*use_official_repo*]
+Use official apt or yum repository. Only used if package_provider is set to 'package'.
+
+[*repo_version*]
+Apt or yum repository version. Only used if 'use_official_repo' is set to 'true'.
+defaults to '4.1'.
+
 [*service_ensure*]
 
 Specifies the service state. Valid values are stopped (false) and running
@@ -103,6 +128,15 @@ manual. Defaults to 'true'.
 [*service_name*]
 
 Name of the Kibana4 service. Defaults to 'kibana4'.
+
+[*manage_init_file*]
+
+Install init file. If the init script is provided by a package,
+set it to `false`. Defaults to 'true'
+
+[*init_template*]
+
+Service file as a template. Defaults to 'kibana4/kibana.init'.
 
 [*install_dir*]
 
@@ -154,6 +188,10 @@ The group ID assigned to the group specified in `kibana4_group`. Defaults to `un
  [*host*]
 
  [*elasticsearch_url*]
+
+ [*elasticsearch_username*]
+
+ [*elasticsearch_password*]
 
  [*elasticsearch_preserve_host*]
 

@@ -24,11 +24,13 @@ class kibana4::config {
     notify  => Service['kibana4'],
   }
 
-  file {$kibana4::pid_file:
-    ensure => file,
-    owner  => $kibana4::kibana4_user,
-    group  => $kibana4::kibana4_group,
-    mode   => '0644',
+  if $kibana4::package_provider == 'archive' {
+    file {$kibana4::pid_file:
+      ensure => file,
+      owner  => $kibana4::kibana4_user,
+      group  => $kibana4::kibana4_group,
+      mode   => '0644',
+    }
   }
 
 }
