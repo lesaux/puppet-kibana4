@@ -44,6 +44,13 @@
 # [*service_name*]
 # Name of the Kibana4 service. Defaults to 'kibana4'.
 #
+# [*init_template*]
+# Service file as a template
+#
+# [*manage_init_file*]
+# Install init file. If the init script is provided by a package,
+# set it to `false`. Defaults to 'true'
+#
 # [*install_dir*]
 # Installation directory used iff install_method is 'archive'
 # Defaults to '/opt'.
@@ -94,6 +101,8 @@ class kibana4 (
   $service_ensure              = $kibana4::params::service_ensure,
   $service_enable              = $kibana4::params::service_enable,
   $service_name                = $kibana4::params::service_name,
+  $init_template               = $kibana4::params::init_template,
+  $manage_init_file            = $kibana4::params::manage_init_file,
   $manage_user                 = $kibana4::params::manage_user,
   $kibana4_group               = $kibana4::params::kibana4_group,
   $kibana4_gid                 = $kibana4::params::kibana4_gid,

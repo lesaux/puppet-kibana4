@@ -66,7 +66,8 @@ class { '::kibana4':
   package_provider   => 'package',
   package_name       => 'kibana',
   package_ensure     => '4.1.1',
-  manage_user        => 'false'
+  manage_user        => false,
+  mamage_init_file   => false,
   service_name       => 'kibana',
   use_official_repo  => true,
   repo_version       => '4.1'
@@ -125,6 +126,15 @@ manual. Defaults to 'true'.
 [*service_name*]
 
 Name of the Kibana4 service. Defaults to 'kibana4'.
+
+[*manage_init_file*]
+
+Install init file. If the init script is provided by a package,
+set it to `false`. Defaults to 'true'
+
+[*init_template*]
+
+Service file as a template. Defaults to 'kibana4/kibana.init'.
 
 [*install_dir*]
 
