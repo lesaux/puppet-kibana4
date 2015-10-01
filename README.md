@@ -59,8 +59,10 @@ Example to install from archive.
     elasticsearch_url => 'http://localhost:9200',
   }
 ```
-Example to install from apt or yum repo. You will need to explicitly set the service_name to 'kibana' in most cases, because
+Example to install from apt or yum repo.
+You will need to explicitly set the service_name to 'kibana' in most cases, because
 for legacy reasons the default service_name is set to kibana4 - this may change in the future.
+We disable user and init.d management as these are provided in official packages.
 ```
 class { '::kibana4':
   package_provider   => 'package',
