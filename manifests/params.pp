@@ -25,6 +25,8 @@ class kibana4::params {
   $port                        = '5601'
   $host                        = '0.0.0.0'
   $elasticsearch_url           = 'http://localhost:9200'
+  $elasticsearch_username      = undef
+  $elasticsearch_password      = undef
   $elasticsearch_preserve_host = true
   $kibana_index                = '.kibana'
   $default_app_id              = 'discover'

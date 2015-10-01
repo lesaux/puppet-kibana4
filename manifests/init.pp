@@ -107,6 +107,8 @@ class kibana4 (
   $host                        = $kibana4::params::host,
   $elasticsearch_url           = $kibana4::params::elasticsearch_url,
   $elasticsearch_preserve_host = $kibana4::params::elasticsearch_preserve_host,
+  $elasticsearch_username      = $kibana4::params::elasticsearch_username,
+  $elasticsearch_password      = $kibana4::params::elasticsearch_password,
   $kibana_index                = $kibana4::params::kibana_index,
   $default_app_id              = $kibana4::params::default_app_id,
   $request_timeout             = $kibana4::params::request_timeout,
