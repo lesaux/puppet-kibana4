@@ -29,7 +29,7 @@ Kibana4 only works with recent versions of Elasticsearch (1.4.4 and later). I re
 
 ### What kibana4 affects
 
-* Downloads and extracts the kibana4 archive, or perform installation using OS pakcage manager.
+* Downloads and extracts the kibana4 archive, or perform installation using OS package manager.
 * Manage the elastic.co Kibana repositories
 * Optionally create a user to use for the service
 * Creates an init.d file if installing from the archive.
@@ -175,6 +175,10 @@ The group ID assigned to the group specified in `kibana4_group`. Defaults to `un
  [*host*]
 
  [*elasticsearch_url*]
+
+ [*elasticsearch_username*]
+
+ [*elasticsearch_password*]
 
  [*elasticsearch_preserve_host*]
 
