@@ -69,7 +69,7 @@ class { '::kibana4':
   package_name       => 'kibana',
   package_ensure     => '4.1.1',
   manage_user        => false,
-  mamage_init_file   => false,
+  manage_init_file   => false,
   service_name       => 'kibana',
   use_official_repo  => true,
   repo_version       => '4.1'
