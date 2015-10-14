@@ -16,6 +16,15 @@
 # also `package_download_url` below).  Set to 'package' to use the default package
 # manager for installation.  Defaults to 'archive'.
 #
+# [*archive_provider*]
+# Select which `archive` type should be used to download Kibana from the
+# Elasticsearch download site. There exist at least two modules that provide an
+# `archive` type: "camptocamp/archive" and "nanliu/archive" (or "puppet/archive"
+# since the module is now in the care of puppet-community). Defaults to
+# 'camptocamp'. If you set this to 'nanliu' (or 'puppet') make sure you have that
+# module installed since both cannot be recorded as a dependency in metadata.json
+# at the same time.
+#
 # [*package_download_url*]
 # Alternative URL from which to download Kibana iff `package_provider` is
 # 'archive'. Defaults to `undef`, because by default the URL is constructed
@@ -24,7 +33,8 @@
 #
 # [*package_proxy_server*]
 # Specifies which proxy server use to download archive. Valid format is
-# http[s]//[user:passwd@]proxy_host:port
+# http[s]//[user:passwd@]proxy_host:port. Not supported when `archive_provider`
+# is 'nanliu' or 'puppet'.
 #
 # [*use_official_repo*]
 # Use official apt or yum repository. Only used if package_provider is set to 'package'.
@@ -94,6 +104,7 @@ class kibana4 (
   $package_ensure              = $kibana4::params::package_ensure,
   $package_name                = $kibana4::params::package_name,
   $package_provider            = $kibana4::params::package_provider,
+  $archive_provider            = $kibana4::params::archive_provider,
   $package_download_url        = $kibana4::params::package_download_url,
   $package_proxy_server        = $kibana4::params::package_proxy_server,
   $use_official_repo           = $kibana4::params::use_official_repo,
