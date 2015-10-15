@@ -6,6 +6,7 @@ class kibana4::params {
   $package_ensure              = '4.1.2-linux-x64'
   $package_name                = 'kibana'
   $package_provider            = 'archive'
+  $archive_provider            = 'camptocamp'
   $package_download_url        = undef
   $package_proxy_server        = undef
   $use_official_repo           = false

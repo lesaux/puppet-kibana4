@@ -45,8 +45,9 @@ include kibana4
 If you decided to have the module create a user, you will need to specify
 user name, group name, uid and gid.
 
-Example to install from archive.
-```
+### Example to install from archive
+
+```puppet
   class { '::kibana4':
     package_ensure    => '4.1.1-linux-x64',
     package_provider  => 'archive',
@@ -59,11 +60,36 @@ Example to install from archive.
     elasticsearch_url => 'http://localhost:9200',
   }
 ```
-Example to install from apt or yum repo.
+
+If you prefer to use "nanliu/archive" or "puppet/archive" as the archive
+downloader instead of the default "camptocamp/archive" then set the class
+parameter `archive_provider`. Make sure to have either "nanliu/archive" or
+"puppet/archive" installed since dependency on one of multiple different
+modules with the same name cannot be recorded in metadata.json (by default this
+module uses and depends on "camptocamp/archive").
+
+```puppet
+  class { '::kibana4':
+    package_ensure    => '4.1.1-linux-x64',
+    package_provider  => 'archive',
+    archive_provider  => 'nanliu', # or 'puppet'
+    symlink           => false,
+    manage_user       => true,
+    kibana4_user      => kibana4,
+    kibana4_group     => kibana4,
+    kibana4_gid       => 200,
+    kibana4_uid       => 200,
+    elasticsearch_url => 'http://localhost:9200',
+  }
+```
+
+### Example to install from apt or yum repo
+
 You will need to explicitly set the service_name to 'kibana' in most cases, because
 for legacy reasons the default service_name is set to kibana4 - this may change in the future.
 We disable user and init.d management as these are provided in official packages.
-```
+
+```puppet
 class { '::kibana4':
   package_provider   => 'package',
   package_name       => 'kibana',
@@ -96,6 +122,16 @@ The name of the Kibana4 package that gets installed. Defaults to 'kibana'.
 Set to 'archive' to download Kibana from the Elasticsearch download site (see
 also `package_download_url` below).  Set to 'package' to use the default package
 manager for installation.  Defaults to 'archive'.
+
+[*archive_provider*]
+
+Select which `archive` type should be used to download Kibana from the
+Elasticsearch download site. There exist at least two modules that provide an
+`archive` type: "camptocamp/archive" and "nanliu/archive" (or "puppet/archive"
+since the module is now in the care of puppet-community). Defaults to
+'camptocamp'. If you set this to 'nanliu' (or 'puppet') make sure you have that
+module installed since both cannot be recorded as a dependency in metadata.json
+at the same time.
 
 [*package_download_url*]
 
