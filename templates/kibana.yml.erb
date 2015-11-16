@@ -19,12 +19,12 @@ kibana_index: "<%= scope.lookupvar('kibana4::kibana_index') %>"
 # used by the Kibana server to perform maintence on the kibana_index at statup. Your Kibana
 # users will still need to authenticate with Elasticsearch (which is proxied thorugh
 # the Kibana server)
-<% if scope.lookupvar('kibana4::elasticsearch_username') != :undef %>
+<% unless scope.lookupvar('kibana4::elasticsearch_username').nil? %>
 kibana_elasticsearch_username: <%= scope.lookupvar('kibana4::elasticsearch_username') %>
 <% else %>
 # kibana_elasticsearch_username: user
 <% end %>
-<% if scope.lookupvar('kibana4::elasticsearch_password') != :undef %>
+<% unless scope.lookupvar('kibana4::elasticsearch_password').nil? %>
 kibana_elasticsearch_password: <%= scope.lookupvar('kibana4::elasticsearch_password') %>
 <% else %>
 # kibana_elasticsearch_username: pass
