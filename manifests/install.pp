@@ -32,6 +32,7 @@ class kibana4::install {
           creates       => "${kibana4::install_dir}/kibana-${version}",
           extract       => true,
           cleanup       => true,
+          notify        => Exec['chown_kibana_directory'],
         }
 
         $symlink_require = Archive["${kibana4::install_dir}/kibana-${version}.tar.gz"]
@@ -43,6 +44,7 @@ class kibana4::install {
           target       => $kibana4::install_dir,
           url          => $download_url,
           proxy_server => $kibana4::package_proxy_server,
+          notify       => Exec['chown_kibana_directory'],
         }
 
         $symlink_require = Archive["kibana-${version}"]
@@ -52,11 +54,20 @@ class kibana4::install {
       }
     }
 
+    exec { 'chown_kibana_directory':
+      command     => "chown -R ${kibana4::kibana4_user}:${kibana4::kibana4_group} ${kibana4::install_dir}/kibana-${version}",
+      path        => ['/bin','/sbin'],
+      refreshonly => true,
+      require     => $symlink_require,
+    }
+
     if $kibana4::symlink {
       file { $kibana4::symlink_name:
         ensure  => link,
         require => $symlink_require,
         target  => "${kibana4::install_dir}/kibana-${version}",
+        owner   => $kibana4::kibana4_user,
+        group   => $kibana4::kibana4_group,
       }
     }
   }
