@@ -46,5 +46,6 @@ class kibana4::params {
     'plugins/markdown_vis/index','plugins/metric_vis/index',
     'plugins/settings/index','plugins/table_vis/index',
     'plugins/vis_types/index','plugins/visualize/index' ]
+  $babel_cache_path            = '/tmp/babel.cache'
 }
 
