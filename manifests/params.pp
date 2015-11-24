@@ -15,7 +15,7 @@ class kibana4::params {
   $service_ensure              = true
   $service_enable              = true
   $service_name                = 'kibana4'
-  $init_template               = 'kibana4/kibana.init'
+  $init_template               = 'kibana4/kibana.init.erb'
   $manage_init_file            = true
   $manage_user                 = true
   $kibana4_group               = 'kibana4'
