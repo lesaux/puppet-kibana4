@@ -93,6 +93,9 @@
 # [*kibana4_gid*]
 # The group ID assigned to the group specified in `kibana4_group`. Defaults to `undef`.
 #
+# [*babel_cache_path*]
+# Kibana uses babel (https://www.npmjs.com/package/babel) which writes it's cache to this location
+#
 # === Examples
 #
 #  class { '::kibana4':
@@ -139,6 +142,7 @@ class kibana4 (
   $ssl_cert_file               = $kibana4::params::ssl_cert_file,
   $pid_file                    = $kibana4::params::pid_file,
   $bundled_plugin_ids          = $kibana4::params::bundled_plugin_ids,
+  $babel_cache_path            = $kibana4::params::babel_cache_path,
 ) inherits kibana4::params {
 
   class {'kibana4::user': }->

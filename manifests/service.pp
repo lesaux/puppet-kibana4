@@ -13,7 +13,16 @@ class kibana4::service {
       group   => root,
       owner   => root,
     }
-    $require = File["/etc/init.d/${kibana4::service_name}"]
+
+    file { '/etc/default/kibana4':
+      ensure  => file,
+      mode    => '0755',
+      content => template('kibana4/default.erb'),
+      group   => root,
+      owner   => root,
+    }
+
+    $require = [File["/etc/init.d/${kibana4::service_name}"], File['/etc/default/kibana4']]
   } else {
     $require = undef
   }
