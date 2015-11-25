@@ -23,8 +23,6 @@ class kibana4::params {
   $symlink_name                  = "${install_dir}/kibana4"
   $server_port                   = 5601
   $server_host                   = '0.0.0.0'
-  $server_base_path              = ''
-  $server_xsrf_token             = ''
   $kibana_index                  = '.kibana'
   $kibana_default_app_id         = 'discover'
   $elasticsearch_request_timeout = 500000
