@@ -8,7 +8,7 @@ class kibana4::service {
   if ($kibana4::manage_init_file == true) {
     file { "/etc/init.d/${kibana4::service_name}":
       ensure  => present,
-      mode    => '0755',
+      mode    => '0644',
       content => template($kibana4::init_template),
       group   => root,
       owner   => root,
@@ -16,7 +16,7 @@ class kibana4::service {
 
     file { '/etc/default/kibana4':
       ensure  => file,
-      mode    => '0755',
+      mode    => '0644',
       content => template('kibana4/default.erb'),
       group   => root,
       owner   => root,

@@ -38,7 +38,7 @@ class kibana4::params {
   $logging_silent                = false
   $logging_quiet                 = false
   $logging_verbose               = false
-  $logging_events                = ''
+  $logging_events                = {}
   $pid_file                      = '/var/run/kibana.pid'
   $es_download_site_url          = 'https://download.elasticsearch.org'
 }

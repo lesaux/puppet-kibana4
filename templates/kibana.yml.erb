@@ -68,7 +68,7 @@ elasticsearch.ssl.ca: "<%= scope.lookupvar('kibana4::elasticsearch_ssl_ca') %>"
 
 # Set to false to have a complete disregard for the validity of the SSL
 # certificate.
-elasticsearch.ssl.verify: "<%= scope.lookupvar('kibana4::elasticsearch_ssl_verify') %>"
+elasticsearch.ssl.verify: <%= scope.lookupvar('kibana4::elasticsearch_ssl_verify') %>
 
 # Time in milliseconds to wait for elasticsearch to respond to pings, defaults to
 # request_timeout setting
