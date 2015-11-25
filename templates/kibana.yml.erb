@@ -109,4 +109,6 @@ logging.verbose: <%= scope.lookupvar('kibana4::logging_verbose') %>
 #   response: '*',
 #   error: '*'
 # }
-logging.events = <%= scope.lookupvar('kibana4::logging_events') %>
+<% unless scope.lookupvar('kibana4::logging_events').nil? -%>
+logging.events: <%= scope.lookupvar('kibana4::logging_events') %>
+<% end -%>
