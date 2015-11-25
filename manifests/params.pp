@@ -7,8 +7,6 @@ class kibana4::params {
   $package_ensure                = '4.2.1-linux-x64'
   $package_name                  = 'kibana'
   $package_provider              = 'archive'
-  $package_download_url          = undef
-  $package_proxy_server          = undef
   $archive_provider              = 'camptocamp'
   $use_official_repo             = false
   $repo_version                  = '4.2'
@@ -16,12 +14,10 @@ class kibana4::params {
   $service_enable                = true
   $service_name                  = 'kibana4'
   $manage_init_file              = true
-  $init_template                 = 'kibana4/kibana.init'
+  $init_template                 = 'kibana4/kibana.init.erb'
   $manage_user                   = true
   $kibana4_group                 = 'kibana4'
-  $kibana4_gid                   = undef
   $kibana4_user                  = 'kibana4'
-  $kibana4_uid                   = undef
   $install_dir                   = '/opt'
   $symlink                       = true
   $symlink_name                  = "${install_dir}/kibana4"
