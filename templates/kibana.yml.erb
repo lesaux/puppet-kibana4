@@ -1,45 +1,54 @@
 # Kibana is served by a back end server. This controls which port to use.
-port: <%= scope.lookupvar('kibana4::port') %>
+server.port: <%= scope.lookupvar('kibana4::port') %>
 
 # The host to bind the server to.
-host: "<%= scope.lookupvar('kibana4::host') %>"
+server.host: "<%= scope.lookupvar('kibana4::host') %>"
+
+# A value to use as a XSRF token. This token is sent back to the server on each request
+# and required if you want to execute requests from other clients (like curl).
+# server.xsrf.token: ""
+
+# If you are running kibana behind a proxy, and want to mount it at a path,
+# specify that path here. The basePath can't end in a slash.
+# server.basePath: ""
 
 # The Elasticsearch instance to use for all your queries.
-elasticsearch_url: "<%= scope.lookupvar('kibana4::elasticsearch_url') %>"
+elasticsearch.url: "<%= scope.lookupvar('kibana4::elasticsearch_url') %>"
 
 # preserve_elasticsearch_host true will send the hostname specified in `elasticsearch`. If you set it to false,
 # then the host you use to connect to *this* Kibana instance will be sent.
-elasticsearch_preserve_host: <%= scope.lookupvar('kibana4::elasticsearch_preserve_host') %>
+elasticsearch.preserveHost: <%= scope.lookupvar('kibana4::elasticsearch_preserve_host') %>
 
 # Kibana uses an index in Elasticsearch to store saved searches, visualizations
 # and dashboards. It will create a new index if it doesn't already exist.
-kibana_index: "<%= scope.lookupvar('kibana4::kibana_index') %>"
-
-# If your Elasticsearch is protected with basic auth, this is the user credentials
-# used by the Kibana server to perform maintence on the kibana_index at statup. Your Kibana
-# users will still need to authenticate with Elasticsearch (which is proxied thorugh
-# the Kibana server)
-<% unless scope.lookupvar('kibana4::elasticsearch_username').nil? %>
-kibana_elasticsearch_username: <%= scope.lookupvar('kibana4::elasticsearch_username') %>
-<% else %>
-# kibana_elasticsearch_username: user
-<% end %>
-<% unless scope.lookupvar('kibana4::elasticsearch_password').nil? %>
-kibana_elasticsearch_password: <%= scope.lookupvar('kibana4::elasticsearch_password') %>
-<% else %>
-# kibana_elasticsearch_username: pass
-<% end %>
+kibana.index: "<%= scope.lookupvar('kibana4::kibana_index') %>"
 
 # The default application to load.
-default_app_id: "<%= scope.lookupvar('kibana4::default_app_id') %>"
+kibana.defaultAppId: "<%= scope.lookupvar('kibana4::default_app_id') %>"
+
+# If your Elasticsearch is protected with basic auth, these are the user credentials
+# used by the Kibana server to perform maintenance on the kibana_index at startup. Your Kibana
+# users will still need to authenticate with Elasticsearch (which is proxied through
+# the Kibana server)
+<% unless scope.lookupvar('kibana4::elasticsearch_username').nil? %>
+elasticsearch.username: "<%= scope.lookupvar('kibana4::elasticsearch_username') %>"
+<% else %>
+# elasticsearch.username: "user"
+<% end %>
+<% unless scope.lookupvar('kibana4::elasticsearch_password').nil? %>
+elasticsearch.password: "<%= scope.lookupvar('kibana4::elasticsearch_password') %>"
+<% else %>
+# elasticsearch.password: "pass"
+<% end %>
+
 
 # Time in milliseconds to wait for responses from the back end or elasticsearch.
 # This must be > 0
-request_timeout: <%= scope.lookupvar('kibana4::request_timeout') %>
+elasticsearch.requestTimeout: <%= scope.lookupvar('kibana4::request_timeout') %>
 
 # Time in milliseconds for Elasticsearch to wait for responses from shards.
 # Set to 0 to disable.
-shard_timeout: <%= scope.lookupvar('kibana4::shard_timeout') %>
+elasticsearch.shardTimeout: <%= scope.lookupvar('kibana4::shard_timeout') %>
 
 # Set to false to have a complete disregard for the validity of the SSL
 # certificate.
