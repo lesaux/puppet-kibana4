@@ -3,49 +3,45 @@
 # Default parameters
 #
 class kibana4::params {
-  $package_ensure              = '4.1.2-linux-x64'
-  $package_name                = 'kibana'
-  $package_provider            = 'archive'
-  $archive_provider            = 'camptocamp'
-  $package_download_url        = undef
-  $package_proxy_server        = undef
-  $use_official_repo           = false
-  $repo_version                = '4.1'
-  $es_download_site_url        = 'https://download.elasticsearch.org'
-  $service_ensure              = true
-  $service_enable              = true
-  $service_name                = 'kibana4'
-  $init_template               = 'kibana4/kibana.init.erb'
-  $manage_init_file            = true
-  $manage_user                 = true
-  $kibana4_group               = 'kibana4'
-  $kibana4_gid                 = undef
-  $kibana4_user                = 'kibana4'
-  $kibana4_uid                 = undef
-  $install_dir                 = '/opt'
-  $symlink                     = true
-  $symlink_name                = "${install_dir}/kibana4"
-  $port                        = '5601'
-  $host                        = '0.0.0.0'
-  $elasticsearch_url           = 'http://localhost:9200'
-  $elasticsearch_username      = undef
-  $elasticsearch_password      = undef
-  $elasticsearch_preserve_host = true
-  $kibana_index                = '.kibana'
-  $default_app_id              = 'discover'
-  $request_timeout             = '300000'
-  $shard_timeout               = '0'
-  $verify_ssl                  = false
-  $ca                          = '/path/to/your/CA.pem'
-  $ssl_key_file                = '/path/to/your/server.key'
-  $ssl_cert_file               = '/path/to/your/server.crt'
-  $pid_file                    = '/var/run/kibana.pid'
-  $bundled_plugin_ids          = [
-    'plugins/dashboard/index','plugins/discover/index',
-    'plugins/doc/index','plugins/kibana/index',
-    'plugins/markdown_vis/index','plugins/metric_vis/index',
-    'plugins/settings/index','plugins/table_vis/index',
-    'plugins/vis_types/index','plugins/visualize/index' ]
-  $babel_cache_path            = '/tmp/babel.cache'
+  $package_ensure                = '4.2.1-linux-x64'
+  $package_name                  = 'kibana'
+  $package_provider              = 'archive'
+  $package_download_url          = undef
+  $package_proxy_server          = undef
+  $archive_provider              = 'camptocamp'
+  $use_official_repo             = false
+  $repo_version                  = '4.2'
+  $service_ensure                = true
+  $service_enable                = true
+  $service_name                  = 'kibana4'
+  $manage_init_file              = true
+  $init_template                 = 'kibana4/kibana.init'
+  $manage_user                   = true
+  $kibana4_group                 = 'kibana4'
+  $kibana4_gid                   = undef
+  $kibana4_user                  = 'kibana4'
+  $kibana4_uid                   = undef
+  $install_dir                   = '/opt'
+  $symlink                       = true
+  $symlink_name                  = "${install_dir}/kibana4"
+  $server_port                   = 5601
+  $server_host                   = '0.0.0.0'
+  $server_base_path              = ''
+  $server_xsrf_token             = ''
+  $kibana_index                  = '.kibana'
+  $kibana_default_app_id         = 'discover'
+  $elasticsearch_request_timeout = 500000
+  $elasticsearch_shard_timeout   = 0
+  $elasticsearch_ping_timeout    = 1500
+  $elasticsearch_startup_timeout = 5000
+  $elasticsearch_url             = 'http://localhost:9200'
+  $elasticsearch_preserve_host   = true
+  $elasticsearch_ssl_verify      = false
+  $logging_dest                  = '/var/log/kibana/kibana4.log'
+  $logging_silent                = false
+  $logging_quiet                 = false
+  $logging_verbose               = false
+  $logging_events                = ''
+  $pid_file                      = '/var/run/kibana.pid'
+  $es_download_site_url          = 'https://download.elasticsearch.org'
 }
-
