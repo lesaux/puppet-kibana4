@@ -93,6 +93,9 @@
 # [*kibana4_gid*]
 # The group ID assigned to the group specified in `kibana4_group`. Defaults to `undef`.
 #
+# [*babel_cache_path*]
+# Kibana uses babel (https://www.npmjs.com/package/babel) which writes it's cache to this location
+#
 # === Examples
 #
 #  class { '::kibana4':

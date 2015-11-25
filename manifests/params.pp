@@ -3,6 +3,7 @@
 # Default parameters
 #
 class kibana4::params {
+  $babel_cache_path            = '/tmp/babel.cache'
   $package_ensure                = '4.2.1-linux-x64'
   $package_name                  = 'kibana'
   $package_provider              = 'archive'
