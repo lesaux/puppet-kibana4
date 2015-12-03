@@ -16,7 +16,7 @@ class kibana4::service {
 
     file { '/etc/default/kibana4':
       ensure  => file,
-      mode    => '0755',
+      mode    => '0644',
       content => template('kibana4/default.erb'),
       group   => root,
       owner   => root,
