@@ -68,6 +68,9 @@
 # [*config_file*]
 # The location, as a path, of the Kibana configuration file.
 #
+# [*config_file_template*]
+# The location, as a path, to the custom Kibana configuration file template.
+#
 # [*symlink*]
 # Determines if a symlink should be created in the installation directory for
 # the extracted archive. Only used if install_method is 'archive'.
@@ -124,6 +127,7 @@ class kibana4 (
   $kibana4_uid                   = undef,
   $install_dir                   = $kibana4::params::install_dir,
   $config_file                   = undef,
+  $config_file_template          = undef,
   $symlink                       = $kibana4::params::symlink,
   $symlink_name                  = $kibana4::params::symlink_name,
   $server_port                   = $kibana4::params::server_port,

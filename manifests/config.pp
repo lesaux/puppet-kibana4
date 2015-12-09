@@ -14,13 +14,19 @@ class kibana4::config {
     $_config_file = "${kibana4::install_dir}/${kibana4::package_name}/config/kibana.yml"
   }
 
+  if $kibana4::config_file_template {
+    $_config_file_template = $kibana4::config_file_template
+  } else {
+    $_config_file_template = 'kibana4/kibana.yml.erb'
+  }
+
   file { 'kibana-config-file':
     ensure  => file,
     path    => $_config_file,
     owner   => $kibana4::kibana4_user,
     group   => $kibana4::kibana4_group,
     mode    => '0755',
-    content => template('kibana4/kibana.yml.erb'),
+    content => template($_config_file_template),
     notify  => Service['kibana4'],
   }
 
