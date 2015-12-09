@@ -1,3 +1,24 @@
+#1.0.4 (2015-09-12)
+
+**Enhancements**
+ - Replaced config file templating with custom file creation from key/values.
+
+**Documentation**
+ - Update with yaml config file examples 
+
+#1.0.3 (2015-03-12)
+
+**Enhancements**
+ - Make kibana 4.2 the default deployed version.
+ - manage babel_cache_path.
+ - fix erb template name.
+ - fix ownership of extracted dir.
+ - fix nil value detection in yaml template.
+ - support for alternate puppet archive module.
+
+**Documentation**
+ - Minor documentation updates
+
 #1.0.2 (2015-01-10)
 
 **Enhancements**

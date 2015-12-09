@@ -271,6 +271,11 @@ describe 'kibana4' do
         :manage_user      => false,
         :install_dir      => '/usr/share',
         :manage_init_file => false,
+        :config           => {
+          'server.port'           => 5601,
+          'server.host'           => '0.0.0.0',
+          'elasticsearch.url'     => 'http://localhost:9200'
+        }
       }
     end
     it { should contain_package('kibana4').with_ensure('4.1.1') }
@@ -285,6 +290,11 @@ describe 'kibana4' do
       {
         :package_provider => 'package',
         :config_file      => '/etc/kibana4/kibana.yml',
+        :config           => {
+          'server.port'           => 5601,
+          'server.host'           => '0.0.0.0',
+          'elasticsearch.url'     => 'http://localhost:9200'
+        }
       }
     end
     it { should contain_file('kibana-config-file').with_path('/etc/kibana4/kibana.yml') }

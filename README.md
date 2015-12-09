@@ -49,15 +49,19 @@ user name, group name, uid and gid.
 
 ```puppet
   class { '::kibana4':
-    package_ensure    => '4.1.1-linux-x64',
+    package_ensure    => '4.3.0-linux-x64',
     package_provider  => 'archive',
-    symlink           => false,
+    symlink           => true,
     manage_user       => true,
     kibana4_user      => kibana4,
     kibana4_group     => kibana4,
     kibana4_gid       => 200,
     kibana4_uid       => 200,
-    elasticsearch_url => 'http://localhost:9200',
+    config            => {
+        'server.port'           => 5601,
+        'server.host'           => '0.0.0.0',
+        'elasticsearch.url'     => 'http://localhost:9200',
+        }
   }
 ```
 
@@ -79,7 +83,11 @@ module uses and depends on "camptocamp/archive").
     kibana4_group     => kibana4,
     kibana4_gid       => 200,
     kibana4_uid       => 200,
-    elasticsearch_url => 'http://localhost:9200',
+    config            => {
+        'server.port'           => 5601,
+        'server.host'           => '0.0.0.0',
+        'elasticsearch.url'     => 'http://localhost:9200',
+        }
   }
 ```
 
@@ -97,6 +105,8 @@ class { '::kibana4':
   manage_user        => false,
   manage_init_file   => false,
   service_name       => 'kibana',
+  kibana4_user       => 'kibana',
+  kibana4_group      => 'kibana',
   use_official_repo  => true,
   repo_version       => '4.1'
 }
