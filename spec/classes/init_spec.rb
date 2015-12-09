@@ -271,7 +271,7 @@ describe 'kibana4' do
         :manage_user      => false,
         :install_dir      => '/usr/share',
         :manage_init_file => false,
-        :config           => {
+        :config		  => {
           'server.port'           => 5601,
           'server.host'           => '0.0.0.0',
           'elasticsearch.url'     => 'http://localhost:9200'
@@ -290,7 +290,7 @@ describe 'kibana4' do
       {
         :package_provider => 'package',
         :config_file      => '/etc/kibana4/kibana.yml',
-        :config           => {
+        :config      	  => {
           'server.port'           => 5601,
           'server.host'           => '0.0.0.0',
           'elasticsearch.url'     => 'http://localhost:9200'

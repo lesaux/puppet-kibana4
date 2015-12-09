@@ -2,6 +2,6 @@
 
 pid.file: "<%= scope.lookupvar('kibana4::pid_file') %>"
 
-<% @config.keys.sort.each do |key| -%>
-<%= key %>: <%= @config[key] %>
+<% scope['kibana4::config'].each_key do |key| -%>
+<%= key %>: <%= scope['kibana4::config'][key] %>
 <% end -%>
