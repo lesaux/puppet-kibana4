@@ -28,13 +28,26 @@ class kibana4::config {
 
 # I can't remember why this was exclusive to the "archive" method.
 #  if $kibana4::package_provider == 'archive' {
-    file {$kibana4::pid_file:
+
+   if $kibana4::config[pid_file] {
+    file {$kibana4::config[pid_file]:
       ensure => file,
       owner  => $kibana4::kibana4_user,
       group  => $kibana4::kibana4_group,
       mode   => '0644',
     }
-#  }
+  }
+
+   if $kibana4::config['pid.file'] {
+    file {$kibana4::config['pid.file']:
+      ensure => file,
+      owner  => $kibana4::kibana4_user,
+      group  => $kibana4::kibana4_group,
+      mode   => '0644',
+    }
+  }
+
+
 
   file { '/var/log/kibana':
     ensure => 'directory',
