@@ -123,8 +123,7 @@ class kibana4 (
   $config_file                   = undef,
   $symlink                       = $kibana4::params::symlink,
   $symlink_name                  = $kibana4::params::symlink_name,
-  $pid_file                      = $kibana4::params::pid_file,
-  $config			 = $kibana4::params::config,
+  $config                        = $kibana4::params::config,
 ) inherits kibana4::params {
 
   class {'kibana4::user': }->

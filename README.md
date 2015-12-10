@@ -239,8 +239,7 @@ The group ID assigned to the group specified in `kibana4_group`. Defaults to `un
 
 [*config*]
 
-A hash of key/value server properties. The pid.file or pid_file parameter (depending on your kibana version)
-is mandatory.
+A hash of key/value server properties. A value for the pid file is defaulted to '/var/run/kibana.pid' if you don't define it.
 
 for version 4.3 an extensive config could look like:
 ```

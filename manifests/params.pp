@@ -3,7 +3,7 @@
 # Default parameters
 #
 class kibana4::params {
-  $babel_cache_path            = '/tmp/babel.cache'
+  $babel_cache_path              = '/tmp/babel.cache'
   $package_ensure                = '4.2.1-linux-x64'
   $package_name                  = 'kibana'
   $package_provider              = 'archive'
@@ -22,6 +22,5 @@ class kibana4::params {
   $symlink                       = true
   $symlink_name                  = "${install_dir}/kibana4"
   $es_download_site_url          = 'https://download.elasticsearch.org'
-  $pid_file                      = '/var/run/kibana.pid'
-  $config			 = undef
+  $config                        = undef
 }

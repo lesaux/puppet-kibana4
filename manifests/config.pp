@@ -15,6 +15,7 @@ class kibana4::config {
   }
 
   if $kibana4::config {
+
     file { 'kibana-config-file':
       ensure  => file,
       path    => $_config_file,
@@ -24,30 +25,32 @@ class kibana4::config {
       content => template('kibana4/kibana.yml.erb'),
       notify  => Service['kibana4'],
     }
-  }
 
-# I can't remember why this was exclusive to the "archive" method.
-#  if $kibana4::package_provider == 'archive' {
-
-   if $kibana4::config[pid_file] {
-    file {$kibana4::config[pid_file]:
-      ensure => file,
-      owner  => $kibana4::kibana4_user,
-      group  => $kibana4::kibana4_group,
-      mode   => '0644',
+    if $kibana4::package_provider == 'archive' {
+      if $kibana4::config[pid_file] {
+        file {$kibana4::config[pid_file]:
+          ensure => file,
+          owner  => $kibana4::kibana4_user,
+          group  => $kibana4::kibana4_group,
+          mode   => '0644',
+        }
+      } elsif $kibana4::config['pid.file'] {
+        file {$kibana4::config['pid.file']:
+          ensure => file,
+          owner  => $kibana4::kibana4_user,
+          group  => $kibana4::kibana4_group,
+          mode   => '0644',
+        }
+      } else {
+        file { '/var/run/kibana.pid' :
+          ensure => file,
+          owner  => $kibana4::kibana4_user,
+          group  => $kibana4::kibana4_group,
+          mode   => '0644',
+        }
+      }
     }
   }
-
-   if $kibana4::config['pid.file'] {
-    file {$kibana4::config['pid.file']:
-      ensure => file,
-      owner  => $kibana4::kibana4_user,
-      group  => $kibana4::kibana4_group,
-      mode   => '0644',
-    }
-  }
-
-
 
   file { '/var/log/kibana':
     ensure => 'directory',
@@ -55,4 +58,5 @@ class kibana4::config {
     group  => $kibana4::kibana4_group,
     mode   => '0755',
   }
+
 }

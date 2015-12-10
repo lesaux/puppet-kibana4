@@ -1,7 +1,5 @@
 # This file is managed by Puppet, any changes will be overwritten
 
-pid.file: "<%= scope.lookupvar('kibana4::pid_file') %>"
-
 <% scope['kibana4::config'].each_key do |key| -%>
 <%= key %>: <%= scope['kibana4::config'][key] %>
 <% end -%>
