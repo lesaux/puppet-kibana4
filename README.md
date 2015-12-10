@@ -96,6 +96,7 @@ module uses and depends on "camptocamp/archive").
 You will need to explicitly set the service_name to 'kibana' in most cases, because
 for legacy reasons the default service_name is set to kibana4 - this may change in the future.
 We disable user and init.d management as these are provided in official packages.
+Notice how the config hash is different in version 4.1 than it is in version 4.3.
 
 ```puppet
 class { '::kibana4':
@@ -110,9 +111,9 @@ class { '::kibana4':
   use_official_repo  => true,
   repo_version       => '4.1'
   config             => {
-    'server.port'           => 5601,
-    'server.host'           => '0.0.0.0',
-    'elasticsearch.url'     => 'http://localhost:9200',
+    'port'                 => 5601,
+    'host'                 => '0.0.0.0',
+    'elasticsearch_url'    => 'http://localhost:9200',
   }
 }
 ```
