@@ -14,24 +14,27 @@ class kibana4::config {
     $_config_file = "${kibana4::install_dir}/${kibana4::package_name}/config/kibana.yml"
   }
 
-  file { 'kibana-config-file':
-    ensure  => file,
-    path    => $_config_file,
-    owner   => $kibana4::kibana4_user,
-    group   => $kibana4::kibana4_group,
-    mode    => '0755',
-    content => template('kibana4/kibana.yml.erb'),
-    notify  => Service['kibana4'],
+  if $kibana4::config {
+    file { 'kibana-config-file':
+      ensure  => file,
+      path    => $_config_file,
+      owner   => $kibana4::kibana4_user,
+      group   => $kibana4::kibana4_group,
+      mode    => '0755',
+      content => template('kibana4/kibana.yml.erb'),
+      notify  => Service['kibana4'],
+    }
   }
 
-  if $kibana4::package_provider == 'archive' {
+# I can't remember why this was exclusive to the "archive" method.
+#  if $kibana4::package_provider == 'archive' {
     file {$kibana4::pid_file:
       ensure => file,
       owner  => $kibana4::kibana4_user,
       group  => $kibana4::kibana4_group,
       mode   => '0644',
     }
-  }
+#  }
 
   file { '/var/log/kibana':
     ensure => 'directory',

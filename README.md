@@ -49,15 +49,19 @@ user name, group name, uid and gid.
 
 ```puppet
   class { '::kibana4':
-    package_ensure    => '4.1.1-linux-x64',
+    package_ensure    => '4.3.0-linux-x64',
     package_provider  => 'archive',
-    symlink           => false,
+    symlink           => true,
     manage_user       => true,
     kibana4_user      => kibana4,
     kibana4_group     => kibana4,
     kibana4_gid       => 200,
     kibana4_uid       => 200,
-    elasticsearch_url => 'http://localhost:9200',
+    config            => {
+        'server.port'           => 5601,
+        'server.host'           => '0.0.0.0',
+        'elasticsearch.url'     => 'http://localhost:9200',
+        }
   }
 ```
 
@@ -79,7 +83,11 @@ module uses and depends on "camptocamp/archive").
     kibana4_group     => kibana4,
     kibana4_gid       => 200,
     kibana4_uid       => 200,
-    elasticsearch_url => 'http://localhost:9200',
+    config            => {
+        'server.port'           => 5601,
+        'server.host'           => '0.0.0.0',
+        'elasticsearch.url'     => 'http://localhost:9200',
+    }
   }
 ```
 
@@ -97,8 +105,15 @@ class { '::kibana4':
   manage_user        => false,
   manage_init_file   => false,
   service_name       => 'kibana',
+  kibana4_user       => 'kibana',
+  kibana4_group      => 'kibana',
   use_official_repo  => true,
   repo_version       => '4.1'
+  config             => {
+    'server.port'           => 5601,
+    'server.host'           => '0.0.0.0',
+    'elasticsearch.url'     => 'http://localhost:9200',
+  }
 }
 ```
 
@@ -216,44 +231,18 @@ The group ID assigned to the group specified in `kibana4_group`. Defaults to `un
 
 ### Configuration Parameters
 
- See Kibana4 documentation for more details. Defaults values are the same as defaults from kibana.yml
- provided in the archive version 4.1.1-linux-x64.
+ See Kibana4 documentation for a list of kibana server properties:
+ https://www.elastic.co/guide/en/kibana/current/kibana-server-properties.html
+ If you do not specify a hash of configuration parameters, then the default kibana.yml provided
+ by the archive or package will be left intact.
 
- [*port*]
+[*config*]
 
- [*host*]
+A hash of key/value server properties, with the exception of the pid.file parameter which is defined outside of this hash.
 
- [*elasticsearch_url*]
+[*pid_file*]
 
- [*elasticsearch_username*]
-
- [*elasticsearch_password*]
-
- [*elasticsearch_preserve_host*]
-
- [*kibana_index*]
-
- [*default_app_id*]
-
- [*request_timeout*]
-
- [*shard_timeout*]
-
- [*verify_ssl*]
-
-Default has been changed to false.
-Providing better SSL support is my todo list.
-
- [*ca*]
-
- [*ssl_key_file*]
-
- [*ssl_cert_file*]
-
- [*pid_file*]
-
- [*bundled_plugin_ids*]
-
+The location, as a path, of the Kibana pid file.
 
 ## Reference
 

@@ -98,10 +98,7 @@
 #
 # === Examples
 #
-#  class { '::kibana4':
-#    package_ensure => '4.0.0',
-#    install_method => 'package',
-#  }
+#   see README file
 #
 class kibana4 (
   $package_ensure                = $kibana4::params::package_ensure,
@@ -126,32 +123,8 @@ class kibana4 (
   $config_file                   = undef,
   $symlink                       = $kibana4::params::symlink,
   $symlink_name                  = $kibana4::params::symlink_name,
-  $server_port                   = $kibana4::params::server_port,
-  $server_host                   = $kibana4::params::server_host,
-  $server_ssl_cert               = undef,
-  $server_ssl_key                = undef,
-  $server_base_path              = undef,
-  $server_xsrf_token             = undef,
-  $kibana_index                  = $kibana4::params::kibana_index,
-  $kibana_default_app_id         = $kibana4::params::kibana_default_app_id,
-  $elasticsearch_request_timeout = $kibana4::params::elasticsearch_request_timeout,
-  $elasticsearch_shard_timeout   = $kibana4::params::elasticsearch_shard_timeout,
-  $elasticsearch_ping_timeout    = $kibana4::params::elasticsearch_ping_timeout,
-  $elasticsearch_startup_timeout = $kibana4::params::elasticsearch_startup_timeout,
-  $elasticsearch_url             = $kibana4::params::elasticsearch_url,
-  $elasticsearch_preserve_host   = $kibana4::params::elasticsearch_preserve_host,
-  $elasticsearch_username        = undef,
-  $elasticsearch_password        = undef,
-  $elasticsearch_ssl_verify      = $kibana4::params::elasticsearch_ssl_verify,
-  $elasticsearch_ssl_ca          = undef,
-  $elasticsearch_ssl_key         = undef,
-  $elasticsearch_ssl_cert        = undef,
-  $logging_dest                  = $kibana4::params::logging_dest,
-  $logging_silent                = $kibana4::params::logging_silent,
-  $logging_quiet                 = $kibana4::params::logging_quiet,
-  $logging_verbose               = $kibana4::params::logging_verbose,
-  $logging_events                = $kibana4::params::logging_events,
   $pid_file                      = $kibana4::params::pid_file,
+  $config			 = $kibana4::params::config,
 ) inherits kibana4::params {
 
   class {'kibana4::user': }->
