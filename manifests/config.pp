@@ -14,22 +14,41 @@ class kibana4::config {
     $_config_file = "${kibana4::install_dir}/${kibana4::package_name}/config/kibana.yml"
   }
 
-  file { 'kibana-config-file':
-    ensure  => file,
-    path    => $_config_file,
-    owner   => $kibana4::kibana4_user,
-    group   => $kibana4::kibana4_group,
-    mode    => '0755',
-    content => template('kibana4/kibana.yml.erb'),
-    notify  => Service['kibana4'],
-  }
+  if $kibana4::config {
 
-  if $kibana4::package_provider == 'archive' {
-    file {$kibana4::pid_file:
-      ensure => file,
-      owner  => $kibana4::kibana4_user,
-      group  => $kibana4::kibana4_group,
-      mode   => '0644',
+    file { 'kibana-config-file':
+      ensure  => file,
+      path    => $_config_file,
+      owner   => $kibana4::kibana4_user,
+      group   => $kibana4::kibana4_group,
+      mode    => '0755',
+      content => template('kibana4/kibana.yml.erb'),
+      notify  => Service['kibana4'],
+    }
+
+    if $kibana4::package_provider == 'archive' {
+      if $kibana4::config[pid_file] {
+        file {$kibana4::config[pid_file]:
+          ensure => file,
+          owner  => $kibana4::kibana4_user,
+          group  => $kibana4::kibana4_group,
+          mode   => '0644',
+        }
+      } elsif $kibana4::config['pid.file'] {
+        file {$kibana4::config['pid.file']:
+          ensure => file,
+          owner  => $kibana4::kibana4_user,
+          group  => $kibana4::kibana4_group,
+          mode   => '0644',
+        }
+      } else {
+        file { '/var/run/kibana.pid' :
+          ensure => file,
+          owner  => $kibana4::kibana4_user,
+          group  => $kibana4::kibana4_group,
+          mode   => '0644',
+        }
+      }
     }
   }
 
@@ -39,4 +58,5 @@ class kibana4::config {
     group  => $kibana4::kibana4_group,
     mode   => '0755',
   }
+
 }

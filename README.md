@@ -49,15 +49,19 @@ user name, group name, uid and gid.
 
 ```puppet
   class { '::kibana4':
-    package_ensure    => '4.1.1-linux-x64',
+    package_ensure    => '4.3.0-linux-x64',
     package_provider  => 'archive',
-    symlink           => false,
+    symlink           => true,
     manage_user       => true,
     kibana4_user      => kibana4,
     kibana4_group     => kibana4,
     kibana4_gid       => 200,
     kibana4_uid       => 200,
-    elasticsearch_url => 'http://localhost:9200',
+    config            => {
+        'server.port'           => 5601,
+        'server.host'           => '0.0.0.0',
+        'elasticsearch.url'     => 'http://localhost:9200',
+        }
   }
 ```
 
@@ -79,7 +83,11 @@ module uses and depends on "camptocamp/archive").
     kibana4_group     => kibana4,
     kibana4_gid       => 200,
     kibana4_uid       => 200,
-    elasticsearch_url => 'http://localhost:9200',
+    config            => {
+        'server.port'           => 5601,
+        'server.host'           => '0.0.0.0',
+        'elasticsearch.url'     => 'http://localhost:9200',
+    }
   }
 ```
 
@@ -88,6 +96,7 @@ module uses and depends on "camptocamp/archive").
 You will need to explicitly set the service_name to 'kibana' in most cases, because
 for legacy reasons the default service_name is set to kibana4 - this may change in the future.
 We disable user and init.d management as these are provided in official packages.
+Notice how the config hash is different in version 4.1 than it is in version 4.3.
 
 ```puppet
 class { '::kibana4':
@@ -97,8 +106,15 @@ class { '::kibana4':
   manage_user        => false,
   manage_init_file   => false,
   service_name       => 'kibana',
+  kibana4_user       => 'kibana',
+  kibana4_group      => 'kibana',
   use_official_repo  => true,
   repo_version       => '4.1'
+  config             => {
+    'port'                 => 5601,
+    'host'                 => '0.0.0.0',
+    'elasticsearch_url'    => 'http://localhost:9200',
+  }
 }
 ```
 
@@ -216,44 +232,44 @@ The group ID assigned to the group specified in `kibana4_group`. Defaults to `un
 
 ### Configuration Parameters
 
- See Kibana4 documentation for more details. Defaults values are the same as defaults from kibana.yml
- provided in the archive version 4.1.1-linux-x64.
+ See Kibana4 documentation for a list of kibana server properties:
+ https://www.elastic.co/guide/en/kibana/current/kibana-server-properties.html
+ If you do not specify a hash of configuration parameters, then the default kibana.yml provided
+ by the archive or package will be left intact.
 
- [*port*]
+[*config*]
 
- [*host*]
+A hash of key/value server properties. A value for the pid file is defaulted to '/var/run/kibana.pid' if you don't define it.
 
- [*elasticsearch_url*]
-
- [*elasticsearch_username*]
-
- [*elasticsearch_password*]
-
- [*elasticsearch_preserve_host*]
-
- [*kibana_index*]
-
- [*default_app_id*]
-
- [*request_timeout*]
-
- [*shard_timeout*]
-
- [*verify_ssl*]
-
-Default has been changed to false.
-Providing better SSL support is my todo list.
-
- [*ca*]
-
- [*ssl_key_file*]
-
- [*ssl_cert_file*]
-
- [*pid_file*]
-
- [*bundled_plugin_ids*]
-
+for version 4.3 an extensive config could look like:
+```
+config => {
+  'server.port'                         => 5601,
+  'server.host'                         => '0.0.0.0',
+  'elasticsearch.url'                   => 'http://localhost:9200',
+  'elasticsearch.preserveHost'          => true,
+  'elasticsearch.ssl.cert'              => '/path/to/your/cert',
+  'elasticsearch.ssl.key'               => '/path/to/your/key',
+  'elasticsearch.password'              => 'password',
+  'elasticsearch.username'              => 'username',
+  'elasticsearch.pingTimeout'           => 1500,
+  'elasticsearch.startupTimeout'        => 5000,
+  'kibana.index'                        => '.kibana',
+  'kibana.defaultAppId'                 => 'discover',
+  'logging.silent'                      => false,
+  'logging.quiet'                       => false,
+  'logging.verbose'                     => false,
+  'logging.events'                      => "{ log: ['info', 'warning', 'error', 'fatal'], response: '*', error: '*' }",
+  'elasticsearch.requestTimeout'        => 500000,
+  'elasticsearch.shardTimeout'          => 0,
+  'elasticsearch.ssl.verify'            => true,
+  'elasticsearch.ssl.ca'                => '[/path/to/a/CA,path/to/anotherCA/]',
+  'server.ssl.key'                      => '/path/to/your/ssl/key',
+  'server.ssl.cert'                     => '/path/to/your/ssl/cert',
+  'pid.file'                            => '/var/run/kibana.pid',
+  'logging.dest'                        => '/var/log/kibana/kibana.log',
+}
+```
 
 ## Reference
 

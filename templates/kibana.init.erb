@@ -25,7 +25,16 @@ program=<%= scope.lookupvar('kibana4::symlink_name') %>/bin/kibana
 program=<%= scope.lookupvar('kibana4::install_dir') %>/kibana-<%= scope.lookupvar('kibana4::package_ensure') %>/bin/kibana
 <% end %>
 args=''
-pidfile=<%= scope.lookupvar('kibana4::pid_file') %>
+
+<% if @config  %>
+  <% if @config.fetch("pid_file","error") != "error" %>
+pidfile=<%= @config.fetch("pid_file") %>
+  <% elsif @config.fetch("pid.file","error") != "error" %>
+pidfile=<%= @config.fetch("pid.file") %>
+  <% end %>
+<% else %>
+pidfile='/var/run/kibana.pid'
+<% end %>
 
 [ -r /etc/default/$name ] && . /etc/default/$name
 [ -r /etc/sysconfig/$name ] && . /etc/sysconfig/$name

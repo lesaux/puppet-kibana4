@@ -3,7 +3,7 @@
 # Default parameters
 #
 class kibana4::params {
-  $babel_cache_path            = '/tmp/babel.cache'
+  $babel_cache_path              = '/tmp/babel.cache'
   $package_ensure                = '4.2.1-linux-x64'
   $package_name                  = 'kibana'
   $package_provider              = 'archive'
@@ -21,22 +21,6 @@ class kibana4::params {
   $install_dir                   = '/opt'
   $symlink                       = true
   $symlink_name                  = "${install_dir}/kibana4"
-  $server_port                   = 5601
-  $server_host                   = '0.0.0.0'
-  $kibana_index                  = '.kibana'
-  $kibana_default_app_id         = 'discover'
-  $elasticsearch_request_timeout = 500000
-  $elasticsearch_shard_timeout   = 0
-  $elasticsearch_ping_timeout    = 1500
-  $elasticsearch_startup_timeout = 5000
-  $elasticsearch_url             = 'http://localhost:9200'
-  $elasticsearch_preserve_host   = true
-  $elasticsearch_ssl_verify      = false
-  $logging_dest                  = '/var/log/kibana/kibana4.log'
-  $logging_silent                = false
-  $logging_quiet                 = false
-  $logging_verbose               = false
-  $logging_events                = {}
-  $pid_file                      = '/var/run/kibana.pid'
   $es_download_site_url          = 'https://download.elasticsearch.org'
+  $config                        = undef
 }
