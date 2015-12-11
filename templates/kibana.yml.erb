@@ -1,5 +1,5 @@
 # This file is managed by Puppet, any changes will be overwritten
 
-<% scope['kibana4::config'].each_key do |key| -%>
-<%= key %>: <%= scope['kibana4::config'][key] %>
-<% end -%>
+<% @config_hash.sort.each do |key,value| %>
+<%= key %>: <%= value %>
+<% end %>
