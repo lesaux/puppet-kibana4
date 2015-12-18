@@ -4,7 +4,7 @@
 #
 class kibana4::params {
   $babel_cache_path              = '/tmp/babel.cache'
-  $package_ensure                = '4.2.1-linux-x64'
+  $package_ensure                = '4.3.1-linux-x64'
   $package_name                  = 'kibana'
   $package_provider              = 'archive'
   $archive_provider              = 'camptocamp'
@@ -21,6 +21,6 @@ class kibana4::params {
   $install_dir                   = '/opt'
   $symlink                       = true
   $symlink_name                  = "${install_dir}/kibana4"
-  $es_download_site_url          = 'https://download.elasticsearch.org'
+  $es_download_site_url          = 'https://download.elastic.co'
   $config                        = undef
 }

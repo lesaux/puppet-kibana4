@@ -192,7 +192,7 @@ Service file as a template. Defaults to 'kibana4/kibana.init'.
 
 [*install_dir*]
 
-Installation directory used iff install_method is 'archive'
+Installation directory used if install_method is 'archive'
 Defaults to '/opt'.
 
 [*config_file*]
