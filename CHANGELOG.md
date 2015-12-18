@@ -1,3 +1,12 @@
+#1.0.5 (2015-18-12)
+
+**Enhancements**
+ - Replaced download url
+ - Update default version to 4.3.1
+
+**Documentation**
+ - Fixes some typos and linting
+
 #1.0.4 (2015-09-12)
 
 **Enhancements**
