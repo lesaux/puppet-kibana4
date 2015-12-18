@@ -5,7 +5,18 @@
 class kibana4::service {
 
   # init file from template
+
   if ($kibana4::manage_init_file == true) {
+
+    if $kibana4::symlink {
+      $program = "${kibana4::symlink_name}/bin/kibana"
+    } else {
+      $program = "${kibana4::install_dir}/kibana-${kibana4::package_ensure}/bin/kibana"
+    }
+
+    $user = $kibana4::kibana4_user
+    $group = $kibana4::kibana4_group
+
     file { "/etc/init.d/${kibana4::service_name}":
       ensure  => present,
       mode    => '0755',

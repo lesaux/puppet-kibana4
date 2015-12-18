@@ -16,6 +16,8 @@ class kibana4::config {
 
   if $kibana4::config {
 
+    $config_hash = $kibana4::config
+
     file { 'kibana-config-file':
       ensure  => file,
       path    => $_config_file,
