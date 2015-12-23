@@ -1,3 +1,8 @@
+#1.0.6 (2015-23-12)
+
+**Enhancements**
+ - config file key sorting.
+
 #1.0.5 (2015-18-12)
 
 **Enhancements**
