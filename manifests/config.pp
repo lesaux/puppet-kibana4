@@ -26,30 +26,6 @@ class kibana4::config {
       notify  => Service['kibana4'],
     }
 
-    if $kibana4::package_provider == 'archive' {
-      if $kibana4::config[pid_file] {
-        file {$kibana4::config[pid_file]:
-          ensure => file,
-          owner  => $kibana4::kibana4_user,
-          group  => $kibana4::kibana4_group,
-          mode   => '0644',
-        }
-      } elsif $kibana4::config['pid.file'] {
-        file {$kibana4::config['pid.file']:
-          ensure => file,
-          owner  => $kibana4::kibana4_user,
-          group  => $kibana4::kibana4_group,
-          mode   => '0644',
-        }
-      } else {
-        file { '/var/run/kibana.pid' :
-          ensure => file,
-          owner  => $kibana4::kibana4_user,
-          group  => $kibana4::kibana4_group,
-          mode   => '0644',
-        }
-      }
-    }
   }
 
   file { '/var/log/kibana':
