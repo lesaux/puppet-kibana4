@@ -41,6 +41,7 @@ class kibana4::install {
         archive { "kibana-${version}":
           ensure       => present,
           checksum     => false,
+          verbose      => false,
           target       => $kibana4::install_dir,
           url          => $download_url,
           proxy_server => $kibana4::package_proxy_server,
