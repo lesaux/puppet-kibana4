@@ -19,27 +19,27 @@ PATH=/sbin:/usr/sbin:/bin:/usr/bin
 export PATH
 
 name=kibana4
-<% if scope.lookupvar('kibana4::symlink')  %>
+<% if scope.lookupvar('kibana4::symlink') -%>
 program=<%= scope.lookupvar('kibana4::symlink_name') %>/bin/kibana
-<% else %>
+<% else -%>
 program=<%= scope.lookupvar('kibana4::install_dir') %>/kibana-<%= scope.lookupvar('kibana4::package_ensure') %>/bin/kibana
-<% end %>
+<% end -%>
 args=''
 
-<% if scope['kibana4::config'] and scope['kibana4::config'].has_key?('pid_file') %>
-pidfile=<%= scope['kibana4::config']['pid_file'] %>
-<% elsif scope['kibana4::config'] and scope['kibana4::config'].has_key?('pid.file') %>
-pidfile=<%= scope['kibana4::config']['pid.file'] %>
-<% else %>
+<% if scope['kibana4::config'] and scope['kibana4::config'].has_key?('pid_file') -%>
+pidfile=<%= scope['kibana4::config']['pid_file'] -%>
+<% elsif scope['kibana4::config'] and scope['kibana4::config'].has_key?('pid.file') -%>
+pidfile=<%= scope['kibana4::config']['pid.file'] -%>
+<% else -%>
 pidfile=/var/run/kibana.pid
-<% end %>
+<% end -%>
 
 rundir=`dirname $pidfile`
 if [ ! -d $rundir ]; then
   mkdir -p $rundir
-<% if scope['kibana4::kibana4_user'] and scope['kibana4::kibana4_group'] %>
+<% if scope['kibana4::kibana4_user'] and scope['kibana4::kibana4_group'] -%>
   chown <%= scope['kibana4::kibana4_user'] %>:<%= scope['kibana4::kibana4_group'] %> $rundir
-<% end %>
+<% end -%>
 fi
 
 [ -r /etc/default/$name ] && . /etc/default/$name
