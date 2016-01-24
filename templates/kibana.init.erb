@@ -26,21 +26,26 @@ program=<%= scope.lookupvar('kibana4::install_dir') %>/kibana-<%= scope.lookupva
 <% end %>
 args=''
 
-<% if @config  %>
-  <% if @config.fetch("pid_file","error") != "error" %>
-pidfile=<%= @config.fetch("pid_file") %>
-  <% elsif @config.fetch("pid.file","error") != "error" %>
-pidfile=<%= @config.fetch("pid.file") %>
-  <% end %>
+<% if scope['kibana4::config'] and scope['kibana4::config'].has_key?('pid_file') %>
+pidfile=<%= scope['kibana4::config']['pid_file'] %>
+<% elsif scope['kibana4::config'] and scope['kibana4::config'].has_key?('pid.file') %>
+pidfile=<%= scope['kibana4::config']['pid.file'] %>
 <% else %>
-pidfile='/var/run/kibana.pid'
+pidfile=/var/run/kibana.pid
 <% end %>
+
+rundir=`dirname $pidfile`
+if [ ! -d $rundir ]; then
+  mkdir -p $rundir
+<% if scope['kibana4::kibana4_user'] and scope['kibana4::kibana4_group'] %>
+  chown <%= scope['kibana4::kibana4_user'] %>:<%= scope['kibana4::kibana4_group'] %> $rundir
+<% end %>
+fi
 
 [ -r /etc/default/$name ] && . /etc/default/$name
 [ -r /etc/sysconfig/$name ] && . /etc/sysconfig/$name
 
 start() {
-
 
   # Run the program!
   chroot --userspec <%= scope.lookupvar('kibana4::kibana4_user') %>:<%= scope.lookupvar('kibana4::kibana4_group') %> / sh -c "
