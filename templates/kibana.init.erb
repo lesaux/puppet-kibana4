@@ -19,10 +19,10 @@ PATH=/sbin:/usr/sbin:/bin:/usr/bin
 export PATH
 
 name=kibana4
-<% if scope.lookupvar('kibana4::symlink') -%>
-program=<%= scope.lookupvar('kibana4::symlink_name') %>/bin/kibana
+<% if scope['kibana4::symlink'] -%>
+program=<%= scope['kibana4::symlink_name'] %>/bin/kibana
 <% else -%>
-program=<%= scope.lookupvar('kibana4::install_dir') %>/kibana-<%= scope.lookupvar('kibana4::package_ensure') %>/bin/kibana
+program=<%= scope['kibana4::install_dir'] %>/kibana-<%= scope['kibana4::package_ensure'] %>/bin/kibana
 <% end -%>
 args=''
 
@@ -48,7 +48,7 @@ fi
 start() {
 
   # Run the program!
-  chroot --userspec <%= scope.lookupvar('kibana4::kibana4_user') %>:<%= scope.lookupvar('kibana4::kibana4_group') %> / sh -c "
+  chroot --userspec <%= scope['kibana4::kibana4_user'] %>:<%= scope['kibana4::kibana4_group'] %> / sh -c "
     cd /
 
     exec \"$program\" $args
