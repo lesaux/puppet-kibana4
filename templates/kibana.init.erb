@@ -52,7 +52,7 @@ start() {
     cd /
 
     exec \"$program\" $args
-  " > /var/log/$name.log 2> /var/log/$name.err &
+  " > /var/log/kibana/$name.log 2> /var/log/kibana/$name.err &
 
   echo "$name started."
   return 0
