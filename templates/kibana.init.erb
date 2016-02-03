@@ -26,9 +26,9 @@ program=<%= scope['kibana4::install_dir'] %>/kibana-<%= scope['kibana4::package_
 <% end -%>
 args=''
 
-<% if scope['kibana4::config'].is_a?(Array) and scope['kibana4::config'].has_key?('pid_file') -%>
+<% if scope['kibana4::config'].is_a?(Hash) and scope['kibana4::config'].has_key?('pid_file') -%>
 pidfile=<%= scope['kibana4::config']['pid_file'] -%>
-<% elsif scope['kibana4::config'].is_a?(Array) and scope['kibana4::config'].has_key?('pid.file') -%>
+<% elsif scope['kibana4::config'].is_a?(Hash) and scope['kibana4::config'].has_key?('pid.file') -%>
 pidfile=<%= scope['kibana4::config']['pid.file'] -%>
 <% else -%>
 pidfile=/var/run/kibana.pid
