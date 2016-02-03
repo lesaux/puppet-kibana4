@@ -1,0 +1,12 @@
+[Unit]
+Description=Kibana 4 Web Interface
+After=elasticsearch.service
+
+[Service]
+ExecStart=/opt/kibana/bin/kibana
+PIDFile=<%= scope.lookupvar('kibana4::pid_file') %>
+
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
