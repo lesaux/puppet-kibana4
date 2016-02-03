@@ -23,8 +23,27 @@ class kibana4::service {
     }
 
     $require = [File["/etc/init.d/${kibana4::service_name}"], File['/etc/default/kibana4']]
-  } else {
-    $require = undef
+
+  }
+
+  if $kibana4::use_systemd {
+
+    file { "/etc/systemd/system/${kibana4::service_name}.service":
+      content => template('kibana4/kibana.systemd.erb'),
+      mode    => '0755',
+    }
+    ~>
+    exec { 'execute kibana-service reload':
+      command       => '/bin/systemctl daemon-reload',
+      refreshonly   => true,
+    }
+
+    file { "/etc/init.d/${kibana4::service_name}":
+      ensure  => absent,
+    }
+
+    $require = File["/etc/systemd/system/${kibana4::service_name}.service"]
+
   }
 
   service { 'kibana4':
