@@ -31,6 +31,10 @@
 # from the usual Elasticsearch download site URL, the `package_name` and
 # `package_ensure`.
 #
+# [*package_dl_timeout*]
+# Specifies a package download timeout, used only if `archive_provider` is set to
+# 'camptocamp'.  Default is 600.
+#
 # [*package_proxy_server*]
 # Specifies which proxy server use to download archive. Valid format is
 # http[s]//[user:passwd@]proxy_host:port. Not supported when `archive_provider`
@@ -105,6 +109,7 @@ class kibana4 (
   $package_name                  = $kibana4::params::package_name,
   $package_provider              = $kibana4::params::package_provider,
   $package_download_url          = undef,
+  $package_dl_timeout            = $kibana4::params::package_dl_timeout,
   $package_proxy_server          = undef,
   $archive_provider              = $kibana4::params::archive_provider,
   $use_official_repo             = $kibana4::params::use_official_repo,
