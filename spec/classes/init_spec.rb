@@ -123,9 +123,6 @@ describe 'kibana4' do
     it { should contain_file('/etc/init.d/kibana4').with_content(/^  chroot --userspec kibana4:kibana4 \/ sh -c "/) }
   end
 
-
-
-
   context 'installs via archive and no symlink and user' do
     let :params do
       {
@@ -175,9 +172,9 @@ describe 'kibana4' do
       {
         :package_provider => 'archive',
         :symlink        => false,
-        :package_ensure        => '4.0.0-linux-x64',
-        :service_ensure         => true,
-        :service_enable         => true,
+        :package_ensure => '4.0.0-linux-x64',
+        :service_ensure => true,
+        :service_enable => true,
         :manage_user    => true,
         :kibana4_user   => 'kib4',
         :kibana4_uid    => '200',
@@ -197,14 +194,14 @@ describe 'kibana4' do
       {
         :package_provider => 'archive',
         :symlink        => true,
-        :package_ensure        => '4.0.0-linux-x64',
+        :package_ensure => '4.0.0-linux-x64',
         :manage_user    => true,
         :kibana4_user   => 'kib4',
         :kibana4_uid    => '200',
         :kibana4_group  => 'kib4',
         :kibana4_gid    => '200',
-        :service_ensure         => false,
-        :service_enable         => false,
+        :service_ensure => false,
+        :service_enable => false,
       }
     end
     it { should contain_archive('kibana-4.0.0-linux-x64')}
