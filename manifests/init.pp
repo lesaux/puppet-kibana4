@@ -65,6 +65,10 @@
 # Install init file. If the init script is provided by a package,
 # set it to `false`. Defaults to 'true'
 #
+# [*use_systemd*]
+# Allow Kibana to be managed by systemd, instead of init script
+# Defaults to 'false'
+#
 # [*install_dir*]
 # Installation directory used iff install_method is 'archive'
 # Defaults to '/opt'.
@@ -119,6 +123,7 @@ class kibana4 (
   $service_name                  = $kibana4::params::service_name,
   $manage_init_file              = $kibana4::params::manage_init_file,
   $init_template                 = $kibana4::params::init_template,
+  $use_systemd                   = $kibana4::params::use_systemd,
   $manage_user                   = $kibana4::params::manage_user,
   $kibana4_group                 = $kibana4::params::kibana4_group,
   $kibana4_gid                   = undef,

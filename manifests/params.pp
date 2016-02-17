@@ -16,6 +16,7 @@ class kibana4::params {
   $service_name                  = 'kibana4'
   $manage_init_file              = true
   $init_template                 = 'kibana4/kibana.init.erb'
+  $use_systemd                   = false
   $manage_user                   = true
   $kibana4_group                 = 'kibana4'
   $kibana4_user                  = 'kibana4'
