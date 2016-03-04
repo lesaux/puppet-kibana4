@@ -275,7 +275,28 @@ config => {
 
 This module uses camptocamp/archives to download and extract the Kibana4 archive.
 
-## Limitations
+## Testing
 
-Basic spec testing is done, but no tests on the generated config file are done at the moment.
+### Rspec
 
+You can install gem dependencies with
+```
+bundle install
+```
+and run tests with
+```
+bundle exec rake spec
+```
+
+### Beaker-rspec
+
+You can run beaker-spec tests which will start two vagrant boxes, one to do basic test of the `archive` installation method, and the other
+to test the `package` installation method. Each vagrant box also runs elasticsearch.
+At this time these tests are fairly basic. We use a basic manifest in each case and ensure that the puppet return code is 2 (the run succeeded,
+and some resources were changed) on the first run, and ensure that the return code is 0 (the run succeeded with no changes or failures; 
+the system was already in the desired state) on the second run.
+Available node sets are centos-66-x64, centos-70-x64, ubuntu-1204-x64, ubuntu-1404-x64, debian-78-x64.
+Run with:
+```
+BEAKER_set=centos-66-x64 bundle exec rspec spec/acceptance
+```
