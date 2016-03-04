@@ -7,7 +7,7 @@ class kibana4::service {
   # init file from template
   if ($kibana4::manage_init_file == true) {
     file { "/etc/init.d/${kibana4::service_name}":
-      ensure  => present,
+      ensure  => file,
       mode    => '0755',
       content => template($kibana4::init_template),
       group   => root,
@@ -33,7 +33,7 @@ class kibana4::service {
     name       => $kibana4::service_name,
     hasstatus  => true,
     hasrestart => true,
-    require    => $require
+    require    => $require,
   }
 
 }
