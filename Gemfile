@@ -10,6 +10,8 @@ def location_for(place, version = nil)
   end
 end
 
+puppetversion = ENV.key?('PUPPET_VERSION') ? "= #{ENV['PUPPET_VERSION']}" : ['>= 3.3']
+
 group :development, :unit_tests do
   gem 'json',                      :require => false
   gem 'metadata-json-lint',        :require => false
@@ -31,7 +33,7 @@ group :system_tests do
 end
 
 gem 'facter', *location_for(ENV['FACTER_GEM_VERSION'])
-gem 'puppet', *location_for(ENV['PUPPET_GEM_VERSION'] || '>= 3.3')
+gem 'puppet', puppetversion
 
 
 if File.exists? "#{__FILE__}.local"
