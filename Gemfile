@@ -31,7 +31,7 @@ group :system_tests do
 end
 
 gem 'facter', *location_for(ENV['FACTER_GEM_VERSION'])
-gem 'puppet', *location_for(ENV['PUPPET_GEM_VERSION'])
+gem 'puppet', *location_for(ENV['PUPPET_GEM_VERSION'] || '>= 3.3')
 
 
 if File.exists? "#{__FILE__}.local"
