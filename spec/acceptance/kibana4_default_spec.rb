@@ -5,56 +5,30 @@ describe 'kibana4 default' do
   archive = only_host_with_role(hosts, 'archive')
   package = only_host_with_role(hosts, 'package')
 
-  #case fact('osfamily')
-  #  when 'RedHat'
-      let(:manifest_package) {
-      <<-EOS
-        class { '::kibana4':
-          package_provider   => 'package',
-          package_ensure     => 'latest',
-          package_name       => 'kibana',
-          manage_user        => false,
-          manage_init_file   => false,
-          service_name       => 'kibana',
-          kibana4_user       => 'kibana',
-          kibana4_group      => 'kibana',
-          use_official_repo  => true,
-          repo_version       => '4.4',
-          config             => {
-            'port'                 => 5601,
-            'host'                 => '0.0.0.0',
-            'elasticsearch_url'    => 'http://localhost:9200',
-          }
-        }
-      EOS
+  let(:manifest_package) {
+  <<-EOS
+    class { '::kibana4':
+      package_provider   => 'package',
+      package_ensure     => 'latest',
+      package_name       => 'kibana',
+      manage_user        => false,
+      manage_init_file   => false,
+      service_name       => 'kibana',
+      kibana4_user       => 'kibana',
+      kibana4_group      => 'kibana',
+      use_official_repo  => true,
+      repo_version       => '4.4',
+      config             => {
+        'port'                 => 5601,
+        'host'                 => '0.0.0.0',
+        'elasticsearch_url'    => 'http://localhost:9200',
       }
-   # when 'Debian'
-   #   let(:manifest_package) {
-   #   <<-EOS
-   #     class { '::kibana4':
-   #       package_provider   => 'package',
-   #       package_ensure     => '4.4.1',
-   #       package_name       => 'kibana',
-   #       manage_user        => false,
-   #       manage_init_file   => false,
-   #       service_name       => 'kibana',
-   #       kibana4_user       => 'kibana',
-   #       kibana4_group      => 'kibana',
-   #       use_official_repo  => true,
-   #       repo_version       => '4.4',
-   #       config             => {
-   #         'port'                 => 5601,
-   #         'host'                 => '0.0.0.0',
-   #         'elasticsearch_url'    => 'http://localhost:9200',
-   #       }
-   #     }
-   #   EOS
-   #   }
-  #end
-
+    }
+    EOS
+  }
 
   let(:manifest_archive) {
-    <<-EOS
+  <<-EOS
     class { '::kibana4':
       package_provider   => 'archive',
       package_ensure     => '4.3.1-linux-x64',
