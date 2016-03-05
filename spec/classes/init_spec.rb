@@ -8,7 +8,7 @@ describe 'kibana4' do
   context 'installs via archive and no symlink and no user' do
     let :params do
       {
-        :package_provider => 'archive',
+        :install_method => 'archive',
         :symlink          => false,
         :package_ensure   => '4.0.0-linux-x64',
         :service_ensure   => false,
@@ -25,7 +25,7 @@ describe 'kibana4' do
   context 'installs via archive and no symlink and service ensure and no user' do
     let :params do
       {
-        :package_provider => 'archive',
+        :install_method => 'archive',
         :symlink          => false,
         :package_ensure   => '4.0.0-linux-x64',
         :service_ensure   => true,
@@ -42,7 +42,7 @@ describe 'kibana4' do
   context 'installs via archive and no init file' do
     let :params do
       {
-        :package_provider => 'archive',
+        :install_method => 'archive',
         :package_ensure   => '4.0.0-linux-x64',
         :service_ensure   => false,
         :service_enable   => false,
@@ -58,7 +58,7 @@ describe 'kibana4' do
   context 'installs via archive and no symlink and service ensure/enable and no user' do
     let :params do
       {
-        :package_provider => 'archive',
+        :install_method => 'archive',
         :symlink          => false,
         :package_ensure   => '4.0.0-linux-x64',
         :service_ensure   => true,
@@ -75,7 +75,7 @@ describe 'kibana4' do
   context 'installs via archive and symlink and no user' do
     let :params do
       {
-        :package_provider => 'archive',
+        :install_method => 'archive',
         :symlink          => true,
         :package_ensure   => '4.0.0-linux-x64',
         :service_ensure   => false,
@@ -92,7 +92,7 @@ describe 'kibana4' do
   context 'installs via archive and symlink and service ensure and no user' do
     let :params do
       {
-        :package_provider => 'archive',
+        :install_method => 'archive',
         :symlink          => true,
         :package_ensure   => '4.0.0-linux-x64',
         :service_ensure   => true,
@@ -109,7 +109,7 @@ describe 'kibana4' do
   context 'installs via archive and symlink and service ensure/enable and no user' do
     let :params do
       {
-        :package_provider => 'archive',
+        :install_method => 'archive',
         :symlink          => true,
         :package_ensure   => '4.0.0-linux-x64',
         :service_ensure   => true,
@@ -126,7 +126,7 @@ describe 'kibana4' do
   context 'installs via archive and no symlink and user' do
     let :params do
       {
-        :package_provider => 'archive',
+        :install_method => 'archive',
         :symlink          => false,
         :package_ensure   => '4.0.0-linux-x64',
         :manage_user      => true,
@@ -148,7 +148,7 @@ describe 'kibana4' do
   context 'installs via archive and no symlink and service ensure and user' do
     let :params do
       {
-        :package_provider => 'archive',
+        :install_method => 'archive',
         :symlink          => false,
         :package_ensure   => '4.0.0-linux-x64',
         :manage_user      => true,
@@ -170,7 +170,7 @@ describe 'kibana4' do
   context 'installs via archive and no symlink and service ensure/enable and no user' do
     let :params do
       {
-        :package_provider => 'archive',
+        :install_method => 'archive',
         :symlink        => false,
         :package_ensure => '4.0.0-linux-x64',
         :service_ensure => true,
@@ -192,7 +192,7 @@ describe 'kibana4' do
   context 'installs via archive and symlink and user' do
     let :params do
       {
-        :package_provider => 'archive',
+        :install_method => 'archive',
         :symlink        => true,
         :package_ensure => '4.0.0-linux-x64',
         :manage_user    => true,
@@ -214,7 +214,7 @@ describe 'kibana4' do
   context 'installs via archive and symlink and service ensure and user' do
     let :params do
       {
-        :package_provider => 'archive',
+        :install_method => 'archive',
         :symlink          => true,
         :package_ensure   => '4.0.0-linux-x64',
         :service_ensure   => true,
@@ -236,7 +236,7 @@ describe 'kibana4' do
   context 'installs via archive and symlink and service ensure/enable and user' do
     let :params do
       {
-        :package_provider => 'archive',
+        :install_method => 'archive',
         :symlink          => true,
         :package_ensure   => '4.0.0-linux-x64',
         :service_ensure   => true,
@@ -258,7 +258,7 @@ describe 'kibana4' do
   context 'installs via package and no symlink and service ensure/enable and user' do
     let :params do
       {
-        :package_provider => 'package',
+        :install_method => 'package',
         :package_name     => 'kibana4',
         :package_ensure   => '4.1.1',
         :service_ensure   => true,
@@ -285,7 +285,7 @@ describe 'kibana4' do
   context 'installs via package and set config file' do
     let :params do
       {
-        :package_provider => 'package',
+        :install_method => 'package',
         :config_file      => '/etc/kibana4/kibana.yml',
         :config      	  => {
           'server.port'           => 5601,
@@ -307,7 +307,7 @@ describe 'kibana4' do
       end
       let :params do
         {
-          :package_provider   => 'package',
+          :install_method   => 'package',
         }
       end
       it { should contain_package('kibana4') }
@@ -321,7 +321,7 @@ describe 'kibana4' do
       end
       let :params do
         {
-          :package_provider   => 'package',
+          :install_method   => 'package',
           :package_name       => 'kibana',
           :service_name       => 'kibana',
           :use_official_repo  => true,
@@ -342,7 +342,7 @@ describe 'kibana4' do
       end
       let :params do
         {
-          :package_provider   => 'package',
+          :install_method   => 'package',
           :package_name       => 'kibana',
           :service_name       => 'kibana',
           :use_official_repo  => true,

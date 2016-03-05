@@ -50,7 +50,7 @@ user name, group name, uid and gid.
 ```puppet
   class { '::kibana4':
     package_ensure    => '4.3.0-linux-x64',
-    package_provider  => 'archive',
+    install_method  => 'archive',
     symlink           => true,
     manage_user       => true,
     kibana4_user      => kibana4,
@@ -75,7 +75,7 @@ module uses and depends on "camptocamp/archive").
 ```puppet
   class { '::kibana4':
     package_ensure    => '4.1.1-linux-x64',
-    package_provider  => 'archive',
+    install_method  => 'archive',
     archive_provider  => 'nanliu', # or 'puppet'
     symlink           => false,
     manage_user       => true,
@@ -100,7 +100,7 @@ Notice how the config hash is different in version 4.1 than it is in version 4.3
 
 ```puppet
 class { '::kibana4':
-  package_provider   => 'package',
+  install_method   => 'package',
   package_name       => 'kibana',
   package_ensure     => '4.1.1',
   manage_user        => false,
@@ -133,7 +133,7 @@ available at the time of module release.
 
 The name of the Kibana4 package that gets installed. Defaults to 'kibana'.
 
-[*package_provider*]
+[*install_method*]
 
 Set to 'archive' to download Kibana from the Elasticsearch download site (see
 also `package_download_url` below).  Set to 'package' to use the default package
@@ -151,7 +151,7 @@ at the same time.
 
 [*package_download_url*]
 
-Alternative URL from which to download Kibana if `package_provider` is
+Alternative URL from which to download Kibana if `install_method` is
 'archive'. Defaults to `undef`, because by default the URL is constructed
 from the usual Elasticsearch download site URL, the `package_name` and
 `package_ensure`.
@@ -161,7 +161,7 @@ from the usual Elasticsearch download site URL, the `package_name` and
 Specify a proxy server if you need to use one. Defaults to `undef`.
 
 [*use_official_repo*]
-Use official apt or yum repository. Only used if package_provider is set to 'package'.
+Use official apt or yum repository. Only used if install_method is set to 'package'.
 
 [*repo_version*]
 Apt or yum repository version. Only used if 'use_official_repo' is set to 'true'.
@@ -207,7 +207,7 @@ Defaults to 'true'.
 [*symlink_name*]
 
 Sets the name to be used for the symlink. The default is '$install_dir/kibana4'.
-Only used if `package_provider` is 'archive'.
+Only used if `install_method` is 'archive'.
 
 [*manage_user*]
 

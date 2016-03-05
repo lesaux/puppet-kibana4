@@ -4,7 +4,7 @@
 #
 class kibana4::install {
 
-  if $kibana4::package_provider == 'archive' {
+  if $kibana4::install_method == 'archive' {
     $package_name = $kibana4::package_name
     $version      = $kibana4::package_ensure
 
@@ -74,7 +74,7 @@ class kibana4::install {
     }
   }
 
-  if $kibana4::package_provider == 'package' {
+  if $kibana4::install_method == 'package' {
 
     if $kibana4::use_official_repo {
 

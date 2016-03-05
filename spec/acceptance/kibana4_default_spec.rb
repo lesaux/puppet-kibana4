@@ -8,7 +8,7 @@ describe 'kibana4 default' do
   let(:manifest_package) {
   <<-EOS
     class { '::kibana4':
-      package_provider   => 'package',
+      install_method     => 'package',
       package_ensure     => 'latest',
       package_name       => 'kibana',
       manage_user        => false,
@@ -30,7 +30,7 @@ describe 'kibana4 default' do
   let(:manifest_archive) {
   <<-EOS
     class { '::kibana4':
-      package_provider   => 'archive',
+      install_method     => 'archive',
       package_ensure     => '4.3.1-linux-x64',
       manage_user        => true,
       manage_init_file   => true,

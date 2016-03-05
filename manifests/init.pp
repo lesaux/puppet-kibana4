@@ -11,7 +11,7 @@
 # [*package_name*]
 # The name of the Kibana4 package that gets installed. Defaults to 'kibana'.
 #
-# [*package_provider*]
+# [*install_method*]
 # Set to 'archive' to download Kibana from the Elasticsearch download site (see
 # also `package_download_url` below).  Set to 'package' to use the default package
 # manager for installation.  Defaults to 'archive'.
@@ -26,7 +26,7 @@
 # at the same time.
 #
 # [*package_download_url*]
-# Alternative URL from which to download Kibana iff `package_provider` is
+# Alternative URL from which to download Kibana iff `install_method` is
 # 'archive'. Defaults to `undef`, because by default the URL is constructed
 # from the usual Elasticsearch download site URL, the `package_name` and
 # `package_ensure`.
@@ -41,7 +41,7 @@
 # is 'nanliu' or 'puppet'.
 #
 # [*use_official_repo*]
-# Use official apt or yum repository. Only used if package_provider is set to 'package'.
+# Use official apt or yum repository. Only used if install_method is set to 'package'.
 #
 # [*repo_version*]
 # apt or yum repository version. Only used if 'use_official_repo' is set to 'true'.
@@ -79,7 +79,7 @@
 #
 # [*symlink_name*]
 # Sets the name to be used for the symlink. The default is '$install_dir/kibana4'.
-# Only used if `package_provider` is 'archive'.
+# Only used if `install_method` is 'archive'.
 #
 # [*manage_user*]
 # Should the user that will run the Kibana service be created and managed by
@@ -107,7 +107,7 @@
 class kibana4 (
   $package_ensure                = $kibana4::params::package_ensure,
   $package_name                  = $kibana4::params::package_name,
-  $package_provider              = $kibana4::params::package_provider,
+  $install_method              = $kibana4::params::install_method,
   $package_download_url          = undef,
   $package_dl_timeout            = $kibana4::params::package_dl_timeout,
   $package_proxy_server          = undef,
