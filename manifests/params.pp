@@ -4,9 +4,9 @@
 #
 class kibana4::params {
   $babel_cache_path              = '/tmp/babel.cache'
-  $package_ensure                = '4.3.1-linux-x64'
+  $version                       = '4.3.1-linux-x64'
   $package_name                  = 'kibana'
-  $install_method              = 'archive'
+  $install_method                = 'archive'
   $package_dl_timeout            = 600
   $archive_provider              = 'camptocamp'
   $use_official_repo             = false

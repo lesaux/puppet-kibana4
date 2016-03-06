@@ -15,7 +15,7 @@ class kibana4::install {
     }
 
     default: {
-      fail("Valid installation methods are `package` or `archive`")
+      fail('Valid installation methods are `package` or `archive`')
     }
 
   }

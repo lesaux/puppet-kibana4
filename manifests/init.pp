@@ -4,7 +4,7 @@
 #
 # === Parameters
 #
-# [*package_ensure*]
+# [*version*]
 # Version of Kibana4 that gets installed.  Defaults to the latest 4.0.0 version
 # available at the time of module release.
 #
@@ -29,7 +29,7 @@
 # Alternative URL from which to download Kibana iff `install_method` is
 # 'archive'. Defaults to `undef`, because by default the URL is constructed
 # from the usual Elasticsearch download site URL, the `package_name` and
-# `package_ensure`.
+# `version`.
 #
 # [*package_dl_timeout*]
 # Specifies a package download timeout, used only if `archive_provider` is set to
@@ -105,9 +105,9 @@
 #   see README file
 #
 class kibana4 (
-  $package_ensure                = $kibana4::params::package_ensure,
+  $version                       = $kibana4::params::version,
   $package_name                  = $kibana4::params::package_name,
-  $install_method              = $kibana4::params::install_method,
+  $install_method                = $kibana4::params::install_method,
   $package_download_url          = undef,
   $package_dl_timeout            = $kibana4::params::package_dl_timeout,
   $package_proxy_server          = undef,

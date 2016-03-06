@@ -4,12 +4,10 @@
 #
 class kibana4::config {
 
-  $version = $kibana4::package_ensure
-
   if $kibana4::config_file {
     $_config_file = $kibana4::config_file
   } elsif $kibana4::install_method == 'archive' {
-    $_config_file = "${kibana4::install_dir}/kibana-${version}/config/kibana.yml"
+    $_config_file = "${kibana4::install_dir}/kibana-${kibana4::version}/config/kibana.yml"
   } elsif $kibana4::install_method == 'package' {
     $_config_file = "${kibana4::install_dir}/${kibana4::package_name}/config/kibana.yml"
   }

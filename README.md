@@ -49,8 +49,8 @@ user name, group name, uid and gid.
 
 ```puppet
   class { '::kibana4':
-    package_ensure    => '4.3.0-linux-x64',
-    install_method  => 'archive',
+    version           => '4.3.0-linux-x64',
+    install_method    => 'archive',
     symlink           => true,
     manage_user       => true,
     kibana4_user      => kibana4,
@@ -74,8 +74,8 @@ module uses and depends on "camptocamp/archive").
 
 ```puppet
   class { '::kibana4':
-    package_ensure    => '4.1.1-linux-x64',
-    install_method  => 'archive',
+    version           => '4.1.1-linux-x64',
+    install_method    => 'archive',
     archive_provider  => 'nanliu', # or 'puppet'
     symlink           => false,
     manage_user       => true,
@@ -100,9 +100,9 @@ Notice how the config hash is different in version 4.1 than it is in version 4.3
 
 ```puppet
 class { '::kibana4':
-  install_method   => 'package',
+  install_method     => 'package',
   package_name       => 'kibana',
-  package_ensure     => '4.1.1',
+  version            => '4.1.1',
   manage_user        => false,
   manage_init_file   => false,
   service_name       => 'kibana',
@@ -124,7 +124,7 @@ Check all parameters in init.pp file
 
 ### Installation Parameters
 
-[*package_ensure*]
+[*version*]
 
 Version of Kibana4 that gets installed.  Defaults to the latest 4.1.1 version
 available at the time of module release.
@@ -154,7 +154,7 @@ at the same time.
 Alternative URL from which to download Kibana if `install_method` is
 'archive'. Defaults to `undef`, because by default the URL is constructed
 from the usual Elasticsearch download site URL, the `package_name` and
-`package_ensure`.
+`version`.
 
 [*package_proxy_server*]
 
