@@ -28,11 +28,12 @@ class kibana4::config {
 
   }
 
-  file { '/var/log/kibana':
-    ensure => 'directory',
-    owner  => $kibana4::kibana4_user,
-    group  => $kibana4::kibana4_group,
-    mode   => '0755',
-  }
+# Log dir is now created and chowned by init script
+#  file { '/var/log/kibana':
+#    ensure => 'directory',
+#    owner  => $kibana4::kibana4_user,
+#    group  => $kibana4::kibana4_group,
+#    mode   => '0755',
+#  }
 
 }

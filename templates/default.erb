@@ -1,1 +1,7 @@
 export BABEL_CACHE_PATH=<%= scope.lookupvar('kibana4::babel_cache_path') %>
+
+user="<% scope['kibana4::kibana4_user'] -%>"
+group="<% scope['kibana4::kibana4_group'] -%>"
+chroot="/"
+chdir="/"
+nice=""
