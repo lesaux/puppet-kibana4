@@ -6,9 +6,9 @@ class kibana4::install::archive {
 
   $package_name = $kibana4::package_name
 
-  $download_url = $kibana4::package_download_url ? {
+  $download_url = $kibana4::archive_download_url ? {
     undef   => "${kibana4::params::es_download_site_url}/kibana/kibana/${package_name}-${kibana4::version}.tar.gz",
-    default => $kibana4::package_download_url,
+    default => $kibana4::archive_download_url,
   }
 
   case $kibana4::archive_provider {

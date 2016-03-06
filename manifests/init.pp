@@ -13,7 +13,7 @@
 #
 # [*install_method*]
 # Set to 'archive' to download Kibana from the Elasticsearch download site (see
-# also `package_download_url` below).  Set to 'package' to use the default package
+# also `archive_download_url` below).  Set to 'package' to use the default package
 # manager for installation.  Defaults to 'archive'.
 #
 # [*archive_provider*]
@@ -25,8 +25,8 @@
 # module installed since both cannot be recorded as a dependency in metadata.json
 # at the same time.
 #
-# [*package_download_url*]
-# Alternative URL from which to download Kibana iff `install_method` is
+# [*archive_download_url*]
+# Alternative URL from which to download Kibana if `install_method` is
 # 'archive'. Defaults to `undef`, because by default the URL is constructed
 # from the usual Elasticsearch download site URL, the `package_name` and
 # `version`.
@@ -40,11 +40,11 @@
 # http[s]//[user:passwd@]proxy_host:port. Not supported when `archive_provider`
 # is 'nanliu' or 'puppet'.
 #
-# [*use_official_repo*]
+# [*package_use_official_repo*]
 # Use official apt or yum repository. Only used if install_method is set to 'package'.
 #
-# [*repo_version*]
-# apt or yum repository version. Only used if 'use_official_repo' is set to 'true'.
+# [*package_repo_version*]
+# apt or yum repository version. Only used if 'package_use_official_repo' is set to 'true'.
 # defaults to '4.1'.
 #
 # [*service_ensure*]
@@ -108,12 +108,12 @@ class kibana4 (
   $version                       = $kibana4::params::version,
   $package_name                  = $kibana4::params::package_name,
   $install_method                = $kibana4::params::install_method,
-  $package_download_url          = undef,
+  $archive_download_url          = undef,
   $archive_dl_timeout            = $kibana4::params::archive_dl_timeout,
   $package_proxy_server          = undef,
   $archive_provider              = $kibana4::params::archive_provider,
-  $use_official_repo             = $kibana4::params::use_official_repo,
-  $repo_version                  = $kibana4::params::repo_version,
+  $package_use_official_repo             = $kibana4::params::package_use_official_repo,
+  $package_repo_version                  = $kibana4::params::package_repo_version,
   $service_ensure                = $kibana4::params::service_ensure,
   $service_enable                = $kibana4::params::service_enable,
   $service_name                  = $kibana4::params::service_name,

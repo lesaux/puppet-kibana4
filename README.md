@@ -108,8 +108,8 @@ class { '::kibana4':
   service_name       => 'kibana',
   kibana4_user       => 'kibana',
   kibana4_group      => 'kibana',
-  use_official_repo  => true,
-  repo_version       => '4.1'
+  package_use_official_repo  => true,
+  package_repo_version       => '4.1'
   config             => {
     'port'                 => 5601,
     'host'                 => '0.0.0.0',
@@ -136,7 +136,7 @@ The name of the Kibana4 package that gets installed. Defaults to 'kibana'.
 [*install_method*]
 
 Set to 'archive' to download Kibana from the Elasticsearch download site (see
-also `package_download_url` below).  Set to 'package' to use the default package
+also `archive_download_url` below).  Set to 'package' to use the default package
 manager for installation.  Defaults to 'archive'.
 
 [*archive_provider*]
@@ -149,7 +149,7 @@ since the module is now in the care of puppet-community). Defaults to
 module installed since both cannot be recorded as a dependency in metadata.json
 at the same time.
 
-[*package_download_url*]
+[*archive_download_url*]
 
 Alternative URL from which to download Kibana if `install_method` is
 'archive'. Defaults to `undef`, because by default the URL is constructed
@@ -160,11 +160,11 @@ from the usual Elasticsearch download site URL, the `package_name` and
 
 Specify a proxy server if you need to use one. Defaults to `undef`.
 
-[*use_official_repo*]
+[*package_use_official_repo*]
 Use official apt or yum repository. Only used if install_method is set to 'package'.
 
-[*repo_version*]
-Apt or yum repository version. Only used if 'use_official_repo' is set to 'true'.
+[*package_repo_version*]
+Apt or yum repository version. Only used if 'package_use_official_repo' is set to 'true'.
 defaults to '4.1'.
 
 [*service_ensure*]

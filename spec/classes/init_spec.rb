@@ -324,8 +324,8 @@ describe 'kibana4' do
           :install_method     => 'package',
           :package_name       => 'kibana',
           :service_name       => 'kibana',
-          :use_official_repo  => true,
-          :repo_version       => '4.1'
+          :package_use_official_repo  => true,
+          :package_repo_version       => '4.1'
         }
       end
       it { should contain_package('kibana4').with_name('kibana')}
@@ -345,8 +345,8 @@ describe 'kibana4' do
           :install_method     => 'package',
           :package_name       => 'kibana',
           :service_name       => 'kibana',
-          :use_official_repo  => true,
-          :repo_version       => '4.1'
+          :package_use_official_repo  => true,
+          :package_repo_version       => '4.1'
         }
       end
       it { should contain_package('kibana4').with_name('kibana')}

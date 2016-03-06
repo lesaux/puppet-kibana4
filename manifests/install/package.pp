@@ -4,17 +4,17 @@
 #
 class kibana4::install::package {
 
-  if $kibana4::use_official_repo {
+  if $kibana4::package_use_official_repo {
 
     case $::osfamily {
 
       'RedHat': {
-        yumrepo { "kibana-${kibana4::repo_version}":
-        baseurl  => "http://packages.elastic.co/kibana/${kibana4::repo_version}/centos",
+        yumrepo { "kibana-${kibana4::package_repo_version}":
+        baseurl  => "http://packages.elastic.co/kibana/${kibana4::package_repo_version}/centos",
         enabled  => '1',
         gpgcheck => '1',
         gpgkey   => 'https://packages.elastic.co/GPG-KEY-elasticsearch',
-        descr    => "Kibana repository for ${kibana4::repo_version}.x packages",
+        descr    => "Kibana repository for ${kibana4::package_repo_version}.x packages",
         before   => Package['kibana4'],
         }
       }
@@ -23,8 +23,8 @@ class kibana4::install::package {
         if !defined(Class['apt']) {
           class { 'apt': }
         }
-        apt::source { "kibana-${kibana4::repo_version}":
-          location => "http://packages.elastic.co/kibana/${kibana4::repo_version}/debian",
+        apt::source { "kibana-${kibana4::package_repo_version}":
+          location => "http://packages.elastic.co/kibana/${kibana4::package_repo_version}/debian",
           release  => 'stable',
           repos    => 'main',
           key      => {
