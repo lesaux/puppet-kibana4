@@ -45,7 +45,7 @@ class kibana4::install::archive {
         target       => $kibana4::install_dir,
         url          => $download_url,
         proxy_server => $kibana4::package_proxy_server,
-        timeout      => $kibana4::package_dl_timeout,
+        timeout      => $kibana4::archive_dl_timeout,
         notify       => Exec['chown_kibana_directory'],
       }
 

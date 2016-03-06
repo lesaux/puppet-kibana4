@@ -7,7 +7,7 @@ class kibana4::params {
   $version                       = '4.3.1-linux-x64'
   $package_name                  = 'kibana'
   $install_method                = 'archive'
-  $package_dl_timeout            = 600
+  $archive_dl_timeout            = 600
   $archive_provider              = 'camptocamp'
   $use_official_repo             = false
   $repo_version                  = '4.2'
