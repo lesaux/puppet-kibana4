@@ -31,6 +31,7 @@ class kibana4::service {
     ensure     => $kibana4::service_ensure,
     enable     => $kibana4::service_enable,
     name       => $kibana4::service_name,
+    provider   => init,
     hasstatus  => true,
     hasrestart => true,
     require    => $require,

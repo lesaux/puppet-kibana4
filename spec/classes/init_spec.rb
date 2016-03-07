@@ -2,6 +2,11 @@ require 'spec_helper'
 describe 'kibana4' do
 
   context 'with defaults for all parameters' do
+    let :facts do
+      {
+         :osfamily => 'RedHat'
+      }
+    end
     it { should contain_class('kibana4') }
   end
 
@@ -9,7 +14,7 @@ describe 'kibana4' do
     let :params do
       {
         :install_method   => 'archive',
-        :archive_symlink          => false,
+        :archive_symlink  => false,
         :version          => '4.0.0-linux-x64',
         :service_ensure   => false,
         :service_enable   => false,
@@ -25,8 +30,8 @@ describe 'kibana4' do
   context 'installs via archive and no symlink and service ensure and no user' do
     let :params do
       {
-        :install_method => 'archive',
-        :archive_symlink          => false,
+        :install_method   => 'archive',
+        :archive_symlink  => false,
         :version          => '4.0.0-linux-x64',
         :service_ensure   => true,
         :service_enable   => false,
@@ -59,7 +64,7 @@ describe 'kibana4' do
     let :params do
       {
         :install_method   => 'archive',
-        :archive_symlink          => false,
+        :archive_symlink  => false,
         :version          => '4.0.0-linux-x64',
         :service_ensure   => true,
         :service_enable   => true,
@@ -76,7 +81,7 @@ describe 'kibana4' do
     let :params do
       {
         :install_method   => 'archive',
-        :archive_symlink          => true,
+        :archive_symlink  => true,
         :version          => '4.0.0-linux-x64',
         :service_ensure   => false,
         :service_enable   => false,
@@ -93,7 +98,7 @@ describe 'kibana4' do
     let :params do
       {
         :install_method   => 'archive',
-        :archive_symlink          => true,
+        :archive_symlink  => true,
         :version          => '4.0.0-linux-x64',
         :service_ensure   => true,
         :service_enable   => false,
@@ -110,7 +115,7 @@ describe 'kibana4' do
     let :params do
       {
         :install_method   => 'archive',
-        :archive_symlink          => true,
+        :archive_symlink  => true,
         :version          => '4.0.0-linux-x64',
         :service_ensure   => true,
         :service_enable   => true,
@@ -127,7 +132,7 @@ describe 'kibana4' do
     let :params do
       {
         :install_method   => 'archive',
-        :archive_symlink          => false,
+        :archive_symlink  => false,
         :version          => '4.0.0-linux-x64',
         :manage_user      => true,
         :kibana4_user     => 'kib4',
@@ -149,7 +154,7 @@ describe 'kibana4' do
     let :params do
       {
         :install_method   => 'archive',
-        :archive_symlink          => false,
+        :archive_symlink  => false,
         :version          => '4.0.0-linux-x64',
         :manage_user      => true,
         :kibana4_user     => 'kib4',
@@ -170,16 +175,16 @@ describe 'kibana4' do
   context 'installs via archive and no symlink and service ensure/enable and no user' do
     let :params do
       {
-        :install_method => 'archive',
-        :archive_symlink        => false,
-        :version        => '4.0.0-linux-x64',
-        :service_ensure => true,
-        :service_enable => true,
-        :manage_user    => true,
-        :kibana4_user   => 'kib4',
-        :kibana4_uid    => '200',
-        :kibana4_group  => 'kib4',
-        :kibana4_gid    => '200',
+        :install_method  => 'archive',
+        :archive_symlink => false,
+        :version         => '4.0.0-linux-x64',
+        :service_ensure  => true,
+        :service_enable  => true,
+        :manage_user     => true,
+        :kibana4_user    => 'kib4',
+        :kibana4_uid     => '200',
+        :kibana4_group   => 'kib4',
+        :kibana4_gid     => '200',
       }
     end
     it { should contain_archive('kibana-4.0.0-linux-x64')}
@@ -192,16 +197,16 @@ describe 'kibana4' do
   context 'installs via archive and symlink and user' do
     let :params do
       {
-        :install_method => 'archive',
-        :archive_symlink        => true,
-        :version        => '4.0.0-linux-x64',
-        :manage_user    => true,
-        :kibana4_user   => 'kib4',
-        :kibana4_uid    => '200',
-        :kibana4_group  => 'kib4',
-        :kibana4_gid    => '200',
-        :service_ensure => false,
-        :service_enable => false,
+        :install_method  => 'archive',
+        :archive_symlink => true,
+        :version         => '4.0.0-linux-x64',
+        :manage_user     => true,
+        :kibana4_user    => 'kib4',
+        :kibana4_uid     => '200',
+        :kibana4_group   => 'kib4',
+        :kibana4_gid     => '200',
+        :service_ensure  => false,
+        :service_enable  => false,
       }
     end
     it { should contain_archive('kibana-4.0.0-linux-x64')}
@@ -215,7 +220,7 @@ describe 'kibana4' do
     let :params do
       {
         :install_method   => 'archive',
-        :archive_symlink          => true,
+        :archive_symlink  => true,
         :version          => '4.0.0-linux-x64',
         :service_ensure   => true,
         :manage_user      => true,
@@ -237,7 +242,7 @@ describe 'kibana4' do
     let :params do
       {
         :install_method   => 'archive',
-        :archive_symlink          => true,
+        :archive_symlink  => true,
         :version          => '4.0.0-linux-x64',
         :service_ensure   => true,
         :service_enable   => true,
@@ -256,26 +261,31 @@ describe 'kibana4' do
   end
 
   context 'installs via package and package_install_dir and no init file and service ensure/enable and user' do
+    let :facts do
+      {
+         :osfamily => 'RedHat'
+      }
+    end
     let :params do
       {
-        :install_method   => 'package',
-        :package_name     => 'kibana4',
-        :version          => '4.1.1',
-        :service_ensure   => true,
-        :service_enable   => true,
-        :kibana4_user     => 'kib4',
-        :kibana4_group    => 'kib4',
-        :manage_user      => false,
-        :package_install_dir      => '/usr/share/kibana4',
-        :manage_init_file => false,
-        :config		  => {
+        :install_method      => 'package',
+        :package_name        => 'kibana4',
+        :version             => '4.4.1',
+        :service_ensure      => true,
+        :service_enable      => true,
+        :kibana4_user        => 'kib4',
+        :kibana4_group       => 'kib4',
+        :manage_user         => false,
+        :package_install_dir => '/usr/share/kibana4',
+        :manage_init_file    => false,
+        :config		     => {
           'server.port'           => 5601,
           'server.host'           => '0.0.0.0',
           'elasticsearch.url'     => 'http://localhost:9200'
         }
       }
     end
-    it { should contain_package('kibana4').with_ensure('4.1.1') }
+    it { should contain_package('kibana4').with_ensure('4.4.1') }
     it { should_not contain_file('/opt/kibana') }
     it { should contain_file('kibana-config-file').with_path('/usr/share/kibana4/config/kibana.yml') }
     it { should contain_service('kibana4').with_ensure('true').with_enable('true') }
@@ -283,26 +293,31 @@ describe 'kibana4' do
   end
 
   context 'installs via package and package_install_dir and init file and service ensure/enable and user' do
+    let :facts do
+      {
+         :osfamily => 'RedHat'
+      }
+    end
     let :params do
       {
-        :install_method   => 'package',
-        :package_name     => 'kibana4',
-        :version          => '4.1.1',
-        :service_ensure   => true,
-        :service_enable   => true,
-        :kibana4_user     => 'kib4',
-        :kibana4_group    => 'kib4',
-        :manage_user      => false,
-        :package_install_dir      => '/usr/share/kibana4',
-        :manage_init_file => true,
-        :config		  => {
+        :install_method      => 'package',
+        :package_name        => 'kibana4',
+        :version             => '4.4.1',
+        :service_ensure      => true,
+        :service_enable      => true,
+        :kibana4_user        => 'kib4',
+        :kibana4_group       => 'kib4',
+        :manage_user         => false,
+        :package_install_dir => '/usr/share/kibana4',
+        :manage_init_file    => true,
+        :config		     => {
           'server.port'           => 5601,
           'server.host'           => '0.0.0.0',
           'elasticsearch.url'     => 'http://localhost:9200'
         }
       }
     end
-    it { should contain_package('kibana4').with_ensure('4.1.1') }
+    it { should contain_package('kibana4').with_ensure('4.4.1') }
     it { should_not contain_file('/opt/kibana') }
     it { should contain_file('kibana-config-file').with_path('/usr/share/kibana4/config/kibana.yml') }
     it { should contain_service('kibana4').with_ensure('true').with_enable('true') }
@@ -310,6 +325,11 @@ describe 'kibana4' do
   end
 
   context 'installs via package and set config file' do
+    let :facts do
+      {
+         :osfamily => 'RedHat'
+      }
+    end
     let :params do
       {
         :install_method   => 'package',
@@ -348,11 +368,11 @@ describe 'kibana4' do
       end
       let :params do
         {
-          :install_method     => 'package',
-          :package_name       => 'kibana',
-          :service_name       => 'kibana',
-          :package_use_official_repo  => true,
-          :package_repo_version       => '4.1'
+          :install_method            => 'package',
+          :package_name              => 'kibana',
+          :service_name              => 'kibana',
+          :package_use_official_repo => true,
+          :package_repo_version      => '4.1'
         }
       end
       it { should contain_package('kibana4').with_name('kibana')}
@@ -369,11 +389,11 @@ describe 'kibana4' do
       end
       let :params do
         {
-          :install_method     => 'package',
-          :package_name       => 'kibana',
-          :service_name       => 'kibana',
-          :package_use_official_repo  => true,
-          :package_repo_version       => '4.1'
+          :install_method            => 'package',
+          :package_name              => 'kibana',
+          :service_name              => 'kibana',
+          :package_use_official_repo => true,
+          :package_repo_version      => '4.1'
         }
       end
       it { should contain_package('kibana4').with_name('kibana')}

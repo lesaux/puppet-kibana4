@@ -12,7 +12,7 @@ class kibana4::params {
   $archive_symlink               = true
   $archive_symlink_name          = "${archive_install_dir}/kibana4"
   $package_name                  = 'kibana'
-  $package_use_official_repo     = false
+  $package_use_official_repo     = true
   $package_repo_version          = '4.4'
   $package_install_dir           = '/opt/kibana'
   $service_ensure                = true
@@ -21,8 +21,8 @@ class kibana4::params {
   $manage_init_file              = true
   $init_template                 = 'kibana4/kibana.init.erb'
   $manage_user                   = true
-  $kibana4_group                 = 'kibana4'
-  $kibana4_user                  = 'kibana4'
+  $kibana4_group                 = 'kibana'
+  $kibana4_user                  = 'kibana'
   $es_download_site_url          = 'https://download.elastic.co'
   $config                        = undef
 }

@@ -49,7 +49,7 @@ user name, group name, uid and gid.
 
 ```puppet
   class { '::kibana4':
-    version           => '4.3.0-linux-x64',
+    version           => '4.4.1-linux-x64',
     install_method    => 'archive',
     archive_symlink   => true,
     manage_user       => true,
@@ -74,7 +74,7 @@ module uses and depends on "camptocamp/archive").
 
 ```puppet
   class { '::kibana4':
-    version           => '4.1.1-linux-x64',
+    version           => '4.4.1-linux-x64',
     install_method    => 'archive',
     archive_provider  => 'nanliu', # or 'puppet'
     archive_symlink   => false,
@@ -93,29 +93,8 @@ module uses and depends on "camptocamp/archive").
 
 ### Example to install from apt or yum repo
 
-You will need to explicitly set the service_name to 'kibana' in most cases, because
-for legacy reasons the default service_name is set to kibana4 - this may change in the future.
-We disable user and init.d management as these are provided in official packages.
-Notice how the config hash is different in version 4.1 than it is in version 4.3.
-
 ```puppet
-class { '::kibana4':
-  install_method     => 'package',
-  package_name       => 'kibana',
-  version            => '4.1.1',
-  manage_user        => false,
-  manage_init_file   => false,
-  service_name       => 'kibana',
-  kibana4_user       => 'kibana',
-  kibana4_group      => 'kibana',
-  package_use_official_repo  => true,
-  package_repo_version       => '4.1'
-  config             => {
-    'port'                 => 5601,
-    'host'                 => '0.0.0.0',
-    'elasticsearch_url'    => 'http://localhost:9200',
-  }
-}
+class { '::kibana4':  }
 ```
 
 ## Parameters
@@ -137,7 +116,7 @@ The name of the Kibana4 package that gets installed. Defaults to 'kibana'.
 
 Set to 'archive' to download Kibana from the Elasticsearch download site (see
 also `archive_download_url` below).  Set to 'package' to use the default package
-manager for installation.  Defaults to 'archive'.
+manager for installation.  Defaults to 'package'.
 
 [*archive_provider*]
 
@@ -179,7 +158,7 @@ manual. Defaults to 'true'.
 
 [*service_name*]
 
-Name of the Kibana4 service. Defaults to 'kibana4'.
+Name of the Kibana4 service. Defaults to 'kibana'.
 
 [*manage_init_file*]
 
@@ -216,7 +195,7 @@ Puppet? Defaults to 'true'.
 
 [*kibana4_user*]
 
-The user that will run the service. For now installation directory is still owned by root.
+The user that will run the service. Defaults to kibana.
 
 [*kibana4_uid*]
 
@@ -224,7 +203,7 @@ The user ID assigned to the user specified in `kibana4_user`. Defaults to `undef
 
 [*kibana4_group*]
 
-The primary group of the kibana user
+The primary group of the kibana user. Defaults to kibana.
 
 [*kibana4_gid*]
 
@@ -236,6 +215,8 @@ The group ID assigned to the group specified in `kibana4_group`. Defaults to `un
  https://www.elastic.co/guide/en/kibana/current/kibana-server-properties.html
  If you do not specify a hash of configuration parameters, then the default kibana.yml provided
  by the archive or package will be left intact.
+ Notice how the config hash is different in version 4.1 than it is in version 4.3.
+
 
 [*config*]
 
