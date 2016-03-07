@@ -1,3 +1,12 @@
+#1.0.9 (2016-07-03)
+
+**Enhancements**
+ - init bug fix
+ - simple plugin support - does not allow plugin updating. 
+
+**Documentation**
+ - plugins simple support
+
 #1.0.7 (2016-06-03)
 
 **Enhancements**
