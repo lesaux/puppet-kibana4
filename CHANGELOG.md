@@ -1,3 +1,19 @@
+#1.0.7 (2016-06-03)
+
+**Enhancements**
+ - Beaker tests
+ - Parameters refactoring
+ - use updated init script from elastic.co packages
+ - archive_dl_timeout feature - thanks to alexharv074
+ - log directory improvements - thanks to alexharv074
+ - updated scope.lookupvar syntax - thanks to alexharv074
+ - template conditions fixes - thanks to mklette
+ - better handling of pid file - - thanks to alexharv074
+ - disabled verbose mode for camptocamp/archive - thanks to alexharv074 
+
+**Documentation**
+ - Several updates
+
 #1.0.6 (2015-23-12)
 
 **Enhancements**
