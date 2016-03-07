@@ -134,11 +134,17 @@ class kibana4 (
   $archive_symlink               = $kibana4::params::archive_symlink,
   $archive_symlink_name          = $kibana4::params::archive_symlink_name,
   $config                        = $kibana4::params::config,
+  $plugins                       = undef,
 ) inherits kibana4::params {
 
   class {'kibana4::user': }->
   class {'kibana4::install': }->
   class {'kibana4::config': }->
   class {'kibana4::service': }
+
+   if $plugins {
+     validate_hash($plugins)
+     create_resources('kibana4::plugin', $plugins)
+   }
 
 }

@@ -217,6 +217,28 @@ The group ID assigned to the group specified in `kibana4_group`. Defaults to `un
  by the archive or package will be left intact.
  Notice how the config hash is different in version 4.1 than it is in version 4.3.
 
+[*plugins*]
+
+A hash of plugins and their installation parameters
+
+example:
+```puppet
+class { '::kibana4':
+      plugins => {
+        'elasticsearch/marvel' => {
+           kibana4_plugin_dir => '/opt/kibana/installedPlugins', #optional - this is the default
+           plugin_dest_dir    => 'marvel',                       #mandatory - plugin will be installed in ${kibana4_plugin_dir}/${plugin_dest_dir}
+           url                => http://your_custom_url,         #necessary if using arbitrary URL
+           ensure             => present,                        #mandatory - either 'present' or 'absent'
+        },
+        'elastic/sense' => {
+           ensure          => present,
+           plugin_dest_dir => 'sense',
+        }
+      }
+
+    }
+```
 
 [*config*]
 

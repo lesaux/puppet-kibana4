@@ -11,6 +11,42 @@ describe 'kibana4 default' do
     EOS
   }
 
+  let(:manifest_package_plugin_install) {
+  <<-EOS
+    class { '::kibana4':
+      plugins => {
+        'elasticsearch/marvel' => {
+           ensure          => present,
+           plugin_dest_dir => 'marvel',
+        },
+	'elastic/sense' => {
+           ensure          => present,
+           plugin_dest_dir => 'sense',
+        }
+      }
+
+    }
+    EOS
+  }
+
+  let(:manifest_package_plugin_remove) {
+  <<-EOS
+    class { '::kibana4':
+      plugins => {
+        'elasticsearch/marvel' => {
+           ensure          => absent,
+           plugin_dest_dir => 'marvel',
+        },
+	'elastic/sense' => {
+           ensure          => absent,
+           plugin_dest_dir => 'sense',
+        }
+      }
+
+    }
+    EOS
+  }
+
   let(:manifest_archive) {
   <<-EOS
     class { '::kibana4':
@@ -38,6 +74,26 @@ describe 'kibana4 default' do
 
   it 'package install should run a second time without changes' do
     result = apply_manifest_on(package, manifest_package, opts = { :catch_failures => true })
+    expect(@result.exit_code).to eq 0
+  end
+
+  it 'package module install should run without errors' do
+    result = apply_manifest_on(package, manifest_package_plugin_install, opts = { :catch_failures => true })
+    expect(@result.exit_code).to eq 2
+  end
+
+  it 'package module install should run a second time without changes' do
+    result = apply_manifest_on(package, manifest_package_plugin_install, opts = { :catch_failures => true })
+    expect(@result.exit_code).to eq 0
+  end
+
+  it 'package module remove should run without errors' do
+    result = apply_manifest_on(package, manifest_package_plugin_remove, opts = { :catch_failures => true })
+    expect(@result.exit_code).to eq 2
+  end
+
+  it 'package module remove should run a second time without changes' do
+    result = apply_manifest_on(package, manifest_package_plugin_remove, opts = { :catch_failures => true })
     expect(@result.exit_code).to eq 0
   end
 
