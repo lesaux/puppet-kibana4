@@ -209,14 +209,6 @@ The primary group of the kibana user. Defaults to kibana.
 
 The group ID assigned to the group specified in `kibana4_group`. Defaults to `undef`.
 
-### Configuration Parameters
-
- See Kibana4 documentation for a list of kibana server properties:
- https://www.elastic.co/guide/en/kibana/current/kibana-server-properties.html
- If you do not specify a hash of configuration parameters, then the default kibana.yml provided
- by the archive or package will be left intact.
- Notice how the config hash is different in version 4.1 than it is in version 4.3.
-
 [*plugins*]
 
 Simple plugin support has been added, but updating existing plugins is not yet supported.
@@ -240,6 +232,15 @@ class { '::kibana4':
 
     }
 ```
+
+
+### Configuration Parameters
+
+ See Kibana4 documentation for a list of kibana server properties:
+ https://www.elastic.co/guide/en/kibana/current/kibana-server-properties.html
+ If you do not specify a hash of configuration parameters, then the default kibana.yml provided
+ by the archive or package will be left intact.
+ Notice how the config hash is different in version 4.1 than it is in version 4.3.
 
 [*config*]
 
