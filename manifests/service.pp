@@ -20,9 +20,10 @@ class kibana4::service {
       content => template('kibana4/default.erb'),
       group   => root,
       owner   => root,
+      notify  => Service['kibana4'],
     }
 
-    $require = [File["/etc/init.d/${kibana4::service_name}"], File['/etc/default/kibana4']]
+    $require = [File["/etc/init.d/${kibana4::service_name}"], File['/etc/default/kibana']]
   } else {
     $require = undef
   }
