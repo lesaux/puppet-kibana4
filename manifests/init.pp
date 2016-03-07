@@ -35,7 +35,7 @@
 # Specifies a package download timeout, used only if `archive_provider` is set to
 # 'camptocamp'.  Default is 600.
 #
-# [*package_proxy_server*]
+# [*archive_proxy_server*]
 # Specifies which proxy server use to download archive. Valid format is
 # http[s]//[user:passwd@]proxy_host:port. Not supported when `archive_provider`
 # is 'nanliu' or 'puppet'.
@@ -56,7 +56,7 @@
 # manual. Defaults to 'true'.
 #
 # [*service_name*]
-# Name of the Kibana4 service. Defaults to 'kibana4'.
+# Name of the Kibana4 service. Defaults to 'kibana'.
 #
 # [*init_template*]
 # Service file as a template
@@ -65,20 +65,24 @@
 # Install init file. If the init script is provided by a package,
 # set it to `false`. Defaults to 'true'
 #
-# [*install_dir*]
-# Installation directory used iff install_method is 'archive'
+# [*archive_install_dir*]
+# Installation directory used if install_method is 'archive'
 # Defaults to '/opt'.
+
+# [*package_install_dir*]
+# Installation directory used if install_method is 'package'
+# Defaults to '/opt/kibana'. You can change this if you are using custom packages.
 #
 # [*config_file*]
 # The location, as a path, of the Kibana configuration file.
 #
-# [*symlink*]
+# [*archive_symlink*]
 # Determines if a symlink should be created in the installation directory for
 # the extracted archive. Only used if install_method is 'archive'.
 # Defaults to 'true'.
 #
-# [*symlink_name*]
-# Sets the name to be used for the symlink. The default is '$install_dir/kibana4'.
+# [*archive_symlink_name*]
+# Sets the name to be used for the symlink. The default is '$archive_install_dir/kibana4'.
 # Only used if `install_method` is 'archive'.
 #
 # [*manage_user*]
@@ -110,10 +114,11 @@ class kibana4 (
   $install_method                = $kibana4::params::install_method,
   $archive_download_url          = undef,
   $archive_dl_timeout            = $kibana4::params::archive_dl_timeout,
-  $package_proxy_server          = undef,
+  $archive_proxy_server          = undef,
   $archive_provider              = $kibana4::params::archive_provider,
-  $package_use_official_repo             = $kibana4::params::package_use_official_repo,
-  $package_repo_version                  = $kibana4::params::package_repo_version,
+  $package_use_official_repo     = $kibana4::params::package_use_official_repo,
+  $package_repo_version          = $kibana4::params::package_repo_version,
+  $package_install_dir           = $kibana4::params::package_install_dir,
   $service_ensure                = $kibana4::params::service_ensure,
   $service_enable                = $kibana4::params::service_enable,
   $service_name                  = $kibana4::params::service_name,
@@ -124,10 +129,10 @@ class kibana4 (
   $kibana4_gid                   = undef,
   $kibana4_user                  = $kibana4::params::kibana4_user,
   $kibana4_uid                   = undef,
-  $install_dir                   = $kibana4::params::install_dir,
+  $archive_install_dir           = $kibana4::params::archive_install_dir,
   $config_file                   = undef,
-  $symlink                       = $kibana4::params::symlink,
-  $symlink_name                  = $kibana4::params::symlink_name,
+  $archive_symlink               = $kibana4::params::archive_symlink,
+  $archive_symlink_name          = $kibana4::params::archive_symlink_name,
   $config                        = $kibana4::params::config,
 ) inherits kibana4::params {
 

@@ -51,7 +51,7 @@ user name, group name, uid and gid.
   class { '::kibana4':
     version           => '4.3.0-linux-x64',
     install_method    => 'archive',
-    symlink           => true,
+    archive_symlink   => true,
     manage_user       => true,
     kibana4_user      => kibana4,
     kibana4_group     => kibana4,
@@ -77,7 +77,7 @@ module uses and depends on "camptocamp/archive").
     version           => '4.1.1-linux-x64',
     install_method    => 'archive',
     archive_provider  => 'nanliu', # or 'puppet'
-    symlink           => false,
+    archive_symlink   => false,
     manage_user       => true,
     kibana4_user      => kibana4,
     kibana4_group     => kibana4,
@@ -156,7 +156,7 @@ Alternative URL from which to download Kibana if `install_method` is
 from the usual Elasticsearch download site URL, the `package_name` and
 `version`.
 
-[*package_proxy_server*]
+[*archive_proxy_server*]
 
 Specify a proxy server if you need to use one. Defaults to `undef`.
 
@@ -190,7 +190,7 @@ set it to `false`. Defaults to 'true'
 
 Service file as a template. Defaults to 'kibana4/kibana.init'.
 
-[*install_dir*]
+[*archive_install_dir*]
 
 Installation directory used if install_method is 'archive'
 Defaults to '/opt'.
@@ -198,15 +198,15 @@ Defaults to '/opt'.
 [*config_file*]
 The location, as a path, of the Kibana configuration file.
 
-[*symlink*]
+[*archive_symlink*]
 
 Determines if a symlink should be created in the installation directory for
 the extracted archive. Only used if install_method is 'archive'.
 Defaults to 'true'.
 
-[*symlink_name*]
+[*archive_symlink_name*]
 
-Sets the name to be used for the symlink. The default is '$install_dir/kibana4'.
+Sets the name to be used for the symlink. The default is '$archive_install_dir/kibana4'.
 Only used if `install_method` is 'archive'.
 
 [*manage_user*]

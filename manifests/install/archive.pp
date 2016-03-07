@@ -14,26 +14,26 @@ class kibana4::install::archive {
   case $kibana4::archive_provider {
     'nanliu','puppet': {
 
-      if $kibana4::package_proxy_server {
+      if $kibana4::archive_proxy_server {
         fail("Setting a proxy server for archive download is not supported when \$archive_provider is '${kibana4::archive_provider}'")
       }
 
-      archive { "${kibana4::install_dir}/kibana-${kibana4::version}.tar.gz":
+      archive { "${kibana4::archive_install_dir}/kibana-${kibana4::version}.tar.gz":
         ensure        => present,
         user          => 'root',
         group         => 'root',
         source        => $download_url,
-        extract_path  => $kibana4::install_dir,
+        extract_path  => $kibana4::archive_install_dir,
         # Extract files as the user doing the extracting, which is the user
         # that runs Puppet, usually root
         extract_flags => '-x --no-same-owner -f',
-        creates       => "${kibana4::install_dir}/kibana-${kibana4::version}",
+        creates       => "${kibana4::archive_install_dir}/kibana-${kibana4::version}",
         extract       => true,
         cleanup       => true,
         notify        => Exec['chown_kibana_directory'],
       }
 
-      $symlink_require = Archive["${kibana4::install_dir}/kibana-${kibana4::version}.tar.gz"]
+      $symlink_require = Archive["${kibana4::archive_install_dir}/kibana-${kibana4::version}.tar.gz"]
 
     }
 
@@ -42,9 +42,9 @@ class kibana4::install::archive {
         ensure       => present,
         checksum     => false,
         verbose      => false,
-        target       => $kibana4::install_dir,
+        target       => $kibana4::archive_install_dir,
         url          => $download_url,
-        proxy_server => $kibana4::package_proxy_server,
+        proxy_server => $kibana4::archive_proxy_server,
         timeout      => $kibana4::archive_dl_timeout,
         notify       => Exec['chown_kibana_directory'],
       }
@@ -60,18 +60,18 @@ class kibana4::install::archive {
   }
 
   exec { 'chown_kibana_directory':
-    command     => "chown -R ${kibana4::kibana4_user}:${kibana4::kibana4_group} ${kibana4::install_dir}/kibana-${kibana4::version}",
+    command     => "chown -R ${kibana4::kibana4_user}:${kibana4::kibana4_group} ${kibana4::archive_install_dir}/kibana-${kibana4::version}",
     path        => ['/bin','/sbin'],
     refreshonly => true,
     require     => $symlink_require,
   }
 
-  if $kibana4::symlink {
+  if $kibana4::archive_symlink {
 
-    file { $kibana4::symlink_name:
+    file { $kibana4::archive_symlink_name:
       ensure  => link,
       require => $symlink_require,
-      target  => "${kibana4::install_dir}/kibana-${kibana4::version}",
+      target  => "${kibana4::archive_install_dir}/kibana-${kibana4::version}",
       owner   => $kibana4::kibana4_user,
       group   => $kibana4::kibana4_group,
     }

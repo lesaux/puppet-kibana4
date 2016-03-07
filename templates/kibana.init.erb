@@ -22,11 +22,11 @@ export PATH
 name=kibana4
 
 <% if scope['kibana4::install_method'] == 'package' -%>
-program=/opt/kibana/bin/kibana
-<% elsif scope['kibana4::symlink'] -%>
-program=<%= scope['kibana4::symlink_name'] %>/bin/kibana
+program=<%= scope['kibana4::package_install_dir'] %>/bin/kibana
+<% elsif scope['kibana4::archive_symlink'] -%>
+program=<%= scope['kibana4::archive_symlink_name'] %>/bin/kibana
 <% elsif -%>
-program=<%= scope['kibana4::install_dir'] %>/kibana-<%= scope['kibana4::version'] %>/bin/kibana
+program=<%= scope['kibana4::archive_install_dir'] %>/kibana-<%= scope['kibana4::version'] %>/bin/kibana
 <% end -%>
 
 args=''

@@ -7,9 +7,9 @@ class kibana4::config {
   if $kibana4::config_file {
     $_config_file = $kibana4::config_file
   } elsif $kibana4::install_method == 'archive' {
-    $_config_file = "${kibana4::install_dir}/kibana-${kibana4::version}/config/kibana.yml"
+    $_config_file = "${kibana4::archive_install_dir}/kibana-${kibana4::version}/config/kibana.yml"
   } elsif $kibana4::install_method == 'package' {
-    $_config_file = "${kibana4::install_dir}/${kibana4::package_name}/config/kibana.yml"
+    $_config_file = "${kibana4::package_install_dir}/config/kibana.yml"
   }
 
   if $kibana4::config {
