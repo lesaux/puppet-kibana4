@@ -219,6 +219,7 @@ The group ID assigned to the group specified in `kibana4_group`. Defaults to `un
 
 [*plugins*]
 
+Simple plugin support has been added, but updating existing plugins is not yet supported.
 A hash of plugins and their installation parameters
 
 example:
