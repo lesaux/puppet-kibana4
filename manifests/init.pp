@@ -142,9 +142,9 @@ class kibana4 (
   class {'kibana4::config': }->
   class {'kibana4::service': }
 
-   if $plugins {
-     validate_hash($plugins)
-     create_resources('kibana4::plugin', $plugins)
-   }
+  if $plugins {
+    validate_hash($plugins)
+    create_resources('kibana4::plugin', $plugins)
+  }
 
 }

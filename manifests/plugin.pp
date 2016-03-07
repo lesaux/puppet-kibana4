@@ -45,18 +45,18 @@ define kibana4::plugin(
 
         exec { "install_kibana_plugin_${name}":
         command => "/opt/kibana/bin/kibana plugin --install ${name} -d ${kibana4_plugin_dir}/${plugin_dest_dir}",
-        path => '/opt/kibana:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
-        unless => "test -d ${kibana4_plugin_dir}/${plugin_dest_dir}",
-        notify => Service['kibana'],
+        path    => '/opt/kibana:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
+        unless  => "test -d ${kibana4_plugin_dir}/${plugin_dest_dir}",
+        notify  => Service['kibana'],
         }
 
       } else {
 
         exec { "install_kibana_plugin_${name}":
         command => "/opt/kibana/bin/kibana plugin --install ${name} -u ${url} -d ${kibana4_plugin_dir}/${plugin_dest_dir}",
-        path => '/opt/kibana:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
-        unless => "test -d ${kibana4_plugin_dir}/${plugin_dest_dir}",
-        notify => Service['kibana'],
+        path    => '/opt/kibana:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
+        unless  => "test -d ${kibana4_plugin_dir}/${plugin_dest_dir}",
+        notify  => Service['kibana'],
         }
 
       }
@@ -66,11 +66,15 @@ define kibana4::plugin(
     'absent': {
         exec { "remove_kibana_plugin_${name}":
         command => "rm -rf ${kibana4_plugin_dir}/${plugin_dest_dir}",
-        path => '/opt/kibana:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
-        unless => "test ! -d ${kibana4_plugin_dir}/${plugin_dest_dir}",
-        notify => Service['kibana'],
+        path    => '/opt/kibana:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
+        unless  => "test ! -d ${kibana4_plugin_dir}/${plugin_dest_dir}",
+        notify  => Service['kibana'],
         }
 
+    }
+
+    default: {
+      fail('`ensure` should be either `present` or `absent`')
     }
 
   }
