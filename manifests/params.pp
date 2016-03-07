@@ -4,17 +4,17 @@
 #
 class kibana4::params {
   $babel_cache_path              = '/tmp/babel.cache'
-  $version                       = '4.3.1-linux-x64'
-  $install_method                = 'archive'
-  $package_name                  = 'kibana'
-  $package_use_official_repo     = false
-  $package_repo_version          = '4.4'
-  $package_install_dir           = '/opt/kibana'
+  $version                       = 'latest'
+  $install_method                = 'package'
   $archive_install_dir           = '/opt'
   $archive_dl_timeout            = 600
   $archive_provider              = 'camptocamp'
   $archive_symlink               = true
   $archive_symlink_name          = "${archive_install_dir}/kibana4"
+  $package_name                  = 'kibana'
+  $package_use_official_repo     = false
+  $package_repo_version          = '4.4'
+  $package_install_dir           = '/opt/kibana'
   $service_ensure                = true
   $service_enable                = true
   $service_name                  = 'kibana'
