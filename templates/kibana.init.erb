@@ -18,8 +18,8 @@
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
 export PATH
 
-#name=kibana
-name=kibana4
+name=kibana
+#name=kibana4
 
 <% if scope['kibana4::install_method'] == 'package' -%>
 program=<%= scope['kibana4::package_install_dir'] %>/bin/kibana
