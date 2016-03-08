@@ -20,7 +20,7 @@ class kibana4::params {
   $service_name                  = 'kibana'
   $manage_init_file              = true
   $init_template                 = 'kibana4/kibana.init.erb'
-  $manage_user                   = true
+  $manage_user                   = false
   $kibana4_group                 = 'kibana'
   $kibana4_user                  = 'kibana'
   $es_download_site_url          = 'https://download.elastic.co'
