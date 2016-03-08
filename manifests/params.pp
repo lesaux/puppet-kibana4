@@ -10,7 +10,7 @@ class kibana4::params {
   $archive_dl_timeout            = 600
   $archive_provider              = 'camptocamp'
   $archive_symlink               = true
-  $archive_symlink_name          = "${archive_install_dir}/kibana4"
+  $archive_symlink_name          = "${archive_install_dir}/kibana"
   $package_name                  = 'kibana'
   $package_use_official_repo     = true
   $package_repo_version          = '4.4'
