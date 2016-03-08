@@ -1,3 +1,9 @@
+#1.0.11 (2016-08-03)
+
+**Enhancements**
+ - plugins install dir was incorrect
+ - manage_user default is now false 
+
 #1.0.9 (2016-07-03)
 
 **Enhancements**
