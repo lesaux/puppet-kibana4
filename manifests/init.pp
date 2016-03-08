@@ -142,6 +142,8 @@ class kibana4 (
   class {'kibana4::config': }->
   class {'kibana4::service': }
 
+  Kibana4::Plugin { require => Class['kibana4::install'] }
+
   if $plugins {
     validate_hash($plugins)
     create_resources('kibana4::plugin', $plugins)

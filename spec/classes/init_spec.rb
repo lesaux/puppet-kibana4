@@ -55,7 +55,7 @@ describe 'kibana4' do
       }
     end
     it { should contain_archive('kibana-4.0.0-linux-x64')}
-    it { should_not contain_file('/opt/kibana').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
+    it { should contain_file('/opt/kibana').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
     it { should contain_service('kibana4').with_ensure('false').with_enable('false') }
     it { should_not contain_file('/etc/init.d/kibana') }
   end
@@ -88,9 +88,9 @@ describe 'kibana4' do
       }
     end
     it { should contain_archive('kibana-4.0.0-linux-x64')}
-    it { should contain_file('/opt/kibana4').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
+    it { should contain_file('/opt/kibana').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
     it { should contain_service('kibana4').with_ensure('false').with_enable('false') }
-    it { should contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana4\/bin\/kibana/) }
+    it { should contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana\/bin\/kibana/) }
     #it { should contain_file('/etc/init.d/kibana').with_content(/^  chroot --userspec kibana4:kibana4 \/ sh -c "/) }
   end
 
@@ -105,9 +105,9 @@ describe 'kibana4' do
       }
     end
     it { should contain_archive('kibana-4.0.0-linux-x64')}
-    it { should contain_file('/opt/kibana4').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
+    it { should contain_file('/opt/kibana').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
     it { should contain_service('kibana4').with_ensure('true').with_enable('false') }
-    it { should contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana4\/bin\/kibana/) }
+    it { should contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana\/bin\/kibana/) }
     #it { should contain_file('/etc/init.d/kibana').with_content(/^  chroot --userspec kibana4:kibana4 \/ sh -c "/) }
   end
 
@@ -122,9 +122,9 @@ describe 'kibana4' do
       }
     end
     it { should contain_archive('kibana-4.0.0-linux-x64')}
-    it { should contain_file('/opt/kibana4').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
+    it { should contain_file('/opt/kibana').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
     it { should contain_service('kibana4').with_ensure('true').with_enable('true') }
-    it { should contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana4\/bin\/kibana/) }
+    it { should contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana\/bin\/kibana/) }
     #it { should contain_file('/etc/init.d/kibana').with_content(/^  chroot --userspec kibana4:kibana4 \/ sh -c "/) }
   end
 
@@ -210,9 +210,9 @@ describe 'kibana4' do
       }
     end
     it { should contain_archive('kibana-4.0.0-linux-x64')}
-    it { should contain_file('/opt/kibana4').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
+    it { should contain_file('/opt/kibana').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
     it { should contain_service('kibana4').with_ensure('false').with_enable('false') }
-    it { should contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana4\/bin\/kibana/) }
+    it { should contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana\/bin\/kibana/) }
     #it { should contain_file('/etc/init.d/kibana').with_content(/^  chroot --userspec kib4:kib4 \/ sh -c "/) }
   end
 
@@ -232,9 +232,9 @@ describe 'kibana4' do
       }
     end
     it { should contain_archive('kibana-4.0.0-linux-x64')}
-    it { should contain_file('/opt/kibana4').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
+    it { should contain_file('/opt/kibana').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
     it { should contain_service('kibana4').with_ensure('true').with_enable('false') }
-    it { should contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana4\/bin\/kibana/) }
+    it { should contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana\/bin\/kibana/) }
     #it { should contain_file('/etc/init.d/kibana').with_content(/^  chroot --userspec kib4:kib4 \/ sh -c "/) }
   end
 
@@ -254,9 +254,9 @@ describe 'kibana4' do
       }
     end
     it { should contain_archive('kibana-4.0.0-linux-x64')}
-    it { should contain_file('/opt/kibana4').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
+    it { should contain_file('/opt/kibana').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
     it { should contain_service('kibana4').with_ensure('true').with_enable('true') }
-    it { should contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana4\/bin\/kibana/) }
+    it { should contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana\/bin\/kibana/) }
     #it { should contain_file('/etc/init.d/kibana').with_content(/^  chroot --userspec kib4:kib4 \/ sh -c "/) }
   end
 
