@@ -185,7 +185,7 @@ Defaults to 'true'.
 
 [*archive_symlink_name*]
 
-Sets the name to be used for the symlink. The default is '$archive_install_dir/kibana4'.
+Sets the name to be used for the symlink. The default is '$archive_install_dir/kibana'.
 Only used if `install_method` is 'archive'.
 
 [*manage_user*]
