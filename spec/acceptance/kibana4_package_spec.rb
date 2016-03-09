@@ -1,8 +1,7 @@
 require 'spec_helper_acceptance'
 
-describe 'kibana4 default' do
+describe 'kibana4 package' do
 
-  archive = only_host_with_role(hosts, 'archive')
   package = only_host_with_role(hosts, 'package')
 
   let(:manifest_package) {
@@ -47,26 +46,6 @@ describe 'kibana4 default' do
     EOS
   }
 
-  let(:manifest_archive) {
-  <<-EOS
-    class { '::kibana4':
-      install_method     => 'archive',
-      version            => '4.4.1-linux-x64',
-      archive_symlink    => true,
-      service_name       => 'kibana',
-      manage_init_file   => true,
-      manage_user        => true,
-      kibana4_user       => 'kibana',
-      kibana4_group      => 'kibana',
-      config             => {
-        'port'                 => 5601,
-        'host'                 => '0.0.0.0',
-        'elasticsearch_url'    => 'http://localhost:9200',
-      }
-    }
-    EOS
-  }
-
   it 'package install should run without errors' do
     result = apply_manifest_on(package, manifest_package, opts = { :catch_failures => true })
     expect(@result.exit_code).to eq 2
@@ -77,34 +56,35 @@ describe 'kibana4 default' do
     expect(@result.exit_code).to eq 0
   end
 
-  it 'package module install should run without errors' do
+  it 'package plugin install should run without errors' do
     result = apply_manifest_on(package, manifest_package_plugin_install, opts = { :catch_failures => true })
     expect(@result.exit_code).to eq 2
   end
 
-  it 'package module install should run a second time without changes' do
+  it 'package plugin install should run a second time without changes' do
     result = apply_manifest_on(package, manifest_package_plugin_install, opts = { :catch_failures => true })
     expect(@result.exit_code).to eq 0
   end
 
-  it 'package module remove should run without errors' do
+  it 'package plugin remove should run without errors' do
     result = apply_manifest_on(package, manifest_package_plugin_remove, opts = { :catch_failures => true })
     expect(@result.exit_code).to eq 2
   end
 
-  it 'package module remove should run a second time without changes' do
+  it 'package plugin remove should run a second time without changes' do
     result = apply_manifest_on(package, manifest_package_plugin_remove, opts = { :catch_failures => true })
     expect(@result.exit_code).to eq 0
   end
 
-  it 'archive install should run without errors' do
-    result = apply_manifest_on(archive, manifest_archive, opts = { :catch_failures => true })
-    expect(@result.exit_code).to eq 2
-  end
+  #describe service('kibana') do
+  #  it { should be_enabled }
+  #end
 
-  it 'archive install should run a second time without changes' do
-    result = apply_manifest_on(archive, manifest_archive, opts = { :catch_failures => true })
-    expect(@result.exit_code).to eq 0
-  end
+  #@hosts.each do |host|
+  #  step "i'm going to say hello to #{host}"
+  #  on host, 'echo hello'
+  #  hellos += 1
+  #end
+
 
 end
