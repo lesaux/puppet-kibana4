@@ -1,6 +1,6 @@
 require 'spec_helper_acceptance'
 
-describe 'kibana4 package' do
+describe 'kibana4 package', :node => :package do
 
   package = only_host_with_role(hosts, 'package')
 
@@ -56,6 +56,56 @@ describe 'kibana4 package' do
     expect(@result.exit_code).to eq 0
   end
 
+  context 'package default params' do
+
+    #if os[:family] == 'redhat'
+    #  describe yumrepo('kibana-4.4') do
+    #    it { should exist }
+    #    it { should be_enabled }
+    #  end
+    #end
+
+    describe group('kibana') do
+      it { should exist }
+    end
+
+    describe user('kibana') do
+      it { should exist }
+      it { should belong_to_group 'kibana' }
+    end
+
+    describe package('kibana') do
+      it { should be_installed }
+    end
+
+    describe file('/opt/kibana') do
+      it { should be_directory }
+      it { should be_owned_by 'root' }
+      it { should be_grouped_into 'root' }
+    end
+
+    describe file('/etc/init.d/kibana') do
+      it { should be_file }
+      it { should contain 'pidfile=/var/run/kibana.pid' }
+    end
+
+    describe file('/etc/default/kibana') do
+      it { should be_file }
+      it { should contain 'user="kibana"' }
+      it { should contain 'group="kibana"' }
+    end
+
+    describe service('kibana') do
+      #it { should be_installed }
+      it { should be_running }
+    end
+
+    describe port(5601) do
+      it { should be_listening.with('tcp') }
+    end
+
+  end
+
   it 'package plugin install should run without errors' do
     result = apply_manifest_on(package, manifest_package_plugin_install, opts = { :catch_failures => true })
     expect(@result.exit_code).to eq 2
@@ -75,16 +125,5 @@ describe 'kibana4 package' do
     result = apply_manifest_on(package, manifest_package_plugin_remove, opts = { :catch_failures => true })
     expect(@result.exit_code).to eq 0
   end
-
-  #describe service('kibana') do
-  #  it { should be_enabled }
-  #end
-
-  #@hosts.each do |host|
-  #  step "i'm going to say hello to #{host}"
-  #  on host, 'echo hello'
-  #  hellos += 1
-  #end
-
 
 end
