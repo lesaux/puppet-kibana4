@@ -42,10 +42,19 @@ include kibana4
 
 ## Usage
 
-If you decided to have the module create a user, you will need to specify
-user name, group name, uid and gid.
+### Example to install from apt or yum repo
+
+The elastic.co packages create a kibana user and group (999:999) and they provide an init file /etc/init.d/kibana
+This is now the preferred installation method for kibana4.
+
+```puppet
+class { '::kibana4':  }
+```
 
 ### Example to install from archive
+
+If you decided to have the module create a user, you will need to specify
+user name, group name, uid and gid.
 
 ```puppet
   class { '::kibana4':
@@ -89,12 +98,6 @@ module uses and depends on "camptocamp/archive").
         'elasticsearch.url'     => 'http://localhost:9200',
     }
   }
-```
-
-### Example to install from apt or yum repo
-
-```puppet
-class { '::kibana4':  }
 ```
 
 ## Parameters
