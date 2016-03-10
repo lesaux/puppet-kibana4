@@ -1,3 +1,10 @@
+#1.0.12 (2016-08-03)
+
+**Enhancements**
+ - More Beaker tests
+ - Readme improvements 
+ - Plugin ordering fix
+
 #1.0.11 (2016-08-03)
 
 **Enhancements**
