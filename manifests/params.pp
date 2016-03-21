@@ -18,6 +18,10 @@ class kibana4::params {
   $service_ensure                = true
   $service_enable                = true
   $service_name                  = 'kibana'
+  case $::operatingsystem {
+    /^(Debian|Ubuntu)$/ : { $service_provider = debian }
+    default:              { $service_provider = init   }
+  }
   $manage_init_file              = true
   $init_template                 = 'kibana4/kibana.init.erb'
   $manage_user                   = false
