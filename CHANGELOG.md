@@ -1,3 +1,8 @@
+#1.0.13 (2016-21-03)
+
+**Enhancements**
+ - Bug fix for Ubuntu
+
 #1.0.12 (2016-08-03)
 
 **Enhancements**

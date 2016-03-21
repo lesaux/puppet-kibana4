@@ -84,13 +84,6 @@ describe 'kibana4 default', :node => :archive do
 
   context 'archive default params' do
 
-    #if os[:family] == 'redhat'
-    #  describe yumrepo('kibana-4.4') do
-    #    it { should exist }
-    #    it { should be_enabled }
-    #  end
-    #end
-
     describe group('kibana') do
       it { should exist }
     end
@@ -109,6 +102,7 @@ describe 'kibana4 default', :node => :archive do
     describe file('/etc/init.d/kibana') do
       it { should be_file }
       it { should contain 'pidfile=/var/run/kibana.pid' }
+      it { should be_executable }
     end
 
     describe file('/etc/default/kibana') do

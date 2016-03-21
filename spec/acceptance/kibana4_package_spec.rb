@@ -87,6 +87,7 @@ describe 'kibana4 package', :node => :package do
     describe file('/etc/init.d/kibana') do
       it { should be_file }
       it { should contain 'pidfile=/var/run/kibana.pid' }
+      it { should be_executable }
     end
 
     describe file('/etc/default/kibana') do
