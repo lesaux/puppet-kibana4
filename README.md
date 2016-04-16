@@ -132,6 +132,10 @@ Use official apt or yum repository. Only used if install_method is set to 'packa
 
 Apt or yum repository version. Only used if 'package_use_official_repo' is set to 'true'.  Defaults to '4.1'.
 
+#### `package_repo_proxy`
+
+Whether or not to use a proxy for downloading the kibana4 package. Default is 'undef, so no proxy will be used.
+
 #### `service_ensure`
 
 Specifies the service state. Valid values are stopped (false) and running (true).  Defaults to 'running'.

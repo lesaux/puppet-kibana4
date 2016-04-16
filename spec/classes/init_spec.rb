@@ -395,6 +395,28 @@ describe 'kibana4' do
       it { is_expected.to contain_yumrepo('kibana-4.1') }
     end
 
+    context 'using the official repos on CentOS behind a proxy' do
+      let :facts do
+        {
+          :osfamily => 'RedHat'
+        }
+      end
+      let :params do
+        {
+          :install_method            => 'package',
+          :package_name              => 'kibana',
+          :service_name              => 'kibana',
+          :package_use_official_repo => true,
+          :package_repo_version      => '4.1',
+          :package_repo_proxy        => 'http://proxy:8080'
+
+        }
+      end
+      it { should contain_package('kibana4').with_name('kibana')}
+      it { should contain_service('kibana4').with_ensure('true').with_name('kibana') }
+      it { should contain_yumrepo('kibana-4.1').with_proxy('http://proxy:8080') }
+    end
+
     context 'using the official repos on Ubuntu' do
       let :facts do
         {
