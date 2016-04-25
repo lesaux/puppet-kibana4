@@ -1,4 +1,5 @@
 require 'spec_helper'
+
 describe 'kibana4' do
 
   context 'with defaults for all parameters' do
@@ -7,7 +8,7 @@ describe 'kibana4' do
          :osfamily => 'RedHat'
       }
     end
-    it { should contain_class('kibana4') }
+    it { is_expected.to contain_class('kibana4') }
   end
 
   context 'installs via archive and no symlink and no user' do
@@ -20,11 +21,11 @@ describe 'kibana4' do
         :service_enable   => false,
       }
     end
-    it { should contain_archive('kibana-4.0.0-linux-x64')}
-    it { should_not contain_file('/opt/kibana').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
-    it { should contain_service('kibana4').with_ensure('false').with_enable('false') }
-    it { should contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana\-4.0.0\-linux\-x64\/bin\/kibana/) }
-    #it { should contain_file('/etc/init.d/kibana').with_content(/^  chroot --userspec kibana4:kibana4 \/ sh -c "/) }
+    it { is_expected.to contain_archive('kibana-4.0.0-linux-x64')}
+    it { is_expected.to_not contain_file('/opt/kibana').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
+    it { is_expected.to contain_service('kibana4').with_ensure('false').with_enable('false') }
+    it { is_expected.to contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana\-4.0.0\-linux\-x64\/bin\/kibana/) }
+    #it { is_expected.to contain_file('/etc/init.d/kibana').with_content(/^  chroot --userspec kibana4:kibana4 \/ sh -c "/) }
   end
 
   context 'installs via archive and no symlink and service ensure and no user' do
@@ -37,11 +38,11 @@ describe 'kibana4' do
         :service_enable   => false,
       }
     end
-    it { should contain_archive('kibana-4.0.0-linux-x64')}
-    it { should_not contain_file('/opt/kibana').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
-    it { should contain_service('kibana4').with_ensure('true').with_enable('false') }
-    it { should contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana\-4.0.0\-linux\-x64\/bin\/kibana/) }
-    #it { should contain_file('/etc/init.d/kibana').with_content(/^  chroot --userspec kibana4:kibana4 \/ sh -c "/) }
+    it { is_expected.to contain_archive('kibana-4.0.0-linux-x64')}
+    it { is_expected.to_not contain_file('/opt/kibana').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
+    it { is_expected.to contain_service('kibana4').with_ensure('true').with_enable('false') }
+    it { is_expected.to contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana\-4.0.0\-linux\-x64\/bin\/kibana/) }
+    #it { is_expected.to contain_file('/etc/init.d/kibana').with_content(/^  chroot --userspec kibana4:kibana4 \/ sh -c "/) }
   end
 
   context 'installs via archive and no init file' do
@@ -54,10 +55,10 @@ describe 'kibana4' do
         :manage_init_file => false,
       }
     end
-    it { should contain_archive('kibana-4.0.0-linux-x64')}
-    it { should contain_file('/opt/kibana').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
-    it { should contain_service('kibana4').with_ensure('false').with_enable('false') }
-    it { should_not contain_file('/etc/init.d/kibana') }
+    it { is_expected.to contain_archive('kibana-4.0.0-linux-x64')}
+    it { is_expected.to contain_file('/opt/kibana').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
+    it { is_expected.to contain_service('kibana4').with_ensure('false').with_enable('false') }
+    it { is_expected.to_not contain_file('/etc/init.d/kibana') }
   end
 
   context 'installs via archive and no symlink and service ensure/enable and no user' do
@@ -70,11 +71,11 @@ describe 'kibana4' do
         :service_enable   => true,
       }
     end
-    it { should contain_archive('kibana-4.0.0-linux-x64')}
-    it { should_not contain_file('/opt/kibana').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
-    it { should contain_service('kibana4').with_ensure('true').with_enable('true') }
-    it { should contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana\-4.0.0\-linux\-x64\/bin\/kibana/) }
-    #it { should contain_file('/etc/init.d/kibana').with_content(/^  chroot --userspec kibana4:kibana4 \/ sh -c "/) }
+    it { is_expected.to contain_archive('kibana-4.0.0-linux-x64')}
+    it { is_expected.to_not contain_file('/opt/kibana').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
+    it { is_expected.to contain_service('kibana4').with_ensure('true').with_enable('true') }
+    it { is_expected.to contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana\-4.0.0\-linux\-x64\/bin\/kibana/) }
+    #it { is_expected.to contain_file('/etc/init.d/kibana').with_content(/^  chroot --userspec kibana4:kibana4 \/ sh -c "/) }
   end
 
   context 'installs via archive and symlink and no user' do
@@ -87,11 +88,11 @@ describe 'kibana4' do
         :service_enable   => false,
       }
     end
-    it { should contain_archive('kibana-4.0.0-linux-x64')}
-    it { should contain_file('/opt/kibana').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
-    it { should contain_service('kibana4').with_ensure('false').with_enable('false') }
-    it { should contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana\/bin\/kibana/) }
-    #it { should contain_file('/etc/init.d/kibana').with_content(/^  chroot --userspec kibana4:kibana4 \/ sh -c "/) }
+    it { is_expected.to contain_archive('kibana-4.0.0-linux-x64')}
+    it { is_expected.to contain_file('/opt/kibana').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
+    it { is_expected.to contain_service('kibana4').with_ensure('false').with_enable('false') }
+    it { is_expected.to contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana\/bin\/kibana/) }
+    #it { is_expected.to contain_file('/etc/init.d/kibana').with_content(/^  chroot --userspec kibana4:kibana4 \/ sh -c "/) }
   end
 
   context 'installs via archive and symlink and service ensure and no user' do
@@ -104,11 +105,11 @@ describe 'kibana4' do
         :service_enable   => false,
       }
     end
-    it { should contain_archive('kibana-4.0.0-linux-x64')}
-    it { should contain_file('/opt/kibana').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
-    it { should contain_service('kibana4').with_ensure('true').with_enable('false') }
-    it { should contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana\/bin\/kibana/) }
-    #it { should contain_file('/etc/init.d/kibana').with_content(/^  chroot --userspec kibana4:kibana4 \/ sh -c "/) }
+    it { is_expected.to contain_archive('kibana-4.0.0-linux-x64')}
+    it { is_expected.to contain_file('/opt/kibana').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
+    it { is_expected.to contain_service('kibana4').with_ensure('true').with_enable('false') }
+    it { is_expected.to contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana\/bin\/kibana/) }
+    #it { is_expected.to contain_file('/etc/init.d/kibana').with_content(/^  chroot --userspec kibana4:kibana4 \/ sh -c "/) }
   end
 
   context 'installs via archive and symlink and service ensure/enable and no user' do
@@ -121,11 +122,11 @@ describe 'kibana4' do
         :service_enable   => true,
       }
     end
-    it { should contain_archive('kibana-4.0.0-linux-x64')}
-    it { should contain_file('/opt/kibana').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
-    it { should contain_service('kibana4').with_ensure('true').with_enable('true') }
-    it { should contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana\/bin\/kibana/) }
-    #it { should contain_file('/etc/init.d/kibana').with_content(/^  chroot --userspec kibana4:kibana4 \/ sh -c "/) }
+    it { is_expected.to contain_archive('kibana-4.0.0-linux-x64')}
+    it { is_expected.to contain_file('/opt/kibana').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
+    it { is_expected.to contain_service('kibana4').with_ensure('true').with_enable('true') }
+    it { is_expected.to contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana\/bin\/kibana/) }
+    #it { is_expected.to contain_file('/etc/init.d/kibana').with_content(/^  chroot --userspec kibana4:kibana4 \/ sh -c "/) }
   end
 
   context 'installs via archive and no symlink and user' do
@@ -143,11 +144,11 @@ describe 'kibana4' do
         :service_ensure   => false,
       }
     end
-    it { should contain_archive('kibana-4.0.0-linux-x64')}
-    it { should_not contain_file('/opt/kibana').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
-    it { should contain_service('kibana4').with_ensure('false').with_enable('false') }
-    it { should contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana\-4.0.0\-linux\-x64\/bin\/kibana/) }
-    #it { should contain_file('/etc/init.d/kibana').with_content(/^  chroot --userspec kib4:kib4 \/ sh -c "/) }
+    it { is_expected.to contain_archive('kibana-4.0.0-linux-x64')}
+    it { is_expected.to_not contain_file('/opt/kibana').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
+    it { is_expected.to contain_service('kibana4').with_ensure('false').with_enable('false') }
+    it { is_expected.to contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana\-4.0.0\-linux\-x64\/bin\/kibana/) }
+    #it { is_expected.to contain_file('/etc/init.d/kibana').with_content(/^  chroot --userspec kib4:kib4 \/ sh -c "/) }
   end
 
   context 'installs via archive and no symlink and service ensure and user' do
@@ -165,11 +166,11 @@ describe 'kibana4' do
         :service_enable   => false,
       }
     end
-    it { should contain_archive('kibana-4.0.0-linux-x64')}
-    it { should_not contain_file('/opt/kibana').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
-    it { should contain_service('kibana4').with_ensure('true').with_enable('false') }
-    it { should contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana\-4.0.0\-linux\-x64\/bin\/kibana/) }
-    #it { should contain_file('/etc/init.d/kibana').with_content(/^  chroot --userspec kib4:kib4 \/ sh -c "/) }
+    it { is_expected.to contain_archive('kibana-4.0.0-linux-x64')}
+    it { is_expected.to_not contain_file('/opt/kibana').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
+    it { is_expected.to contain_service('kibana4').with_ensure('true').with_enable('false') }
+    it { is_expected.to contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana\-4.0.0\-linux\-x64\/bin\/kibana/) }
+    #it { is_expected.to contain_file('/etc/init.d/kibana').with_content(/^  chroot --userspec kib4:kib4 \/ sh -c "/) }
   end
 
   context 'installs via archive and no symlink and service ensure/enable and no user' do
@@ -187,11 +188,11 @@ describe 'kibana4' do
         :kibana4_gid     => '200',
       }
     end
-    it { should contain_archive('kibana-4.0.0-linux-x64')}
-    it { should_not contain_file('/opt/kibana').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
-    it { should contain_service('kibana4').with_ensure('true').with_enable('true') }
-    it { should contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana\-4.0.0\-linux\-x64\/bin\/kibana/) }
-    #it { should contain_file('/etc/init.d/kibana').with_content(/^  chroot --userspec kib4:kib4 \/ sh -c "/) }
+    it { is_expected.to contain_archive('kibana-4.0.0-linux-x64')}
+    it { is_expected.to_not contain_file('/opt/kibana').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
+    it { is_expected.to contain_service('kibana4').with_ensure('true').with_enable('true') }
+    it { is_expected.to contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana\-4.0.0\-linux\-x64\/bin\/kibana/) }
+    #it { is_expected.to contain_file('/etc/init.d/kibana').with_content(/^  chroot --userspec kib4:kib4 \/ sh -c "/) }
   end
 
   context 'installs via archive and symlink and user' do
@@ -209,11 +210,11 @@ describe 'kibana4' do
         :service_enable  => false,
       }
     end
-    it { should contain_archive('kibana-4.0.0-linux-x64')}
-    it { should contain_file('/opt/kibana').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
-    it { should contain_service('kibana4').with_ensure('false').with_enable('false') }
-    it { should contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana\/bin\/kibana/) }
-    #it { should contain_file('/etc/init.d/kibana').with_content(/^  chroot --userspec kib4:kib4 \/ sh -c "/) }
+    it { is_expected.to contain_archive('kibana-4.0.0-linux-x64')}
+    it { is_expected.to contain_file('/opt/kibana').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
+    it { is_expected.to contain_service('kibana4').with_ensure('false').with_enable('false') }
+    it { is_expected.to contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana\/bin\/kibana/) }
+    #it { is_expected.to contain_file('/etc/init.d/kibana').with_content(/^  chroot --userspec kib4:kib4 \/ sh -c "/) }
   end
 
   context 'installs via archive and symlink and service ensure and user' do
@@ -231,11 +232,11 @@ describe 'kibana4' do
         :service_enable   => false,
       }
     end
-    it { should contain_archive('kibana-4.0.0-linux-x64')}
-    it { should contain_file('/opt/kibana').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
-    it { should contain_service('kibana4').with_ensure('true').with_enable('false') }
-    it { should contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana\/bin\/kibana/) }
-    #it { should contain_file('/etc/init.d/kibana').with_content(/^  chroot --userspec kib4:kib4 \/ sh -c "/) }
+    it { is_expected.to contain_archive('kibana-4.0.0-linux-x64')}
+    it { is_expected.to contain_file('/opt/kibana').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
+    it { is_expected.to contain_service('kibana4').with_ensure('true').with_enable('false') }
+    it { is_expected.to contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana\/bin\/kibana/) }
+    #it { is_expected.to contain_file('/etc/init.d/kibana').with_content(/^  chroot --userspec kib4:kib4 \/ sh -c "/) }
   end
 
   context 'installs via archive and symlink and service ensure/enable and user' do
@@ -253,11 +254,11 @@ describe 'kibana4' do
         :kibana4_gid      => '200',
       }
     end
-    it { should contain_archive('kibana-4.0.0-linux-x64')}
-    it { should contain_file('/opt/kibana').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
-    it { should contain_service('kibana4').with_ensure('true').with_enable('true') }
-    it { should contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana\/bin\/kibana/) }
-    #it { should contain_file('/etc/init.d/kibana').with_content(/^  chroot --userspec kib4:kib4 \/ sh -c "/) }
+    it { is_expected.to contain_archive('kibana-4.0.0-linux-x64')}
+    it { is_expected.to contain_file('/opt/kibana').with_ensure('link').with_target('/opt/kibana-4.0.0-linux-x64') }
+    it { is_expected.to contain_service('kibana4').with_ensure('true').with_enable('true') }
+    it { is_expected.to contain_file('/etc/init.d/kibana').with_content(/^program=\/opt\/kibana\/bin\/kibana/) }
+    #it { is_expected.to contain_file('/etc/init.d/kibana').with_content(/^  chroot --userspec kib4:kib4 \/ sh -c "/) }
   end
 
   context 'installs via package and package_install_dir and no init file and service ensure/enable and user' do
@@ -285,11 +286,11 @@ describe 'kibana4' do
         }
       }
     end
-    it { should contain_package('kibana4').with_ensure('4.4.1') }
-    it { should_not contain_file('/opt/kibana') }
-    it { should contain_file('kibana-config-file').with_path('/usr/share/kibana4/config/kibana.yml') }
-    it { should contain_service('kibana4').with_ensure('true').with_enable('true') }
-    it { should_not contain_file('/etc/init.d/kibana') }
+    it { is_expected.to contain_package('kibana4').with_ensure('4.4.1') }
+    it { is_expected.to_not contain_file('/opt/kibana') }
+    it { is_expected.to contain_file('kibana-config-file').with_path('/usr/share/kibana4/config/kibana.yml') }
+    it { is_expected.to contain_service('kibana4').with_ensure('true').with_enable('true') }
+    it { is_expected.to_not contain_file('/etc/init.d/kibana') }
   end
 
   context 'installs via package and package_install_dir and init file and service ensure/enable and user' do
@@ -317,13 +318,12 @@ describe 'kibana4' do
         }
       }
     end
-    it { should contain_package('kibana4').with_ensure('4.4.1') }
-    it { should_not contain_file('/opt/kibana') }
-    it { should contain_file('kibana-config-file').with_path('/usr/share/kibana4/config/kibana.yml') }
-    it { should contain_service('kibana4').with_ensure('true').with_enable('true') }
-    it { should contain_file('/etc/init.d/kibana') }
+    it { is_expected.to contain_package('kibana4').with_ensure('4.4.1') }
+    it { is_expected.to_not contain_file('/opt/kibana') }
+    it { is_expected.to contain_file('kibana-config-file').with_path('/usr/share/kibana4/config/kibana.yml') }
+    it { is_expected.to contain_service('kibana4').with_ensure('true').with_enable('true') }
+    it { is_expected.to contain_file('/etc/init.d/kibana') }
     it {
-      # verify_contents comes from puppetlabs_spec_helper/module_spec_helper.rb
       verify_contents(catalogue, '/etc/init.d/kibana', [
         'rundir=$(dirname $pidfile)',
         '[ ! -d $rundir ] && mkdir -p $rundir',
@@ -356,7 +356,7 @@ describe 'kibana4' do
         }
       }
     end
-    it { should contain_file('kibana-config-file').with_path('/etc/kibana4/kibana.yml') }
+    it { is_expected.to contain_file('kibana-config-file').with_path('/etc/kibana4/kibana.yml') }
   end
 
   context 'installs via package provider' do
@@ -372,7 +372,7 @@ describe 'kibana4' do
           :install_method   => 'package',
         }
       end
-      it { should contain_package('kibana4') }
+      it { is_expected.to contain_package('kibana4') }
     end
 
     context 'using the official repos on CentOS' do
@@ -390,9 +390,9 @@ describe 'kibana4' do
           :package_repo_version      => '4.1'
         }
       end
-      it { should contain_package('kibana4').with_name('kibana')}
-      it { should contain_service('kibana4').with_ensure('true').with_name('kibana') }
-      it { should contain_yumrepo('kibana-4.1') }
+      it { is_expected.to contain_package('kibana4').with_name('kibana')}
+      it { is_expected.to contain_service('kibana4').with_ensure('true').with_name('kibana') }
+      it { is_expected.to contain_yumrepo('kibana-4.1') }
     end
 
     context 'using the official repos on Ubuntu' do
@@ -411,9 +411,9 @@ describe 'kibana4' do
           :package_repo_version      => '4.1'
         }
       end
-      it { should contain_package('kibana4').with_name('kibana')}
-      it { should contain_service('kibana4').with_ensure('true').with_name('kibana') }
-      it { should contain_apt__source('kibana-4.1') }
+      it { is_expected.to contain_package('kibana4').with_name('kibana')}
+      it { is_expected.to contain_service('kibana4').with_ensure('true').with_name('kibana') }
+      it { is_expected.to contain_apt__source('kibana-4.1') }
     end
 
   end
