@@ -323,12 +323,18 @@ describe 'kibana4' do
     it { should contain_service('kibana4').with_ensure('true').with_enable('true') }
     it { should contain_file('/etc/init.d/kibana') }
     it {
+      # verify_contents comes from puppetlabs_spec_helper/module_spec_helper.rb
       verify_contents(catalogue, '/etc/init.d/kibana', [
         'rundir=$(dirname $pidfile)',
         '[ ! -d $rundir ] && mkdir -p $rundir',
         'chown $user:$group $rundir',
         '  echo $! > $pidfile',
         '  chown $user:$group $pidfile',
+      ])
+    }
+    it {
+      verify_contents(catalogue, '/etc/init.d/kibana', [
+        'program=/usr/share/kibana4/bin/kibana',
       ])
     }
   end
