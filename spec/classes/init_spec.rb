@@ -321,7 +321,16 @@ describe 'kibana4' do
     it { should_not contain_file('/opt/kibana') }
     it { should contain_file('kibana-config-file').with_path('/usr/share/kibana4/config/kibana.yml') }
     it { should contain_service('kibana4').with_ensure('true').with_enable('true') }
-    it { should contain_file('/etc/init.d/kibana').with_content(/^program=\/usr\/share\/kibana4\/bin\/kibana/) }
+    it { should contain_file('/etc/init.d/kibana') }
+    it {
+      verify_contents(catalogue, '/etc/init.d/kibana', [
+        'rundir=$(dirname $pidfile)',
+        '[ ! -d $rundir ] && mkdir -p $rundir',
+        'chown $user:$group $rundir',
+        '  echo $! > $pidfile',
+        '  chown $user:$group $pidfile',
+      ])
+    }
   end
 
   context 'installs via package and set config file' do
