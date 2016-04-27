@@ -40,9 +40,12 @@ pidfile=<%= scope['kibana4::config']['pid.file'] -%>
 pidfile=/var/run/kibana.pid
 <% end -%>
 
-
 [ -r /etc/default/$name ] && . /etc/default/$name
 [ -r /etc/sysconfig/$name ] && . /etc/sysconfig/$name
+
+rundir=$(dirname $pidfile)
+[ ! -d $rundir ] && mkdir -p $rundir
+chown $user:$group $rundir
 
 trace() {
   logger -t "/etc/init.d/kibana" "$@"
@@ -76,6 +79,7 @@ start() {
   # generate it there will be a race condition between the pidfile writing
   # and a process possibly asking for status.
   echo $! > $pidfile
+  chown $user:$group $pidfile
 
   emit "$name started"
   return 0
