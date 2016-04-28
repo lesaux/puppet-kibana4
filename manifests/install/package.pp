@@ -10,12 +10,13 @@ class kibana4::install::package {
 
       'RedHat': {
         yumrepo { "kibana-${kibana4::package_repo_version}":
-        baseurl  => "http://packages.elastic.co/kibana/${kibana4::package_repo_version}/centos",
-        enabled  => '1',
-        gpgcheck => '1',
-        gpgkey   => 'https://packages.elastic.co/GPG-KEY-elasticsearch',
-        descr    => "Kibana repository for ${kibana4::package_repo_version}.x packages",
-        before   => Package['kibana4'],
+          baseurl  => "http://packages.elastic.co/kibana/${kibana4::package_repo_version}/centos",
+          enabled  => '1',
+          gpgcheck => '1',
+          gpgkey   => 'https://packages.elastic.co/GPG-KEY-elasticsearch',
+          descr    => "Kibana repository for ${kibana4::package_repo_version}.x packages",
+          proxy    => $kibana4::package_repo_proxy,
+          before   => Package['kibana4'],
         }
       }
 

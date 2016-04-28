@@ -73,6 +73,10 @@
 # Installation directory used if install_method is 'package'
 # Defaults to '/opt/kibana'. You can change this if you are using custom packages.
 #
+# [*package_repo_proxy*]
+# A proxy to use for downloading packages.
+# Defaults to 'undef'. You can change this if you are behind a proxy
+#
 # [*config_file*]
 # The location, as a path, of the Kibana configuration file.
 #
@@ -119,6 +123,7 @@ class kibana4 (
   $package_use_official_repo     = $kibana4::params::package_use_official_repo,
   $package_repo_version          = $kibana4::params::package_repo_version,
   $package_install_dir           = $kibana4::params::package_install_dir,
+  $package_repo_proxy            = undef,
   $service_ensure                = $kibana4::params::service_ensure,
   $service_enable                = $kibana4::params::service_enable,
   $service_name                  = $kibana4::params::service_name,
