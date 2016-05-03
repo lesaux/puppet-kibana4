@@ -4,7 +4,7 @@
 #
 class kibana4::config {
 
-    $_config_file = "/opt/kibana/config/kibana.yml"
+    $_config_file = '/opt/kibana/config/kibana.yml'
 
   if $kibana4::config {
 

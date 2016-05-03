@@ -11,14 +11,14 @@ class kibana4::params {
   $service_enable                = true
   $service_name                  = 'kibana'
   case $::osfamily {
-     Debian: { $service_provider = debian }
-     RedHat: {
-       case $::operatingsystemmajrelease {
-         6: { $service_provider = init }
-         7: { $service_provider = systemd }
-       }
-     }
-     default: { $service_provider = init   }
+    'Debian': { $service_provider = debian }
+    'RedHat': {
+      case $::operatingsystemmajrelease {
+        '7': { $service_provider = systemd }
+        default: { $service_provider = init }
+      }
+    }
+    default: { $service_provider = init   }
   }
   $config                        = undef
 }
