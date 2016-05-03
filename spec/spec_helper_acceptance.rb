@@ -24,8 +24,6 @@ RSpec.configure do |c|
       on host, puppet('module', 'install',
                       'puppetlabs-java'), acceptable_exit_codes: [0, 1]
       on host, puppet('module', 'install',
-                      'camptocamp-archive'), acceptable_exit_codes: [0, 1]
-      on host, puppet('module', 'install',
                       'elasticsearch-elasticsearch'), acceptable_exit_codes: [0, 1]
       on host, "puppet config set basemodulepath /etc/puppet/modules:/etc/puppetlabs/puppet/modules/", acceptable_exit_codes: [0, 1]
       pp = <<-EOS

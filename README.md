@@ -28,10 +28,8 @@ This module assumes you have a working Elasticsearch installation and indices (u
 
 ### What kibana4 affects
 
-* Downloads and extracts the kibana4 archive, or perform installation using OS package manager.
 * Manage the elastic.co Kibana repositories
-* Optionally create a user to use for the service. You should not create a user if installing Kibana with package management (apt or yum).
-* Creates an init.d file if installing from the archive. Note that the init file is not managed if you are installing Kibana with package management (apt or yum).
+* Install the Kibana package
 * Modifies configuration file if needed.
 * Java installation is not managed by this module.
 
@@ -43,55 +41,10 @@ include kibana4
 
 ## Usage
 
-### Example to install from apt or yum repo
-
 The elastic.co packages create a kibana user and group (999:999) and they provide an init file `/etc/init.d/kibana`.  This is now the preferred installation method for kibana4.
 
 ```puppet
 include kibana4
-```
-
-### Example to install from archive
-
-If you decide to have the module create a user, you will need to specify user name, group name, uid and gid.
-
-```puppet
-  class { 'kibana4':
-    version         => '4.4.1-linux-x64',
-    install_method  => 'archive',
-    archive_symlink => true,
-    manage_user     => true,
-    kibana4_user    => 'kibana4',
-    kibana4_group   => 'kibana4',
-    kibana4_gid     => 3000,
-    kibana4_uid     => 3000,
-    config          => {
-      'server.port'       => 5601,
-      'server.host'       => '0.0.0.0',
-      'elasticsearch.url' => 'http://localhost:9200',
-    },
-  }
-```
-
-If you prefer to use [nanliu/archive](https://forge.puppet.com/nanliu/archive) or [puppet/archive](https://forge.puppet.com/puppet/archive) as the archive downloader instead of the default [camptocamp/archive](https://forge.puppet.com/camptocamp/archive) then set the class parameter `archive_provider`. Make sure to have either nanliu/archive or puppet/archive installed since dependency on one of multiple different modules with the same name cannot be recorded in `metadata.json` (by default this module uses and depends on camptocamp/archive).
-
-```puppet
-  class { 'kibana4':
-    version          => '4.4.1-linux-x64',
-    install_method   => 'archive',
-    archive_provider => 'nanliu', # or 'puppet'
-    archive_symlink  => false,
-    manage_user      => true,
-    kibana4_user     => 'kibana4',
-    kibana4_group    => 'kibana4',
-    kibana4_gid      => 200,
-    kibana4_uid      => 200,
-    config           => {
-      'server.port'       => 5601,
-      'server.host'       => '0.0.0.0',
-      'elasticsearch.url' => 'http://localhost:9200',
-    },
-  }
 ```
 
 ## Parameters
@@ -102,39 +55,19 @@ Check all parameters in the `manifests/init.pp` file.
 
 #### `version`
 
-Version of Kibana4 that gets installed.  Defaults to the latest 4.1.1 version available at the time of module release.
-
-#### `package_name`
-
-The name of the Kibana4 package that gets installed. Defaults to 'kibana'.
+Version of Kibana4 that gets installed.  Defaults to the latest version available in the `package_repo_version` you select
 
 #### `install_method`
 
-Set to 'archive' to download Kibana from the Elasticsearch download site (see also `archive_download_url` below).  Set to 'package' to use the default package manager for installation.  Defaults to 'package'.
-
-#### `archive_provider`
-
-Select which `archive` type should be used to download Kibana from the Elasticsearch download site. There exist at least two modules that provide an `archive` type: 'camptocamp/archive' and 'nanliu/archive' (or 'puppet/archive' since the module is now in the care of puppet-community). Defaults to 'camptocamp'. If you set this to 'nanliu' (or 'puppet') make sure you have that module installed since both cannot be recorded as a dependency in metadata.json at the same time.
-
-#### `archive_download_url`
-
-Alternative URL from which to download Kibana if `install_method` is 'archive'. Defaults to `undef`, because by default the URL is constructed from the usual Elasticsearch download site URL, the `package_name` and `version`.
-
-#### `archive_proxy_server`
-
-Specify a proxy server if you need to use one. Defaults to `undef`.
-
-#### `package_use_official_repo`
-
-Use official apt or yum repository. Only used if install_method is set to 'package'.
+This parameter is deprecated. Only package installation from official `elastic.co` repositories is supported.
 
 #### `package_repo_version`
 
-Apt or yum repository version. Only used if 'package_use_official_repo' is set to 'true'.  Defaults to '4.1'.
+Apt or yum repository version. Defaults to '4.5'.
 
 #### `package_repo_proxy`
 
-Whether or not to use a proxy for downloading the kibana4 package. Default is 'undef, so no proxy will be used.
+Whether or not to use a proxy for downloading the kibana4 package. Default is 'undef, so no proxy will be used. This is only support with yum repositories.
 
 #### `service_ensure`
 
@@ -147,50 +80,6 @@ Should the service be enabled on boot. Valid values are 'true', 'false', and 'ma
 #### `service_name`
 
 Name of the Kibana4 service. Defaults to 'kibana'.
-
-#### `manage_init_file`
-
-Install init file. If the init script is provided by a package, set it to `false`. Defaults to 'true'.
-
-#### `init_template`
-
-Service file as a template. Defaults to 'kibana4/kibana.init'.
-
-#### `archive_install_dir`
-
-Installation directory used if install_method is 'archive'.  Defaults to '/opt'.
-
-#### `config_file`
-
-The location, as a path, of the Kibana configuration file.
-
-#### `archive_symlink`
-
-Determines if a symlink should be created in the installation directory for the extracted archive. Only used if install_method is 'archive'.  Defaults to 'true'.
-
-#### `archive_symlink_name`
-
-Sets the name to be used for the symlink. The default is '$archive_install_dir/kibana'.  Only used if `install_method` is 'archive'.
-
-#### `manage_user`
-
-Specifies whether the user and group that will run the Kibana service is to be created and managed by Puppet.  Defaults to 'true'.
-
-#### `kibana4_user`
-
-The user that will run the service. Defaults to 'kibana'.
-
-#### `kibana4_uid`
-
-The user ID assigned to the user specified in `kibana4_user`. Defaults to `undef`.
-
-#### `kibana4_group`
-
-The primary group of the kibana user. Defaults to 'kibana'.
-
-#### `kibana4_gid`
-
-The group ID assigned to the group specified in `kibana4_group`. Defaults to `undef`.
 
 #### `plugins`
 

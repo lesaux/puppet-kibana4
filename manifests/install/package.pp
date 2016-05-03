@@ -4,8 +4,6 @@
 #
 class kibana4::install::package {
 
-  if $kibana4::package_use_official_repo {
-
     case $::osfamily {
 
       'RedHat': {
@@ -45,11 +43,10 @@ class kibana4::install::package {
 
     }
 
-  }
 
   package { 'kibana4':
     ensure => $kibana4::version,
-    name   => $kibana4::package_name,
+    name   => kibana,
   }
 
 }

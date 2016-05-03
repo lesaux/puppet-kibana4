@@ -58,6 +58,7 @@ describe 'kibana4 package', :node => :package do
 
   context 'package default params' do
 
+
     #if os[:family] == 'redhat'
     #  describe yumrepo('kibana-4.4') do
     #    it { should exist }
@@ -86,14 +87,12 @@ describe 'kibana4 package', :node => :package do
 
     describe file('/etc/init.d/kibana') do
       it { should be_file }
-      it { should contain 'pidfile=/var/run/kibana.pid' }
       it { should be_executable }
     end
 
     describe file('/etc/default/kibana') do
       it { should be_file }
       it { should contain 'user="kibana"' }
-      it { should contain 'group="kibana"' }
     end
 
     describe service('kibana') do
@@ -101,9 +100,13 @@ describe 'kibana4 package', :node => :package do
       it { should be_running }
     end
 
-    describe port(5601) do
-      it { should be_listening.with('tcp') }
+    describe command('sleep 45') do
+      its(:exit_status) { should eq 0 }
+      describe port(5601) do
+        it { should be_listening.with('tcp') }
+      end
     end
+
 
   end
 

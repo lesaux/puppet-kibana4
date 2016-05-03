@@ -1,11 +1,4 @@
 HOSTS:
-  ubuntu-1404-x64-archive:
-    roles:
-      - agent
-      - archive
-    platform: ubuntu-14.04-amd64
-    box: puppetlabs/ubuntu-14.04-64-nocm
-    hypervisor: vagrant
   ubuntu-1404-x64-package:
     roles:
       - agent

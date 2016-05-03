@@ -5,28 +5,20 @@
 class kibana4::params {
   $babel_cache_path              = '/tmp/babel.cache'
   $version                       = 'latest'
-  $install_method                = 'package'
-  $archive_install_dir           = '/opt'
-  $archive_dl_timeout            = 600
-  $archive_provider              = 'camptocamp'
-  $archive_symlink               = true
-  $archive_symlink_name          = "${archive_install_dir}/kibana"
-  $package_name                  = 'kibana'
-  $package_use_official_repo     = true
-  $package_repo_version          = '4.4'
+  $package_repo_version          = '4.5'
   $package_install_dir           = '/opt/kibana'
   $service_ensure                = true
   $service_enable                = true
   $service_name                  = 'kibana'
-  case $::operatingsystem {
-    /^(Debian|Ubuntu)$/ : { $service_provider = debian }
-    default:              { $service_provider = init   }
+  case $::osfamily {
+     Debian: { $service_provider = debian }
+     RedHat: {
+       case $::operatingsystemmajrelease {
+         6: { $service_provider = init }
+         7: { $service_provider = systemd }
+       }
+     }
+     default: { $service_provider = init   }
   }
-  $manage_init_file              = true
-  $init_template                 = 'kibana4/kibana.init.erb'
-  $manage_user                   = false
-  $kibana4_group                 = 'kibana'
-  $kibana4_user                  = 'kibana'
-  $es_download_site_url          = 'https://download.elastic.co'
   $config                        = undef
 }
