@@ -111,9 +111,9 @@ class { 'kibana4':
 
 #### `config`
 
-A hash of key/value server properties. Note that the default value for `pid.file` in the Kibana 4 application is `/var/run/kibana.pid`.
+A hash of key/value server properties. Note that specifying a value for `pid.file` seems to break startup scripts as of version 4.5.
 
-For version 4.3 an extensive config could look like:
+An extensive config could look like:
 
 ```puppet
   ...
