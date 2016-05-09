@@ -1,3 +1,11 @@
+#1.0.17 (2016-09-05)
+
+**Deprecation**
+ - Deprecated archive installation method
+
+**Enhancements**
+ - Enabled systemd on EL7.
+
 #1.0.13 (2016-21-03)
 
 **Enhancements**
