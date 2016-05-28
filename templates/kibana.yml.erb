@@ -1,5 +1,12 @@
 # This file is managed by Puppet, any changes will be overwritten
 
 <% scope['kibana4::config'].keys.sort.each do |key| -%>
+<% unless scope['kibana4::config'][key].is_a?(Array) -%>
 <%= key %>: <%= scope['kibana4::config'][key] %>
+<% else -%>
+<%= key %>:
+<% scope['kibana4::config'][key].each do |e| -%>
+  - <%= e %>
+<% end -%>
+<% end -%>
 <% end -%>
