@@ -62,4 +62,30 @@ describe 'kibana4' do
     end
     it { is_expected.to_not contain_yumrepo('kibana-4.5') }
   end
+
+  context 'handles array values in the config hash' do
+    let :facts do
+      {
+         :osfamily => 'RedHat'
+      }
+    end
+    let :params do
+      {
+        :version             => 'latest',
+        :service_ensure      => true,
+        :service_enable      => true,
+        :config		     => {
+          'server.port'           => 5601,
+          'server.host'           => '0.0.0.0',
+          'elasticsearch.url'     => 'http://localhost:9200',
+          'bundled_plugin_ids'    => [
+            'plugins/visualize/index'
+          ]
+        }
+      }
+    end
+    it { is_expected.to contain_file('kibana-config-file')
+      .with_content(/^(  - plugins\/visualize\/index)$/) }
+  end
+
 end
