@@ -44,33 +44,31 @@ define kibana4::plugin(
       if !$url {
 
         exec { "install_kibana_plugin_${name}":
-        command => "/opt/kibana/bin/kibana plugin --install ${name} -d ${kibana4_plugin_dir}",
+        command => "/opt/kibana/bin/kibana plugin --install ${name} -d ${kibana4_plugin_dir && service kibana restart}",
         path    => '/opt/kibana:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
         unless  => "test -d ${kibana4_plugin_dir}/${plugin_dest_dir}",
-        notify  => Service['kibana'],
         }
 
       } else {
 
         exec { "install_kibana_plugin_${name}":
-        command => "/opt/kibana/bin/kibana plugin --install ${name} -u ${url} -d ${kibana4_plugin_dir}",
+        command => "/opt/kibana/bin/kibana plugin --install ${name} -u ${url} -d ${kibana4_plugin_dir} && service kibana restart",
         path    => '/opt/kibana:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
         unless  => "test -d ${kibana4_plugin_dir}/${plugin_dest_dir}",
-        notify  => Service['kibana'],
         }
 
       }
-
+      #Kibana needs to be running before installing any plugin
+      Service['kibana4'] -> Exec["install_kibana_plugin_${name}"]
     }
 
     'absent': {
         exec { "remove_kibana_plugin_${name}":
-        command => "rm -rf ${kibana4_plugin_dir}/${plugin_dest_dir}",
+        command => "rm -rf ${kibana4_plugin_dir}/${plugin_dest_dir}  && service kibana restart",
         path    => '/opt/kibana:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
         unless  => "test ! -d ${kibana4_plugin_dir}/${plugin_dest_dir}",
-        notify  => Service['kibana'],
         }
-
+        Service['kibana4'] -> Exec["remove_kibana_plugin_${name}"]
     }
 
     default: {
