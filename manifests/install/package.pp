@@ -4,7 +4,7 @@
 #
 class kibana4::install::package {
 
-	if ($kibana4::manage_repo == true) {
+  if ($kibana4::manage_repo == true) {
 
     case $::osfamily {
 
@@ -45,7 +45,7 @@ class kibana4::install::package {
 
     }
 
-	}
+  }
 
 
   package { 'kibana4':
