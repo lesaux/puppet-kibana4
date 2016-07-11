@@ -36,6 +36,7 @@
 #
 class kibana4 (
   $version                       = $kibana4::params::version,
+  $manage_repo                   = true,
   $package_repo_version          = $kibana4::params::package_repo_version,
   $package_repo_proxy            = undef,
   $service_ensure                = $kibana4::params::service_ensure,
