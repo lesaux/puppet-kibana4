@@ -38,7 +38,7 @@ define kibana4::plugin(
     fail('you must define a plugin destination dir, such as `marvel`')
   }
 
-  file { "${kibana4_plugin_dir}":
+  file { $kibana4_plugin_dir:
     ensure => directory,
     path   => $kibana4_plugin_dir,
     owner  => $user,
@@ -57,7 +57,7 @@ define kibana4::plugin(
           user    => $user,
           unless  => "test -d ${kibana4_plugin_dir}/${plugin_dest_dir}",
           notify  => Service['kibana'],
-          require => File["${kibana4_plugin_dir}"],
+          require => File[$kibana4_plugin_dir],
         }
 
       } else {
@@ -68,7 +68,7 @@ define kibana4::plugin(
           user    => $user,
           unless  => "test -d ${kibana4_plugin_dir}/${plugin_dest_dir}",
           notify  => Service['kibana'],
-          require => File["${kibana4_plugin_dir}"],
+          require => File[$kibana4_plugin_dir],
         }
 
       }
@@ -82,7 +82,7 @@ define kibana4::plugin(
           user    => $user,
           unless  => "test ! -d ${kibana4_plugin_dir}/${plugin_dest_dir}",
           notify  => Service['kibana'],
-          require => File["${kibana4_plugin_dir}"],
+          require => File[$kibana4_plugin_dir],
         }
 
     }
