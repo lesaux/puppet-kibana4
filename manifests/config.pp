@@ -10,7 +10,7 @@ class kibana4::config {
     path    => '/opt/kibana/optimize',
     recurse => true,
     owner   => $kibana4::kibana4_user,
-    mode    => '0755',
+    mode    => '0644',
   }
 
   file { 'kibana-config-file':
