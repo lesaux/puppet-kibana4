@@ -31,6 +31,7 @@ define kibana4::plugin(
   $kibana4_plugin_dir     = '/opt/kibana/installedPlugins',
   $ensure                 = 'present',
   $url                    = undef,
+  $user                   = $kibana4::params::user,
 ) {
 
   if !$plugin_dest_dir {
@@ -40,7 +41,7 @@ define kibana4::plugin(
   file { "${kibana4_plugin_dir}":
     ensure => directory,
     path   => $kibana4_plugin_dir,
-    owner  => $kibana4::$kibana4_user,
+    owner  => $user,
     mode   => 0755,
   }
 
@@ -48,7 +49,7 @@ define kibana4::plugin(
     ensure => directory,
     path   => '/opt/kibana/optimize',
     recurse => true,
-    owner  => $kibana4::$kibana4_user,
+    owner  => $user,
     mode   => 0755,
   }
 
@@ -61,7 +62,7 @@ define kibana4::plugin(
         exec { "install_kibana_plugin_${name}":
           command => "/opt/kibana/bin/kibana plugin --install ${name} -d ${kibana4_plugin_dir}",
           path    => '/opt/kibana:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
-          user    => $kibana4::$kibana4_user,
+          user    => $user,
           unless  => "test -d ${kibana4_plugin_dir}/${plugin_dest_dir}",
           notify  => Service['kibana'],
           require => [
@@ -75,7 +76,7 @@ define kibana4::plugin(
         exec { "install_kibana_plugin_${name}":
           command => "/opt/kibana/bin/kibana plugin --install ${name} -u ${url} -d ${kibana4_plugin_dir}",
           path    => '/opt/kibana:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
-          user    => $kibana4::$kibana4_user,
+          user    => $user,
           unless  => "test -d ${kibana4_plugin_dir}/${plugin_dest_dir}",
           notify  => Service['kibana'],
           require => [
@@ -92,7 +93,7 @@ define kibana4::plugin(
         exec { "remove_kibana_plugin_${name}":
           command => "/opt/kibana/bin/kibana plugin --remove ${kibana4_plugin_dir}"
           path    => '/opt/kibana:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
-          user    => $kibana4::$kibana4_user,
+          user    => $user,
           unless  => "test ! -d ${kibana4_plugin_dir}/${plugin_dest_dir}",
           notify  => Service['kibana'],
           require => [
