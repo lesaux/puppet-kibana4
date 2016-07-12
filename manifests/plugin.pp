@@ -42,15 +42,7 @@ define kibana4::plugin(
     ensure => directory,
     path   => $kibana4_plugin_dir,
     owner  => $user,
-    mode   => 0755,
-  }
-
-  file { 'fix-optimize-bundles':
-    ensure => directory,
-    path   => '/opt/kibana/optimize',
-    recurse => true,
-    owner  => $user,
-    mode   => 0755,
+    mode   => '0755',
   }
 
   case $ensure {
@@ -65,10 +57,7 @@ define kibana4::plugin(
           user    => $user,
           unless  => "test -d ${kibana4_plugin_dir}/${plugin_dest_dir}",
           notify  => Service['kibana'],
-          require => [
-            File["${kibana4_plugin_dir}"],
-            File['fix-optimize-bundles']
-          ],
+          require => File["${kibana4_plugin_dir}"],
         }
 
       } else {
@@ -79,10 +68,7 @@ define kibana4::plugin(
           user    => $user,
           unless  => "test -d ${kibana4_plugin_dir}/${plugin_dest_dir}",
           notify  => Service['kibana'],
-          require => [
-            File["${kibana4_plugin_dir}"],
-            File['fix-optimize-bundles']
-          ],
+          require => File["${kibana4_plugin_dir}"],
         }
 
       }
@@ -91,15 +77,12 @@ define kibana4::plugin(
 
     'absent': {
         exec { "remove_kibana_plugin_${name}":
-          command => "/opt/kibana/bin/kibana plugin --remove ${kibana4_plugin_dir}"
+          command => "/opt/kibana/bin/kibana plugin --remove ${kibana4_plugin_dir}",
           path    => '/opt/kibana:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
           user    => $user,
           unless  => "test ! -d ${kibana4_plugin_dir}/${plugin_dest_dir}",
           notify  => Service['kibana'],
-          require => [
-            File["${kibana4_plugin_dir}"],
-            File['fix-optimize-bundles']
-          ],
+          require => File["${kibana4_plugin_dir}"],
         }
 
     }
