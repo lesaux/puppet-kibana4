@@ -63,8 +63,8 @@ class kibana4 (
   class {'kibana4::config': }->
   class {'kibana4::service': }
 
-  Kibana4::Plugin { 
-    require => [ 
+  Kibana4::Plugin {
+    require => [
       Class['kibana4::install'],
       Class['kibana4::config'],
     ]
