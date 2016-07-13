@@ -2,22 +2,27 @@
 #
 # Configuration
 #
+
 class kibana4::config {
 
-    $_config_file = '/opt/kibana/config/kibana.yml'
+  # This should really be fixed at the kibana package level. There is no reason not to have
+  # these files owned by Kibana as it makes installing plugins much more seamless.
+  file { 'fix-optimize-bundles':
+    ensure  => directory,
+    path    => '/opt/kibana/optimize',
+    recurse => true,
+    owner   => $kibana4::kibana4_user,
+    mode    => '0644',
+  }
 
-  if $kibana4::config {
-
-    file { 'kibana-config-file':
-      ensure  => file,
-      path    => $_config_file,
-      owner   => $kibana4::kibana4_user,
-      group   => $kibana4::kibana4_group,
-      mode    => '0755',
-      content => template('kibana4/kibana.yml.erb'),
-      notify  => Service['kibana4'],
-    }
-
+  file { 'kibana-config-file':
+    ensure  => file,
+    path    => '/opt/kibana/config/kibana.yml',
+    owner   => $kibana4::kibana4_user,
+    group   => $kibana4::kibana4_group,
+    mode    => '0644',
+    content => template('kibana4/kibana.yml.erb'),
+    notify  => Service['kibana4'],
   }
 
 }

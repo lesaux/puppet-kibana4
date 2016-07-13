@@ -4,6 +4,8 @@
 #
 class kibana4::install::package {
 
+  if ($kibana4::manage_repo) {
+
     case $::osfamily {
 
       'RedHat': {
@@ -40,13 +42,11 @@ class kibana4::install::package {
       default: {
         fail("${::operatingsystem} not supported")
       }
-
     }
-
+  }
 
   package { 'kibana4':
     ensure => $kibana4::version,
     name   => kibana,
   }
-
 }

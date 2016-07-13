@@ -61,6 +61,10 @@ Version of Kibana4 that gets installed.  Defaults to the latest version availabl
 
 This parameter is deprecated. Only package installation from official `elastic.co` repositories is supported.
 
+#### `manage_repo`
+
+Whether or not to have the module also manage the Yum or Apt repos.  Defaults to 'true'.
+
 #### `package_repo_version`
 
 Apt or yum repository version. Defaults to '4.5'.
