@@ -1,3 +1,8 @@
+#1.0.18 (2016-20-07)
+
+**Enhancements**
+ - add feature manage_repo by Alex Harvey.
+
 #1.0.17 (2016-09-05)
 
 **Deprecation**
