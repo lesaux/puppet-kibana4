@@ -34,4 +34,32 @@ describe 'kibana4' do
     it { is_expected.to contain_service('kibana4').with_ensure('true').with_enable('true') }
   end
 
+  context 'with manage_repo unspecified' do
+    let :facts do
+      {
+         :osfamily => 'RedHat'
+      }
+    end
+    let :params do
+      {
+        :package_repo_version => '4.5',
+      }
+    end
+    it { is_expected.to contain_yumrepo('kibana-4.5') }
+  end
+
+  context 'with manage_repo set to false' do
+    let :facts do
+      {
+         :osfamily => 'RedHat'
+      }
+    end
+    let :params do
+      {
+        :manage_repo          => false,
+        :package_repo_version => '4.5',
+      }
+    end
+    it { is_expected.to_not contain_yumrepo('kibana-4.5') }
+  end
 end
