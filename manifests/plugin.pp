@@ -44,7 +44,7 @@ define kibana4::plugin(
       if !$url {
 
         exec { "install_kibana_plugin_${name}":
-        command => "/opt/kibana/bin/kibana plugin --install ${name} -d ${kibana4_plugin_dir && service kibana restart}",
+        command => "/opt/kibana/bin/kibana plugin --install ${name} -d ${kibana4_plugin_dir} && service kibana restart",
         path    => '/opt/kibana:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
         unless  => "test -d ${kibana4_plugin_dir}/${plugin_dest_dir}",
         }
