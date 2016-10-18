@@ -19,6 +19,9 @@
 # A proxy to use for downloading packages.
 # Defaults to 'undef'. You can change this if you are behind a proxy
 #
+# [*package_name*]
+# Name of the kibana package to install. Defaults to 'kibana'.
+#
 # [*service_ensure*]
 # Specifies the service state. Valid values are stopped (false) and running
 # (true). Defaults to 'running'.
@@ -42,6 +45,7 @@ class kibana4 (
   $manage_repo                   = $kibana4::params::manage_repo,
   $package_repo_version          = $kibana4::params::package_repo_version,
   $package_repo_proxy            = undef,
+  $package_name                  = $kibana4::params::package_name,
   $service_ensure                = $kibana4::params::service_ensure,
   $service_enable                = $kibana4::params::service_enable,
   $service_name                  = $kibana4::params::service_name,

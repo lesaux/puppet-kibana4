@@ -47,6 +47,6 @@ class kibana4::install::package {
 
   package { 'kibana4':
     ensure => $kibana4::version,
-    name   => kibana,
+    name   => $kibana4::package_name,
   }
 }
