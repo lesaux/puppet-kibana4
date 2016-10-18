@@ -22,4 +22,5 @@ class kibana4::params {
     default: { $service_provider = init   }
   }
   $config                        = undef
+  $config_path                   = '/opt/kibana/config/kibana.yml'
 }
