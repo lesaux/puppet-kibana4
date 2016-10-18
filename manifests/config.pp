@@ -11,7 +11,7 @@ class kibana4::config {
       path    => $kibana4::config_file,
       owner   => $kibana4::config_file_owner,
       group   => $kibana4::config_file_group,
-      mode    => '0755',
+      mode    => '0644',
       content => template('kibana4/kibana.yml.erb'),
       notify  => Service['kibana4'],
     }
