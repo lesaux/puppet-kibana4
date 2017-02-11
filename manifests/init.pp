@@ -1,11 +1,11 @@
-# == Class: Kibana4
+# == Class: Kibana
 #
-# Installs and configures Kibana4.
+# Installs and configures Kibana.
 #
 # === Parameters
 #
 # [*version*]
-# Version of Kibana4 that gets installed.  Defaults to the latest version
+# Version of Kibana that gets installed.  Defaults to the latest version
 # available in the `package_repo_version` that is selected.
 #
 # [*manage_repo*]
@@ -28,7 +28,7 @@
 # manual. Defaults to 'true'.
 #
 # [*service_name*]
-# Name of the Kibana4 service. Defaults to 'kibana'.
+# Name of the Kibana service. Defaults to 'kibana'.
 #
 # [*babel_cache_path*]
 # Kibana uses babel (https://www.npmjs.com/package/babel) which writes it's cache to this location
@@ -37,18 +37,18 @@
 #
 #   see README file
 #
-class kibana4 (
-  $version                       = $kibana4::params::version,
-  $manage_repo                   = $kibana4::params::manage_repo,
-  $package_repo_version          = $kibana4::params::package_repo_version,
+class kibana (
+  $version                       = $kibana::params::version,
+  $manage_repo                   = $kibana::params::manage_repo,
+  $package_repo_version          = $kibana::params::package_repo_version,
   $package_repo_proxy            = undef,
-  $service_ensure                = $kibana4::params::service_ensure,
-  $service_enable                = $kibana4::params::service_enable,
-  $service_name                  = $kibana4::params::service_name,
-  $service_provider              = $kibana4::params::service_provider,
-  $config                        = $kibana4::params::config,
+  $service_ensure                = $kibana::params::service_ensure,
+  $service_enable                = $kibana::params::service_enable,
+  $service_name                  = $kibana::params::service_name,
+  $service_provider              = $kibana::params::service_provider,
+  $config                        = $kibana::params::config,
   $plugins                       = undef,
-) inherits kibana4::params {
+) inherits kibana::params {
 
   validate_bool($manage_repo)
 
@@ -56,14 +56,14 @@ class kibana4 (
     validate_string($package_repo_version)
   }
 
-  class {'kibana4::install': }->
-  class {'kibana4::config': }->
-  class {'kibana4::service': }
+  class {'kibana::install': }->
+  class {'kibana::config': }->
+  class {'kibana::service': }
 
-  Kibana4::Plugin { require => Class['kibana4::install'] }
+  Kibana::Plugin { require => Class['kibana::install'] }
 
   if $plugins {
     validate_hash($plugins)
-    create_resources('kibana4::plugin', $plugins)
+    create_resources('kibana::plugin', $plugins)
   }
 }

@@ -1,18 +1,18 @@
 require 'spec_helper_acceptance'
 
-describe 'kibana4 package', :node => :package do
+describe 'kibana package', :node => :package do
 
   package = only_host_with_role(hosts, 'package')
 
   let(:manifest_package) {
   <<-EOS
-    class { '::kibana4': }
+    class { '::kibana': }
     EOS
   }
 
   let(:manifest_package_plugin_install) {
   <<-EOS
-    class { '::kibana4':
+    class { '::kibana':
       plugins => {
         'elasticsearch/marvel' => {
            ensure          => present,
@@ -30,7 +30,7 @@ describe 'kibana4 package', :node => :package do
 
   let(:manifest_package_plugin_remove) {
   <<-EOS
-    class { '::kibana4':
+    class { '::kibana':
       plugins => {
         'elasticsearch/marvel' => {
            ensure          => absent,

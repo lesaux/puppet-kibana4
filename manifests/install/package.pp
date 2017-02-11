@@ -1,22 +1,22 @@
-# == Class: kibana4
+# == Class: kibana
 #
 # Package Installation Method
 #
-class kibana4::install::package {
+class kibana::install::package {
 
-  if ($kibana4::manage_repo) {
+  if ($kibana::manage_repo) {
 
     case $::osfamily {
 
       'RedHat': {
-        yumrepo { "kibana-${kibana4::package_repo_version}":
-          baseurl  => "http://packages.elastic.co/kibana/${kibana4::package_repo_version}/centos",
+        yumrepo { "kibana-${kibana::package_repo_version}":
+          baseurl  => "http://packages.elastic.co/kibana/${kibana::package_repo_version}/centos",
           enabled  => '1',
           gpgcheck => '1',
           gpgkey   => 'https://packages.elastic.co/GPG-KEY-elasticsearch',
-          descr    => "Kibana repository for ${kibana4::package_repo_version}.x packages",
-          proxy    => $kibana4::package_repo_proxy,
-          before   => Package['kibana4'],
+          descr    => "Kibana repository for ${kibana::package_repo_version}.x packages",
+          proxy    => $kibana::package_repo_proxy,
+          before   => Package['kibana'],
         }
       }
 
@@ -24,8 +24,8 @@ class kibana4::install::package {
         if !defined(Class['apt']) {
           class { 'apt': }
         }
-        apt::source { "kibana-${kibana4::package_repo_version}":
-          location => "http://packages.elastic.co/kibana/${kibana4::package_repo_version}/debian",
+        apt::source { "kibana-${kibana::package_repo_version}":
+          location => "http://packages.elastic.co/kibana/${kibana::package_repo_version}/debian",
           release  => 'stable',
           repos    => 'main',
           key      => {
@@ -35,7 +35,7 @@ class kibana4::install::package {
           include  => {
             'src' => false,
           },
-          before   => Package['kibana4'],
+          before   => Package['kibana'],
         }
       }
 
@@ -45,8 +45,8 @@ class kibana4::install::package {
     }
   }
 
-  package { 'kibana4':
-    ensure => $kibana4::version,
+  package { 'kibana':
+    ensure => $kibana::version,
     name   => kibana,
   }
 }

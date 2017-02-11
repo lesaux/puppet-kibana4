@@ -1,16 +1,16 @@
-# kibana4
+# kibana
 
-[![Puppet Forge](http://img.shields.io/puppetforge/v/lesaux/kibana4.svg)](https://forge.puppetlabs.com/lesaux/kibana4)
-[![Build Status](http://img.shields.io/travis/lesaux/puppet-kibana4.svg)](http://travis-ci.org/lesaux/puppet-kibana4)
+[![Puppet Forge](http://img.shields.io/puppetforge/v/lesaux/kibana.svg)](https://forge.puppetlabs.com/lesaux/kibana)
+[![Build Status](http://img.shields.io/travis/lesaux/puppet-kibana.svg)](http://travis-ci.org/lesaux/puppet-kibana)
 
 
 #### Table of Contents
 
 1. [Overview](#overview)
 2. [Module Description - What the module does and why it is useful](#module-description)
-3. [Setup - The basics of getting started with kibana4](#setup)
-    * [What kibana4 affects](#what-kibana4-affects)
-    * [Beginning with kibana4](#beginning-with-kibana4)
+3. [Setup - The basics of getting started with kibana](#setup)
+    * [What kibana affects](#what-kibana-affects)
+    * [Beginning with kibana](#beginning-with-kibana)
 4. [Usage - Configuration options and additional functionality](#usage)
 5. [Parameters](#parameters)
 6. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
@@ -18,33 +18,33 @@
 
 ## Overview
 
-Install and configure Kibana4. Should work on any linux OS.
+Install and configure Kibana. Should work on any linux OS.
 
 ## Module Description
 
-This module assumes you have a working Elasticsearch installation and indices (usually an 'ELK' stack).  Kibana4 only works with recent versions of Elasticsearch (1.4.4 and later).  I recommend using the 'elasticsearch' output with `protocol => 'http'` in Logstash (supported since 1.4.0) as the default `protocol => 'node'` uses ES version 1.1.1 and will prevent Kibana4 from connecting.
+This module assumes you have a working Elasticsearch installation and indices (usually an 'ELK' stack).  Kibana only works with recent versions of Elasticsearch (1.4.4 and later).  I recommend using the 'elasticsearch' output with `protocol => 'http'` in Logstash (supported since 1.4.0) as the default `protocol => 'node'` uses ES version 1.1.1 and will prevent Kibana from connecting.
 
 ## Setup
 
-### What kibana4 affects
+### What kibana affects
 
 * Manage the elastic.co Kibana repositories
 * Install the Kibana package
 * Modifies configuration file if needed.
 * Java installation is not managed by this module.
 
-### Beginning with kibana4
+### Beginning with kibana
 
 ```puppet
-include kibana4
+include kibana
 ```
 
 ## Usage
 
-The elastic.co packages create a kibana user and group (999:999) and they provide an init file `/etc/init.d/kibana`.  This is now the preferred installation method for kibana4.
+The elastic.co packages create a kibana user and group (999:999) and they provide an init file `/etc/init.d/kibana`.  This is now the preferred installation method for kibana.
 
 ```puppet
-include kibana4
+include kibana
 ```
 
 ## Parameters
@@ -55,7 +55,7 @@ Check all parameters in the `manifests/init.pp` file.
 
 #### `version`
 
-Version of Kibana4 that gets installed.  Defaults to the latest version available in the `package_repo_version` you select
+Version of Kibana that gets installed.  Defaults to the latest version available in the `package_repo_version` you select
 
 #### `install_method`
 
@@ -71,7 +71,7 @@ Apt or yum repository version. Defaults to '4.5'.
 
 #### `package_repo_proxy`
 
-Whether or not to use a proxy for downloading the kibana4 package. Default is 'undef, so no proxy will be used. This is only support with yum repositories.
+Whether or not to use a proxy for downloading the kibana package. Default is 'undef, so no proxy will be used. This is only support with yum repositories.
 
 #### `service_ensure`
 
@@ -83,19 +83,19 @@ Should the service be enabled on boot. Valid values are 'true', 'false', and 'ma
 
 #### `service_name`
 
-Name of the Kibana4 service. Defaults to 'kibana'.
+Name of the Kibana service. Defaults to 'kibana'.
 
 #### `plugins`
 
 Simple plugin support has been added, but updating existing plugins is not yet supported.  A hash of plugins and their installation parameters is expected:
 
 ```puppet
-class { 'kibana4':
+class { 'kibana':
   ...
   plugins => {
     'elasticsearch/marvel' => {
-       kibana4_plugin_dir => '/opt/kibana/installedPlugins', # optional - this is the default
-       plugin_dest_dir    => 'marvel',                       # mandatory - plugin will be installed in ${kibana4_plugin_dir}/${plugin_dest_dir}
+       kibana_plugin_dir => '/opt/kibana/installedPlugins', # optional - this is the default
+       plugin_dest_dir    => 'marvel',                       # mandatory - plugin will be installed in ${kibana_plugin_dir}/${plugin_dest_dir}
        url                => 'http://your_custom_url',       # necessary if using arbitrary URL
        ensure             => present,                        # mandatory - either 'present' or 'absent'
     },
@@ -109,7 +109,7 @@ class { 'kibana4':
 
 ### Configuration Parameters
 
-* See the [Kibana4 documentation](https://www.elastic.co/guide/en/kibana/current/kibana-server-properties.html) for a full list of kibana server properties.
+* See the [Kibana documentation](https://www.elastic.co/guide/en/kibana/current/kibana-server-properties.html) for a full list of kibana server properties.
 * Note: If you do not specify a hash of configuration parameters, then the default `kibana.yml` provided by the archive or package will be left intact.
 * Note: The config hash is different in version 4.1 than it is in version 4.3.
 

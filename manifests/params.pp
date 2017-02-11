@@ -1,8 +1,8 @@
-# == Class: kibana4
+# == Class: kibana
 #
 # Default parameters
 #
-class kibana4::params {
+class kibana::params {
   $babel_cache_path              = '/tmp/babel.cache'
   $version                       = 'latest'
   $manage_repo                   = true

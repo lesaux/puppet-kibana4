@@ -1,10 +1,10 @@
-# == Class: kibana4
+# == Class: kibana
 #
 # Configuration
 #
-class kibana4::config {
+class kibana::config {
 
-  if $kibana4::config {
+  if $kibana::config {
 
     file { 'kibana-config-file':
       ensure  => file,
@@ -12,8 +12,8 @@ class kibana4::config {
       owner   => 'kibana',
       group   => 'kibana',
       mode    => '0755',
-      content => template('kibana4/kibana.yml.erb'),
-      notify  => Service['kibana4'],
+      content => template('kibana/kibana.yml.erb'),
+      notify  => Service['kibana'],
     }
   }
 
