@@ -4,4 +4,4 @@ fixtures:
      archive: "https://github.com/camptocamp/puppet-archive.git"
      apt: "https://github.com/puppetlabs/puppetlabs-apt.git"
   symlinks:
-    'kibana4': "#{source_dir}"
+    'kibana': "#{source_dir}"

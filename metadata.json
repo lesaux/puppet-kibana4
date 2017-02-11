@@ -1,12 +1,12 @@
 {
-  "name": "lesaux-kibana4",
-  "version": "1.0.18",
+  "name": "lesaux-kibana",
+  "version": "5.0.0",
   "author": "lesaux",
-  "summary": "Kibana 4 installation",
+  "summary": "Kibana installation",
   "license": "Apache-2.0",
-  "source": "https://github.com/lesaux/puppet-kibana4.git",
-  "project_page": "https://github.com/lesaux/puppet-kibana4",
-  "issues_url": "https://github.com/lesaux/puppet-kibana4/issues",
+  "source": "https://github.com/lesaux/puppet-kibana.git",
+  "project_page": "https://github.com/lesaux/puppet-kibana",
+  "issues_url": "https://github.com/lesaux/puppet-kibana/issues",
   "tags": [
     "kibana",
     "logstash",
@@ -31,9 +31,9 @@
     {
       "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
+        "16.04",
         "14.04",
         "12.04",
-        "10.04"
       ]
     }
   ],
