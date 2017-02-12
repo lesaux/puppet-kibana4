@@ -10,7 +10,7 @@
 #
 # [*kibana_plugin_dir*]
 #   Directory where all modules will be installed
-#   Default to '/opt/kibana/installedPlugins'
+#   Default to '/usr/share/kibana/installedPlugins'
 #
 # [*plugin_dest_dir*]
 #   Directory where the module will be installed
@@ -28,7 +28,7 @@
 
 define kibana::plugin(
   $plugin_dest_dir        = undef,
-  $kibana_plugin_dir     = '/opt/kibana/installedPlugins',
+  $kibana_plugin_dir     = '/usr/share/kibana/installedPlugins',
   $ensure                 = 'present',
   $url                    = undef,
 ) {
@@ -44,8 +44,8 @@ define kibana::plugin(
       if !$url {
 
         exec { "install_kibana_plugin_${name}":
-        command => "/opt/kibana/bin/kibana plugin --install ${name} -d ${kibana_plugin_dir}",
-        path    => '/opt/kibana:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
+        command => "/usr/share/kibana/bin/kibana-plugin install ${name} -d ${kibana_plugin_dir}",
+        path    => '/usr/share/kibana/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
         unless  => "test -d ${kibana_plugin_dir}/${plugin_dest_dir}",
         notify  => Service['kibana'],
         }
@@ -53,8 +53,8 @@ define kibana::plugin(
       } else {
 
         exec { "install_kibana_plugin_${name}":
-        command => "/opt/kibana/bin/kibana plugin --install ${name} -u ${url} -d ${kibana_plugin_dir}",
-        path    => '/opt/kibana:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
+        command => "/usr/share/kibana/bin/kibana-plugin install ${name} -u ${url} -d ${kibana_plugin_dir}",
+        path    => '/usr/share/kibana/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
         unless  => "test -d ${kibana_plugin_dir}/${plugin_dest_dir}",
         notify  => Service['kibana'],
         }
@@ -66,7 +66,7 @@ define kibana::plugin(
     'absent': {
         exec { "remove_kibana_plugin_${name}":
         command => "rm -rf ${kibana_plugin_dir}/${plugin_dest_dir}",
-        path    => '/opt/kibana:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
+        path    => '/usr/share/kibana/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
         unless  => "test ! -d ${kibana_plugin_dir}/${plugin_dest_dir}",
         notify  => Service['kibana'],
         }
