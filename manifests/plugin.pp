@@ -37,29 +37,22 @@ define kibana::plugin(
     fail('you must define a plugin destination dir, such as `marvel`')
   }
 
+  if $url {
+      $plugin_name =  $url
+  } else {
+      $plugin_name = $name
+  }
+
   case $ensure {
 
     'present': {
 
-      if !$url {
-
         exec { "install_kibana_plugin_${name}":
-        command => "/usr/share/kibana/bin/kibana-plugin install ${name} -d ${kibana_plugin_dir}",
+        command => "/usr/share/kibana/bin/kibana-plugin install ${plugin_name} -d ${kibana_plugin_dir}",
         path    => '/usr/share/kibana/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
         unless  => "test -d ${kibana_plugin_dir}/${plugin_dest_dir}",
         notify  => Service['kibana'],
         }
-
-      } else {
-
-        exec { "install_kibana_plugin_${name}":
-        command => "/usr/share/kibana/bin/kibana-plugin install ${name} -u ${url} -d ${kibana_plugin_dir}",
-        path    => '/usr/share/kibana/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
-        unless  => "test -d ${kibana_plugin_dir}/${plugin_dest_dir}",
-        notify  => Service['kibana'],
-        }
-
-      }
 
     }
 
