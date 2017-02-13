@@ -28,7 +28,7 @@
 
 define kibana::plugin(
   $plugin_dest_dir        = undef,
-  $kibana_plugin_dir     = '/usr/share/kibana/installedPlugins',
+  $kibana_plugin_dir     = '/usr/share/kibana/plugins',
   $ensure                 = 'present',
   $url                    = undef,
 ) {
