@@ -8,7 +8,7 @@ class kibana::config {
 
     file { 'kibana-config-file':
       ensure  => file,
-      path    => '/etc/kibana/config/kibana.yml',
+      path    => '/etc/kibana/kibana.yml',
       owner   => 'kibana',
       group   => 'kibana',
       mode    => '0755',
