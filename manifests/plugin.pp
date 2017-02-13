@@ -1,16 +1,16 @@
-# == Define: kibana4::plugin
+# == Define: kibana::plugin
 #
 # This define allows you to install arbitrary Kibana plugins
 # either by using the default repositories or by specifying an URL
 #
-# All default values are defined in the kibana4::params class.
+# All default values are defined in the kibana::params class.
 #
 #
 # === Parameters
 #
-# [*kibana4_plugin_dir*]
+# [*kibana_plugin_dir*]
 #   Directory where all modules will be installed
-#   Default to '/opt/kibana/installedPlugins'
+#   Default to '/usr/share/kibana/installedPlugins'
 #
 # [*plugin_dest_dir*]
 #   Directory where the module will be installed
@@ -26,9 +26,9 @@
 #   This variable is optional
 #
 
-define kibana4::plugin(
+define kibana::plugin(
   $plugin_dest_dir        = undef,
-  $kibana4_plugin_dir     = '/opt/kibana/installedPlugins',
+  $kibana_plugin_dir     = '/usr/share/kibana/plugins',
   $ensure                 = 'present',
   $url                    = undef,
 ) {
@@ -37,37 +37,30 @@ define kibana4::plugin(
     fail('you must define a plugin destination dir, such as `marvel`')
   }
 
+  if $url {
+      $plugin_name =  $url
+  } else {
+      $plugin_name = $name
+  }
+
   case $ensure {
 
     'present': {
 
-      if !$url {
-
         exec { "install_kibana_plugin_${name}":
-        command => "/opt/kibana/bin/kibana plugin --install ${name} -d ${kibana4_plugin_dir}",
-        path    => '/opt/kibana:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
-        unless  => "test -d ${kibana4_plugin_dir}/${plugin_dest_dir}",
+        command => "/usr/share/kibana/bin/kibana-plugin install ${plugin_name} -d ${kibana_plugin_dir}",
+        path    => '/usr/share/kibana/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
+        unless  => "test -d ${kibana_plugin_dir}/${plugin_dest_dir}",
         notify  => Service['kibana'],
         }
-
-      } else {
-
-        exec { "install_kibana_plugin_${name}":
-        command => "/opt/kibana/bin/kibana plugin --install ${name} -u ${url} -d ${kibana4_plugin_dir}",
-        path    => '/opt/kibana:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
-        unless  => "test -d ${kibana4_plugin_dir}/${plugin_dest_dir}",
-        notify  => Service['kibana'],
-        }
-
-      }
 
     }
 
     'absent': {
         exec { "remove_kibana_plugin_${name}":
-        command => "rm -rf ${kibana4_plugin_dir}/${plugin_dest_dir}",
-        path    => '/opt/kibana:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
-        unless  => "test ! -d ${kibana4_plugin_dir}/${plugin_dest_dir}",
+        command => "rm -rf ${kibana_plugin_dir}/${plugin_dest_dir}",
+        path    => '/usr/share/kibana/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
+        unless  => "test ! -d ${kibana_plugin_dir}/${plugin_dest_dir}",
         notify  => Service['kibana'],
         }
 

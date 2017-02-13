@@ -1,3 +1,16 @@
+#5.0.0 (2017-02-13)
+
+**Breaking Changes**
+ - Module name change to just kibana
+ - Semantic versioning to reflect only supporting v5
+
+**Enhancements**
+ - Added support for Kibana 5
+
+**Deprecation**
+ - Versions less than 5.0 of kibana are no longer supported.
+
+
 #1.0.18 (2016-20-07)
 
 **Enhancements**

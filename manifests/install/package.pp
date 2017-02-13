@@ -1,22 +1,22 @@
-# == Class: kibana4
+# == Class: kibana
 #
 # Package Installation Method
 #
-class kibana4::install::package {
+class kibana::install::package {
 
-  if ($kibana4::manage_repo) {
+  if ($kibana::manage_repo) {
 
     case $::osfamily {
 
       'RedHat': {
-        yumrepo { "kibana-${kibana4::package_repo_version}":
-          baseurl  => "http://packages.elastic.co/kibana/${kibana4::package_repo_version}/centos",
+        yumrepo { "kibana-${kibana::package_repo_version}":
+          baseurl  => "http://artifacts.elastic.co/kibana/${kibana::package_repo_version}/yum",
           enabled  => '1',
           gpgcheck => '1',
-          gpgkey   => 'https://packages.elastic.co/GPG-KEY-elasticsearch',
-          descr    => "Kibana repository for ${kibana4::package_repo_version}.x packages",
-          proxy    => $kibana4::package_repo_proxy,
-          before   => Package['kibana4'],
+          gpgkey   => 'https://artifacts.elastic.co/GPG-KEY-elasticsearch',
+          descr    => "Kibana repository for ${kibana::package_repo_version}.x packages",
+          proxy    => $kibana::package_repo_proxy,
+          before   => Package['kibana'],
         }
       }
 
@@ -24,18 +24,18 @@ class kibana4::install::package {
         if !defined(Class['apt']) {
           class { 'apt': }
         }
-        apt::source { "kibana-${kibana4::package_repo_version}":
-          location => "http://packages.elastic.co/kibana/${kibana4::package_repo_version}/debian",
+        apt::source { "kibana-${kibana::package_repo_version}":
+          location => "http://artifacts.elastic.co/kibana/${kibana::package_repo_version}/apt",
           release  => 'stable',
           repos    => 'main',
           key      => {
-            'source' => 'http://packages.elastic.co/GPG-KEY-elasticsearch',
+            'source' => 'http://artifacts.elastic.co/GPG-KEY-elasticsearch',
             'id'     => '46095ACC8548582C1A2699A9D27D666CD88E42B4',
           },
           include  => {
             'src' => false,
           },
-          before   => Package['kibana4'],
+          before   => Package['kibana'],
         }
       }
 
@@ -45,8 +45,8 @@ class kibana4::install::package {
     }
   }
 
-  package { 'kibana4':
-    ensure => $kibana4::version,
+  package { 'kibana':
+    ensure => $kibana::version,
     name   => kibana,
   }
 }
