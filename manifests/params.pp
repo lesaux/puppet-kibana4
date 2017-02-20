@@ -1,25 +1,40 @@
-# == Class: kibana4
+# == Class: kibana
 #
 # Default parameters
 #
-class kibana4::params {
-  $babel_cache_path              = '/tmp/babel.cache'
-  $version                       = 'latest'
-  $manage_repo                   = true
-  $package_repo_version          = '4.5'
-  $package_install_dir           = '/opt/kibana'
-  $service_ensure                = true
-  $service_enable                = true
-  $service_name                  = 'kibana'
-  case $::osfamily {
-    'Debian': { $service_provider = debian }
-    'RedHat': {
-      case $::operatingsystemmajrelease {
-        '7': { $service_provider = systemd }
-        default: { $service_provider = init }
+class kibana::params {
+  $version        = 'latest'
+  $manage_repo    = true
+  $service_ensure = 'running'
+  $service_enable = true
+
+  case $::operatingsystem {
+    'Debian': {
+      if versioncmp($::operatingsystemmajrelease, '8') >= 0 {
+        $service_provider = 'systemd'
+      } else {
+        $service_provider = 'init'
       }
     }
-    default: { $service_provider = init   }
+    'RedHat': {
+      if versioncmp($::operatingsystemmajrelease, '7') >= 0 {
+        $service_provider = 'systemd'
+      } else {
+        $service_provider = 'init'
+      }
+    }
+    'Ubuntu': {
+      if versioncmp($::operatingsystemmajrelease, '15.10') > 0 {
+        $service_provider = 'systemd'
+      } else {
+        $service_provider = 'init'
+      }
+    }
+    default: {
+      $service_provider = 'init'
+    }
   }
-  $config                        = undef
+
+  $config  = {}
+  $plugins = {}
 }

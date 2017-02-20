@@ -1,3 +1,11 @@
+#5.0.0 (2017-02-13)
+
+**Breaking Changes**
+ - Module name changed from `kibana4` to `kibana` to reflect support for Kibana 5.
+
+**Enhancements**
+ - Added support for Kibana 5.
+
 #1.0.18 (2016-20-07)
 
 **Enhancements**
