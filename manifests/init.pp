@@ -1,19 +1,18 @@
-# == Class: Kibana4
+# == Class: Kibana
 #
-# Installs and configures Kibana4.
+# Installs and configures Kibana.
 #
 # === Parameters
 #
 # [*version*]
-# Version of Kibana4 that gets installed.  Defaults to the latest version
+# Version of Kibana that gets installed.  Defaults to the latest version
 # available in the `package_repo_version` that is selected.
 #
 # [*manage_repo*]
 # Enable repo management by enabling the official repositories.
 #
 # [*package_repo_version*]
-# apt or yum repository version. Only used if 'package_use_official_repo' is set to 'true'.
-# defaults to '4.5'.
+# apt or yum repository version.
 #
 # [*package_repo_proxy*]
 # A proxy to use for downloading packages.
@@ -27,43 +26,43 @@
 # Should the service be enabled on boot. Valid values are true, false, and
 # manual. Defaults to 'true'.
 #
-# [*service_name*]
-# Name of the Kibana4 service. Defaults to 'kibana'.
-#
-# [*babel_cache_path*]
-# Kibana uses babel (https://www.npmjs.com/package/babel) which writes it's cache to this location
-#
 # === Examples
 #
 #   see README file
 #
-class kibana4 (
-  $version                       = $kibana4::params::version,
-  $manage_repo                   = $kibana4::params::manage_repo,
-  $package_repo_version          = $kibana4::params::package_repo_version,
+class kibana (
+  $version                       = $kibana::params::version,
+  $manage_repo                   = $kibana::params::manage_repo,
+  $package_repo_version          = undef,
   $package_repo_proxy            = undef,
-  $service_ensure                = $kibana4::params::service_ensure,
-  $service_enable                = $kibana4::params::service_enable,
-  $service_name                  = $kibana4::params::service_name,
-  $service_provider              = $kibana4::params::service_provider,
-  $config                        = $kibana4::params::config,
-  $plugins                       = undef,
-) inherits kibana4::params {
+  $service_ensure                = $kibana::params::service_ensure,
+  $service_enable                = $kibana::params::service_enable,
+  $service_provider              = $kibana::params::service_provider,
+  $config                        = $kibana::params::config,
+  $plugins                       = $kibana::params::plugins,
+) inherits kibana::params {
 
   validate_bool($manage_repo)
-
   if ($manage_repo) {
-    validate_string($package_repo_version)
+    validate_re($package_repo_version, '^\d+\.\d+$')
+  }
+  validate_hash($config)
+  validate_hash($plugins)
+
+  if $package_repo_version == undef {
+    $config_path = undef
+    $package_install_dir = undef
+  } elsif versioncmp($package_repo_version, '5.0') >= 0 {
+    $config_path = '/etc/kibana/kibana.yml'
+    $package_install_dir = '/usr/share/kibana'
+  } else {
+    $config_path = '/opt/kibana/config/kibana.yml'
+    $package_install_dir = '/opt/kibana'
   }
 
-  class {'kibana4::install': }->
-  class {'kibana4::config': }->
-  class {'kibana4::service': }
+  class { 'kibana::install': } ->
+  class { 'kibana::config': } ->
+  class { 'kibana::service': }
 
-  Kibana4::Plugin { require => Class['kibana4::install'] }
-
-  if $plugins {
-    validate_hash($plugins)
-    create_resources('kibana4::plugin', $plugins)
-  }
+  create_resources('kibana::plugin', $plugins)
 }

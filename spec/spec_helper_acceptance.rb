@@ -15,7 +15,7 @@ RSpec.configure do |c|
   c.before :suite do
     # Install module
     #weirdly this installs in /etc/puppetlabs/puppet/modules which is why we are changing basemodulepath further down
-    puppet_module_install(source: module_root, module_name: 'kibana4')
+    puppet_module_install(source: module_root, module_name: 'kibana')
     hosts.each do |host|
       on host, puppet('module', 'install',
                       'puppetlabs-apt'), acceptable_exit_codes: [0, 1]
