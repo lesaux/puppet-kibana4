@@ -21,9 +21,10 @@ group :development, :unit_tests do
   gem 'rspec-puppet', '>= 2.3.2',  :require => false
   gem 'simplecov',                 :require => false
   gem 'rspec-puppet-facts',        :require => false
+  gem 'retriable', '< 3' if RUBY_VERSION < '2'
 end
 group :system_tests do
-  gem 'beaker-rspec',                  *location_for(ENV['BEAKER_RSPEC_VERSION'] || '>= 3.4')
+  gem 'beaker-rspec', '< 6',           *location_for(ENV['BEAKER_RSPEC_VERSION'] || '>= 3.4')
   gem 'beaker',                        *location_for(ENV['BEAKER_VERSION'])
   gem 'public_suffix', '~> 1.4.0',     :require => false
   gem 'serverspec',                    :require => false
