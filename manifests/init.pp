@@ -56,9 +56,9 @@ class kibana4 (
     validate_string($package_repo_version)
   }
 
-  class {'kibana4::install': }->
-  class {'kibana4::config': }->
-  class {'kibana4::service': }
+  class {'kibana4::install': }
+->class {'kibana4::config': }
+->class {'kibana4::service': }
 
   Kibana4::Plugin { require => Class['kibana4::install'] }
 
