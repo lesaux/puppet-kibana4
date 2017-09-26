@@ -22,7 +22,7 @@ group :development, :unit_tests do
   gem 'simplecov',                 :require => false
   gem 'rspec-puppet-facts',        :require => false
   gem 'retriable', '< 3' if RUBY_VERSION < '2'
-  gem 'nokogiri', '< 1.8' if RUBY_VERSION < '2.1'
+  gem 'nokogiri', '< 1.7' if RUBY_VERSION < '2.1'
 end
 group :system_tests do
   gem 'beaker-rspec', '< 6',           *location_for(ENV['BEAKER_RSPEC_VERSION'] || '>= 3.4')
