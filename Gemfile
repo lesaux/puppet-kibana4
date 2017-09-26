@@ -14,7 +14,7 @@ puppetversion = ENV.key?('PUPPET_VERSION') ? "= #{ENV['PUPPET_VERSION']}" : ['>=
 
 group :development, :unit_tests do
   gem 'json',                      :require => false
-  gem 'metadata-json-lint',        :require => false
+  gem 'metadata-json-lint', '< 1.7' if RUBY_VERSION < '2.1'
   gem 'puppet_facts',              :require => false
   gem 'puppet-blacksmith',         :require => false
   gem 'puppetlabs_spec_helper',    :require => false
