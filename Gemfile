@@ -10,11 +10,11 @@ def location_for(place, version = nil)
   end
 end
 
-puppetversion = ENV.key?('PUPPET_VERSION') ? "= #{ENV['PUPPET_VERSION']}" : ['>= 3.3']
+puppetversion = ENV.key?('PUPPET_GEM_VERSION') ? "#{ENV['PUPPET_GEM_VERSION']}" : ['>= 3.3']
 
 group :development, :unit_tests do
   gem 'json',                      :require => false
-  gem 'metadata-json-lint', '< 1.7' if RUBY_VERSION < '2.1'
+  gem 'metadata-json-lint', '< 1.2' if RUBY_VERSION < '2.1'
   gem 'puppet_facts',              :require => false
   gem 'puppet-blacksmith',         :require => false
   gem 'puppetlabs_spec_helper',    :require => false
