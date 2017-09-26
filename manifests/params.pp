@@ -16,7 +16,7 @@ class kibana4::params {
     'RedHat': {
       case $::operatingsystemmajrelease {
         '7': { $service_provider = systemd }
-        default: { $service_provider = init }
+        default: { $service_provider = redhat }
       }
     }
     default: { $service_provider = init   }
