@@ -25,6 +25,7 @@ end
 group :system_tests do
   gem 'beaker-rspec',                  *location_for(ENV['BEAKER_RSPEC_VERSION'] || '>= 3.4')
   gem 'beaker',                        *location_for(ENV['BEAKER_VERSION'])
+  gem 'public_suffix', '~> 1.4.0',     :require => false
   gem 'serverspec',                    :require => false
   gem 'beaker-puppet_install_helper',  :require => false
   gem 'master_manipulator',            :require => false
