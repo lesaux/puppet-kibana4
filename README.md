@@ -1,3 +1,7 @@
+# This module is has been deprecated in favor of the elastic/kibana puppet module.
+
+
+
 # kibana4
 
 [![Puppet Forge](http://img.shields.io/puppetforge/v/lesaux/kibana4.svg)](https://forge.puppetlabs.com/lesaux/kibana4)
