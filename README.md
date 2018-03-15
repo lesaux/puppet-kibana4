@@ -102,6 +102,7 @@ class { 'kibana4':
        plugin_dest_dir    => 'marvel',                       # mandatory - plugin will be installed in ${kibana4_plugin_dir}/${plugin_dest_dir}
        url                => 'http://your_custom_url',       # necessary if using arbitrary URL
        ensure             => present,                        # mandatory - either 'present' or 'absent'
+       http_proxy         => 'http://proxy.domain.com:8080', # optional - used only if 'url' parameter is specified (otherwise ignored)
     },
     'elastic/sense' => {
        ensure          => present,
