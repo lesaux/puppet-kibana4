@@ -7,7 +7,7 @@ class kibana4::service {
   service { 'kibana4':
     ensure     => $kibana4::service_ensure,
     enable     => $kibana4::service_enable,
-    name       => kibana,
+    name       => $kibana4::service_name,
     provider   => $kibana4::service_provider,
     hasstatus  => true,
     hasrestart => true,
