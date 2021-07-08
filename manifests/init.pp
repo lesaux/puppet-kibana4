@@ -47,6 +47,9 @@ class kibana4 (
   $service_name                  = $kibana4::params::service_name,
   $service_provider              = $kibana4::params::service_provider,
   $config                        = $kibana4::params::config,
+  $config_file                   = $kibana4::params::config_file,
+  $config_file_owner             = $kibana4::params::config_file_owner,
+  $config_file_group             = $kibana4::params::config_file_group,
   $plugins                       = undef,
 ) inherits kibana4::params {
 

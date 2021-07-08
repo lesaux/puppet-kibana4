@@ -22,4 +22,7 @@ class kibana4::params {
     default: { $service_provider = init   }
   }
   $config                        = undef
+  $config_file                   = '/opt/kibana/config/kibana.yml'
+  $config_file_owner             = 'kibana'
+  $config_file_group             = 'kibana'
 }

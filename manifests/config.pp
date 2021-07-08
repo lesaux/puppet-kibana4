@@ -8,10 +8,10 @@ class kibana4::config {
 
     file { 'kibana-config-file':
       ensure  => file,
-      path    => '/opt/kibana/config/kibana.yml',
-      owner   => 'kibana',
-      group   => 'kibana',
-      mode    => '0755',
+      path    => $kibana4::config_file,
+      owner   => $kibana4::config_file_owner,
+      group   => $kibana4::config_file_group,
+      mode    => '0644',
       content => template('kibana4/kibana.yml.erb'),
       notify  => Service['kibana4'],
     }
