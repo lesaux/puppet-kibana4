@@ -8,6 +8,7 @@ class kibana4::params {
   $manage_repo                   = true
   $package_repo_version          = '4.5'
   $package_install_dir           = '/opt/kibana'
+  $package_name                  = 'kibana'
   $service_ensure                = true
   $service_enable                = true
   $service_name                  = 'kibana'
